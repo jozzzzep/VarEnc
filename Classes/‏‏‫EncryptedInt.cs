@@ -7,10 +7,18 @@ public class EncryptedInt
     /// In the memory it is saved as a float that is affected by random values. { encryptionValue1 & encryptionValue2 }
     /// It is recommended to reset them everytime the program starts.
     ///
-    /// To create an Encrypted int just use the constructors. Example:
-    /// EncryptedInt score = new EncryptedInt();
-    /// For setting or getting the value - write this.value (it will work exactly as an int)
-    /// If you want to reset the encryption values just call the ResetEncryptionKeys() function. It would keep the stored value.
+    /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
+    /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// 
+    /// ---- Properties:
+    /// 
+    /// Value - Returns the decrypted value of the stored int. It'll work exactly as an int.
+    /// 
+    /// ---- Methods: 
+    /// 
+    /// ResetEncryptionKeys() - Changes the random values that effect the stored int while keeping its value
+    /// ToString() - Returns the value of the stored int as a string.
+
 
     #region Variables and Properties
 
@@ -22,7 +30,7 @@ public class EncryptedInt
     private float _value;
 
     // The decrypted value
-    public int value
+    public int Value
     {
         set
         {
@@ -81,19 +89,19 @@ public class EncryptedInt
     public void ResetEncryptionKeys()
     {
         // keep and decrypt the current value
-        int decryptedValue = value;
+        int decryptedValue = Value;
 
         // set a new values to the encryption keys
         SetEncryptionKeys();
 
         // set and encrypt the value back with the new keys
-        value = decryptedValue;
+        Value = decryptedValue;
     }
 
     // Returns the stored value as a string
     public string ToString()
     {
-        return value.ToString();
+        return Value.ToString();
     }
 
     #endregion
