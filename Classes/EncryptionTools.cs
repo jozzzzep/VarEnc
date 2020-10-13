@@ -15,9 +15,15 @@ static class EncryptionTools
     static private Random random = new Random();
 
     // Returns a random float between 1 and 10
-    public static float RandomNumber()
+    public static float RandomNumberFloat()
     {
         return (float)(random.NextDouble() * 10);
+    }
+
+    // Returns a random double between 1 and 10
+    public static double RandomNumberDouble()
+    {
+        return (random.NextDouble() * 10);
     }
 
     #endregion
