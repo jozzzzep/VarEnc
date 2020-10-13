@@ -3,8 +3,8 @@ using System;
 [System.Serializable]
 public class EncryptedInt
 {
-    /// A class for storing an int while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a float that is affected by random values. { encryptionValue1 & encryptionValue2 }
+    /// A class for storing a 32-bit integer while efficiently keeping it encrypted in the memory.
+    /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// It is recommended to reset them everytime the program starts.
     ///
     /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
@@ -23,22 +23,22 @@ public class EncryptedInt
     #region Variables and Properties
 
     // The encryption values
-    private float encryptionValue1;
-    private float encryptionValue2;
+    private float encryptionKey1;
+    private float encryptionKey2;
 
     // The encrypted value stored in memory
-    private float _value;
+    private double encryptedValue;
 
     // The decrypted value
     public int Value
     {
         set
         {
-            _value = encrypt(value);
+            encryptedValue = encrypt(value);
         }
         get
         {
-            return (int)Math.Round(decrypt(_value));
+            return (int)Math.Round(decrypt(encryptedValue));
         }
     }
 
@@ -50,7 +50,7 @@ public class EncryptedInt
     public EncryptedInt(int value)
     {
         SetEncryptionKeys();
-        _value = encrypt(value);
+        encryptedValue = encrypt(value);
     }
 
     public EncryptedInt()
@@ -61,28 +61,28 @@ public class EncryptedInt
     #region Methods
 
     // Takes a given value and returns it encrypted
-    private float encrypt(float value)
+    private double encrypt(double value)
     {
-        float valueToReturn = value;
-        valueToReturn += encryptionValue1;
-        valueToReturn *= encryptionValue2;
+        double valueToReturn = value;
+        valueToReturn += encryptionKey1;
+        valueToReturn *= encryptionKey2;
         return valueToReturn;
     }
 
     // Takes an encrypted value and returns it decrypted
-    private float decrypt(float value)
+    private double decrypt(double value)
     {
-        float valueToReturn = value;
-        valueToReturn /= encryptionValue2;
-        valueToReturn -= encryptionValue1;
+        double valueToReturn = value;
+        valueToReturn /= encryptionKey2;
+        valueToReturn -= encryptionKey1;
         return valueToReturn;
     }
 
     // Setting the encryption keys to a new random values
     private void SetEncryptionKeys()
     {
-        encryptionValue1 = EncryptionTools.RandomNumber();
-        encryptionValue2 = EncryptionTools.RandomNumber();
+        encryptionKey1 = EncryptionTools.RandomNumber();
+        encryptionKey2 = EncryptionTools.RandomNumber();
     }
 
     // Resets the encryption keys and keeps the stored values
