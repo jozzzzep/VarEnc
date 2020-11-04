@@ -2,9 +2,10 @@ using System;
 
 static class EncryptionTools
 {
-    /// Not a class you should use. But it is a requirement to have it if you want to use the EncryptedInt class.
-    /// Just copy it with EncryptedInt and forget about it.
-    /// This is just a static class the EncryptedInt class uses to get a random float.
+    ///  Not a class you should use.
+    ///  But it is a requirement to have it if you want to use most of the classes and structs.
+    ///  Just copy it with all the other files and forget about it.
+    ///  This is just a static class the classes uses to get a random float.
     /// 
     /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
     /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
