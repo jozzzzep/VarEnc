@@ -6,8 +6,8 @@ public struct elong
     /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// Every time the value changes, the encryption keys change too. And it works exactly as a long.
     ///
-    /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Content
 

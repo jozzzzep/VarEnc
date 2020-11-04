@@ -9,8 +9,8 @@ public class EncryptedInteger<TDecrypted, TEncrypted>
     /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// It is recommended to reset them everytime the program starts.
     ///
-    /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
     /// 
     /// ---- Generic setup:
     /// 

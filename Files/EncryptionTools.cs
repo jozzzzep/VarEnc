@@ -7,8 +7,8 @@ static class EncryptionTools
     ///  Just copy it with all the other files and forget about it.
     ///  This is just a static class the classes uses to get a random float.
     /// 
-    /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Methods
 
