@@ -1,14 +1,24 @@
 using System;
 
 [System.Serializable]
-public class EncryptedInt
+public class EncryptedInteger<TDecrypted, TEncrypted>
+        where TDecrypted : IComparable, IConvertible
+        where TEncrypted : IComparable, IConvertible
 {
-    /// A class for storing a 32-bit integer while efficiently keeping it encrypted in the memory.
+    /// A generic class for storing every type of integer while efficiently keeping it encrypted in the memory.
     /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// It is recommended to reset them everytime the program starts.
     ///
     /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
     /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// 
+    /// ---- Generic setup:
+    /// 
+    /// TDecrypted should be an integer:
+    /// sbyte, short, int, long
+    /// 
+    /// TEncrypted shoud be a floating-point number:
+    /// float, double, decimal
     /// 
     /// ---- Properties:
     /// 
@@ -19,26 +29,29 @@ public class EncryptedInt
     /// ResetEncryptionKeys() - Changes the random values that effect the stored int while keeping its value
     /// ToString() - Returns the value of the stored int as a string.
 
+    #region Content
 
     #region Variables and Properties
 
     // The encryption values
-    private float encryptionKey1;
-    private float encryptionKey2;
+    dynamic encryptionKey1;
+    dynamic encryptionKey2;
 
     // The encrypted value stored in memory
-    private double encryptedValue;
+    private TEncrypted encryptedValue;
 
     // The decrypted value
-    public int Value
+    public TDecrypted Value
     {
         set
         {
-            encryptedValue = encrypt(value);
+            dynamic val = value;
+            encryptedValue = encrypt(val);
         }
         get
         {
-            return (int)Math.Round(decrypt(encryptedValue));
+            dynamic encryptedVal = encryptedValue;
+            return (TDecrypted)Math.Round(decrypt(encryptedVal));
         }
     }
 
@@ -47,32 +60,37 @@ public class EncryptedInt
     #region Constructors
 
     // Constractors
-    public EncryptedInt(int value)
+    public EncryptedInteger(TDecrypted value)
     {
+        dynamic val = value;
         SetEncryptionKeys();
-        encryptedValue = encrypt(value);
+        encryptedValue = encrypt(val);
     }
 
-    public EncryptedInt()
-        : this(0) { }
+    public EncryptedInteger()
+    {
+        dynamic val = 0;
+        SetEncryptionKeys();
+        encryptedValue = encrypt(val);
+    }
 
     #endregion
 
     #region Methods
 
     // Takes a given value and returns it encrypted
-    private double encrypt(double value)
+    private TEncrypted encrypt(TEncrypted value)
     {
-        double valueToReturn = value;
+        TEncrypted valueToReturn = value;
         valueToReturn += encryptionKey1;
         valueToReturn *= encryptionKey2;
         return valueToReturn;
     }
 
     // Takes an encrypted value and returns it decrypted
-    private double decrypt(double value)
+    private TEncrypted decrypt(TEncrypted value)
     {
-        double valueToReturn = value;
+        TEncrypted valueToReturn = value;
         valueToReturn /= encryptionKey2;
         valueToReturn -= encryptionKey1;
         return valueToReturn;
@@ -81,15 +99,17 @@ public class EncryptedInt
     // Setting the encryption keys to a new random values
     private void SetEncryptionKeys()
     {
-        encryptionKey1 = EncryptionTools.RandomNumberFloat();
-        encryptionKey2 = EncryptionTools.RandomNumberFloat();
+        dynamic randomVar1 = EncryptionTools.RandomNumberDouble();
+        dynamic randomVar2 = EncryptionTools.RandomNumberDouble();
+        encryptionKey1 = (TEncrypted)randomVar1;
+        encryptionKey2 = (TEncrypted)randomVar2;
     }
 
     // Resets the encryption keys and keeps the stored values
     public void ResetEncryptionKeys()
     {
         // keep and decrypt the current value
-        int decryptedValue = Value;
+        TDecrypted decryptedValue = Value;
 
         // set a new values to the encryption keys
         SetEncryptionKeys();
@@ -103,6 +123,8 @@ public class EncryptedInt
     {
         return Value.ToString();
     }
+
+    #endregion
 
     #endregion
 }

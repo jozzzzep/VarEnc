@@ -26,5 +26,11 @@ static class EncryptionTools
         return (random.NextDouble() * 10);
     }
 
+    // Returns a random decimal between 1 and 10
+    public static decimal RandomNumberDecimal()
+    {
+        return (decimal)(random.NextDouble() * 10);
+    }
+
     #endregion
 }
