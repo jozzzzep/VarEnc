@@ -3,8 +3,8 @@
  
 # [WIKI]:
 * **[Examples & Tutorial]**
-* **[EncryptionTools]**  class. Not a class you should use. But it is a requirement to have it if you want to use one of the Encrypted Integer classes.
-Just copy it with EncryptedInt and forget about it. This is just a static class the EncryptedInt class uses to get a random float.
+* **[EncryptionTools]**  class. Not a class you should use. But it is a requirement to have it if you want to use most of the classes and structs.
+Just copy it with all the other files and forget about it. This is just a static class the classes uses to get a random float.
 
 [WIKI]: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
 [Examples & Tutorial]: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
