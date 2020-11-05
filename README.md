@@ -1,5 +1,5 @@
 # Variable Encryption
-Simple tools for storing values while efficiently keeping it encrypted in the memory.
+Simple tools for storing values while efficiently keeping them encrypted in the memory.
 * Currnetly supports all types of integers in C#.
  
 # [WIKI]:
