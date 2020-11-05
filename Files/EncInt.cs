@@ -1,6 +1,6 @@
 using System;
 
-public struct eint
+public struct EncInt
 {
     /// A struct for storing a 32-bit integer while efficiently keeping it encrypted in the memory.
     /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
@@ -37,7 +37,7 @@ public struct eint
 
     #region Constructors
 
-    private eint(int value)
+    private EncInt(int value)
     {
         // set default values
         encryptionKey1 = 0;
@@ -87,7 +87,7 @@ public struct eint
     // Not recommended to use
     public override bool Equals(object obj)
     {
-        return obj is eint eint &&
+        return obj is EncInt eint &&
                (int)Value == (int)eint.Value;
     }
     public override int GetHashCode()
@@ -100,32 +100,32 @@ public struct eint
     #region Operators Overloading
 
     /// + - * / %
-    public static eint operator +(eint eint1, eint eint2) => new eint((int)(eint1.Value + eint2.Value));
-    public static eint operator -(eint eint1, eint eint2) => new eint((int)(eint1.Value - eint2.Value));
-    public static eint operator *(eint eint1, eint eint2) => new eint((int)(eint1.Value * eint2.Value));
-    public static eint operator /(eint eint1, eint eint2) => new eint((int)(eint1.Value / eint2.Value));
-    public static eint operator %(eint eint1, eint eint2) => new eint((int)(eint1.Value % eint2.Value));
+    public static EncInt operator +(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value + eint2.Value));
+    public static EncInt operator -(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value - eint2.Value));
+    public static EncInt operator *(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value * eint2.Value));
+    public static EncInt operator /(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value / eint2.Value));
+    public static EncInt operator %(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value % eint2.Value));
 
-    public static int operator +(eint eint1, int eint2) => (int)eint1.Value + eint2;
-    public static int operator -(eint eint1, int eint2) => (int)eint1.Value - eint2;
-    public static int operator *(eint eint1, int eint2) => (int)eint1.Value * eint2;
-    public static int operator /(eint eint1, int eint2) => (int)eint1.Value / eint2;
-    public static int operator %(eint eint1, int eint2) => (int)eint1.Value % eint2;
+    public static int operator +(EncInt eint1, int eint2) => (int)eint1.Value + eint2;
+    public static int operator -(EncInt eint1, int eint2) => (int)eint1.Value - eint2;
+    public static int operator *(EncInt eint1, int eint2) => (int)eint1.Value * eint2;
+    public static int operator /(EncInt eint1, int eint2) => (int)eint1.Value / eint2;
+    public static int operator %(EncInt eint1, int eint2) => (int)eint1.Value % eint2;
 
     /// == != < >
-    public static bool operator ==(eint eint1, int eint2) => (int)eint1.Value == eint2;
-    public static bool operator !=(eint eint1, int eint2) => (int)eint1.Value != eint2;
-    public static bool operator >(eint eint1, int eint2) => (int)eint1.Value > eint2;
-    public static bool operator <(eint eint1, int eint2) => (int)eint1.Value < eint2;
+    public static bool operator ==(EncInt eint1, int eint2) => (int)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, int eint2) => (int)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, int eint2) => (int)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, int eint2) => (int)eint1.Value < eint2;
 
-    public static bool operator ==(eint eint1, eint eint2) => (int)eint1.Value == (int)eint2.Value;
-    public static bool operator !=(eint eint1, eint eint2) => (int)eint1.Value != (int)eint2.Value;
-    public static bool operator <(eint eint1, eint eint2) => (int)eint1.Value < (int)eint2.Value;
-    public static bool operator >(eint eint1, eint eint2) => (int)eint1.Value > (int)eint2.Value;
+    public static bool operator ==(EncInt eint1, EncInt eint2) => (int)eint1.Value == (int)eint2.Value;
+    public static bool operator !=(EncInt eint1, EncInt eint2) => (int)eint1.Value != (int)eint2.Value;
+    public static bool operator <(EncInt eint1, EncInt eint2) => (int)eint1.Value < (int)eint2.Value;
+    public static bool operator >(EncInt eint1, EncInt eint2) => (int)eint1.Value > (int)eint2.Value;
 
     /// assign
-    public static implicit operator eint(int value) => new eint(value);
-    public static implicit operator int(eint eint1) => (int)eint1.Value;
+    public static implicit operator EncInt(int value) => new EncInt(value);
+    public static implicit operator int(EncInt eint1) => (int)eint1.Value;
 
     #endregion
 

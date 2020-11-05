@@ -1,6 +1,6 @@
 using System;
 
-public struct elong
+public struct EncLong
 {
     /// A struct for storing a 64-bit integer while efficiently keeping it encrypted in the memory.
     /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
@@ -37,7 +37,7 @@ public struct elong
 
     #region Constructors
 
-    private elong(long value)
+    private EncLong(long value)
     {
         // set default values
         encryptionKey1 = 0;
@@ -87,7 +87,7 @@ public struct elong
     // Not recommended to use
     public override bool Equals(object obj)
     {
-        return obj is elong eint &&
+        return obj is EncLong eint &&
                (long)Value == (long)eint.Value;
     }
     public override int GetHashCode()
@@ -100,32 +100,32 @@ public struct elong
     #region Operators Overloading
 
     /// + - * / %
-    public static elong operator +(elong eint1, elong eint2) => new elong((long)(eint1.Value + eint2.Value));
-    public static elong operator -(elong eint1, elong eint2) => new elong((long)(eint1.Value - eint2.Value));
-    public static elong operator *(elong eint1, elong eint2) => new elong((long)(eint1.Value * eint2.Value));
-    public static elong operator /(elong eint1, elong eint2) => new elong((long)(eint1.Value / eint2.Value));
-    public static elong operator %(elong eint1, elong eint2) => new elong((long)(eint1.Value % eint2.Value));
+    public static EncLong operator +(EncLong eint1, EncLong eint2) => new EncLong((long)(eint1.Value + eint2.Value));
+    public static EncLong operator -(EncLong eint1, EncLong eint2) => new EncLong((long)(eint1.Value - eint2.Value));
+    public static EncLong operator *(EncLong eint1, EncLong eint2) => new EncLong((long)(eint1.Value * eint2.Value));
+    public static EncLong operator /(EncLong eint1, EncLong eint2) => new EncLong((long)(eint1.Value / eint2.Value));
+    public static EncLong operator %(EncLong eint1, EncLong eint2) => new EncLong((long)(eint1.Value % eint2.Value));
 
-    public static long operator +(elong eint1, long eint2) => (long)eint1.Value + eint2;
-    public static long operator -(elong eint1, long eint2) => (long)eint1.Value - eint2;
-    public static long operator *(elong eint1, long eint2) => (long)eint1.Value * eint2;
-    public static long operator /(elong eint1, long eint2) => (long)eint1.Value / eint2;
-    public static long operator %(elong eint1, long eint2) => (long)eint1.Value % eint2;
+    public static long operator +(EncLong eint1, long eint2) => (long)eint1.Value + eint2;
+    public static long operator -(EncLong eint1, long eint2) => (long)eint1.Value - eint2;
+    public static long operator *(EncLong eint1, long eint2) => (long)eint1.Value * eint2;
+    public static long operator /(EncLong eint1, long eint2) => (long)eint1.Value / eint2;
+    public static long operator %(EncLong eint1, long eint2) => (long)eint1.Value % eint2;
 
     /// == != < >
-    public static bool operator ==(elong eint1, long eint2) => (long)eint1.Value == eint2;
-    public static bool operator !=(elong eint1, long eint2) => (long)eint1.Value != eint2;
-    public static bool operator >(elong eint1, long eint2) => (long)eint1.Value > eint2;
-    public static bool operator <(elong eint1, long eint2) => (long)eint1.Value < eint2;
+    public static bool operator ==(EncLong eint1, long eint2) => (long)eint1.Value == eint2;
+    public static bool operator !=(EncLong eint1, long eint2) => (long)eint1.Value != eint2;
+    public static bool operator >(EncLong eint1, long eint2) => (long)eint1.Value > eint2;
+    public static bool operator <(EncLong eint1, long eint2) => (long)eint1.Value < eint2;
 
-    public static bool operator ==(elong eint1, elong eint2) => (long)eint1.Value == (long)eint2.Value;
-    public static bool operator !=(elong eint1, elong eint2) => (long)eint1.Value != (long)eint2.Value;
-    public static bool operator <(elong eint1, elong eint2) => (long)eint1.Value < (long)eint2.Value;
-    public static bool operator >(elong eint1, elong eint2) => (long)eint1.Value > (long)eint2.Value;
+    public static bool operator ==(EncLong eint1, EncLong eint2) => (long)eint1.Value == (long)eint2.Value;
+    public static bool operator !=(EncLong eint1, EncLong eint2) => (long)eint1.Value != (long)eint2.Value;
+    public static bool operator <(EncLong eint1, EncLong eint2) => (long)eint1.Value < (long)eint2.Value;
+    public static bool operator >(EncLong eint1, EncLong eint2) => (long)eint1.Value > (long)eint2.Value;
 
     /// assign
-    public static implicit operator elong(long value) => new elong(value);
-    public static implicit operator long(elong eint1) => (long)eint1.Value;
+    public static implicit operator EncLong(long value) => new EncLong(value);
+    public static implicit operator long(EncLong eint1) => (long)eint1.Value;
 
     #endregion
 
