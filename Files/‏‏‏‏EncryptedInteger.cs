@@ -1,6 +1,5 @@
 using System;
 
-[System.Serializable]
 public class EncryptedInteger<TDecrypted, TEncrypted>
         where TDecrypted : IComparable, IConvertible
         where TEncrypted : IComparable, IConvertible

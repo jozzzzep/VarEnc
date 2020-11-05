@@ -1,6 +1,5 @@
 using System;
 
-[System.Serializable]
 public class EncryptedInt
 {
     /// A class for storing a 32-bit integer while efficiently keeping it encrypted in the memory.
