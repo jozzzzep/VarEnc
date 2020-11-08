@@ -1,0 +1,4 @@
+Version 0.3.2 Release Notes
+
+- Changed the names of the structs "eint" and "elong" to "EncInt" and "EncLong"
+- Deleted all generic classes (EncryptedInteger, EncryptedInt08, etc...)

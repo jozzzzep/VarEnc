@@ -1,0 +1,13 @@
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.exe
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.deps.json
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.runtimeconfig.json
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.runtimeconfig.dev.json
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.dll
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\bin\Debug\netcoreapp3.1\VariableEncryption.pdb
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.AssemblyInfoInputs.cache
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.AssemblyInfo.cs
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.csproj.CoreCompileInputs.cache
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.dll
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.pdb
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.genruntimeconfig.cache
+C:\Users\Yosef Davidovich\Documents\Github\Variable-Encryption\Solution\Variable-Encryption\Variable-Encryption\obj\Debug\netcoreapp3.1\VariableEncryption.csprojAssemblyReference.cache

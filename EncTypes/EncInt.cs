@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 public struct EncInt
 {
@@ -10,6 +10,19 @@ public struct EncInt
     /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Content
+
+    #region Encryption Key Generator
+
+    // The Random class for getting the random numbers
+    static private Random random = new Random();
+
+    // Returns a random double between 1 and 10
+    public static double GetEncryptionKey()
+    {
+        return (random.NextDouble() * 10);
+    }
+
+    #endregion
 
     #region Variables
 
@@ -37,16 +50,15 @@ public struct EncInt
 
     #region Constructors
 
-    private EncInt(int value)
+    public static EncInt NewEncInt(int value)
     {
-        // set default values
-        encryptionKey1 = 0;
-        encryptionKey2 = 0;
-        encryptedValue = 0;
-
-        // initialize
-        SetEncryptionKeys();
-        encryptedValue = encrypt(value);
+        EncInt theEncInt = new EncInt
+        {
+            encryptionKey1 = GetEncryptionKey(),
+            encryptionKey2 = GetEncryptionKey(),
+            Value = value
+        };
+        return theEncInt;
     }
 
     #endregion
@@ -71,13 +83,6 @@ public struct EncInt
         return valueToReturn;
     }
 
-    // Setting the encryption keys to a new random values
-    private void SetEncryptionKeys()
-    {
-        encryptionKey1 = EncryptionTools.RandomNumberDouble();
-        encryptionKey2 = EncryptionTools.RandomNumberDouble();
-    }
-
     // Returns the stored value as a string
     public override string ToString()
     {
@@ -100,11 +105,11 @@ public struct EncInt
     #region Operators Overloading
 
     /// + - * / %
-    public static EncInt operator +(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value + eint2.Value));
-    public static EncInt operator -(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value - eint2.Value));
-    public static EncInt operator *(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value * eint2.Value));
-    public static EncInt operator /(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value / eint2.Value));
-    public static EncInt operator %(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value % eint2.Value));
+    public static EncInt operator +(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value + eint2.Value));
+    public static EncInt operator -(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value - eint2.Value));
+    public static EncInt operator *(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value * eint2.Value));
+    public static EncInt operator /(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value / eint2.Value));
+    public static EncInt operator %(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value % eint2.Value));
 
     public static int operator +(EncInt eint1, int eint2) => (int)eint1.Value + eint2;
     public static int operator -(EncInt eint1, int eint2) => (int)eint1.Value - eint2;
@@ -124,7 +129,7 @@ public struct EncInt
     public static bool operator >(EncInt eint1, EncInt eint2) => (int)eint1.Value > (int)eint2.Value;
 
     /// assign
-    public static implicit operator EncInt(int value) => new EncInt(value);
+    public static implicit operator EncInt(int value) => EncInt.NewEncInt(value);
     public static implicit operator int(EncInt eint1) => (int)eint1.Value;
 
     #endregion

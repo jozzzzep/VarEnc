@@ -1,0 +1,10 @@
+Version 0.3.0 Release Notes
+
+- Changed the license from "MIT" to "GPL-3.0"
+- Added Encrypted Integer Structures
+	A group of structures for storing an integer while efficiently keeping it encrypted in the memory.
+	In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
+	Every time the value changes, the encryption keys change too. And it works exactly as an int.
+	
+* eint - A struct for storing a 32-bit integer while efficiently keeping it encrypted in the memory.
+* elong - A struct for storing a 64-bit integer while efficiently keeping it encrypted in the memory.
