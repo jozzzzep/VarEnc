@@ -17,8 +17,8 @@ Simple tools for storing values while efficiently keeping them encrypted in the 
 * **EncDecimal** - A type for containing a "Decimal" type.
   Exactly the same concept as the struct above.
 
-* **EncString** - A type for containing a "Decimal" type.
-  Exactly the same concept as the struct above.
+* **EncString** - An EncType class for a string type,
+that uses a XOR bitwise encryption.
 
 ## Classes and Structs INDEPENDENCIE
 I all previous version, all the classes, the structs and the EncTypes depend on the **EncryptionTools**.
