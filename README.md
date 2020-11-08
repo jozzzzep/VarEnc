@@ -1,7 +1,7 @@
 # Variable Encryption
 Simple tools for storing values while efficiently keeping them encrypted in the memory.
-* Currnetly supports in C#: 
- **int - long - float - double - decimal - string**.
+* Currnetly supports in C#  
+* **int - long - float - double - decimal - string**.
  
  # [PRESS HERE TO ENTER THE WIKI]
  
