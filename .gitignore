@@ -4,8 +4,8 @@
 
 ### DotnetCore ###
 # .NET Core build folders
-bin/
-obj/
++Variable-Encryption/Benchmark/BenchmarkSolution/Variable-Encryption/Variable-Encryption/bin/
++Variable-Encryption/Benchmark/BenchmarkSolution/Variable-Encryption/Variable-Encryption/obj/
 
 # Common node modules locations
 /node_modules
