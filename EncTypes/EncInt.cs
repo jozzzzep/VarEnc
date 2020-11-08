@@ -7,7 +7,6 @@ public struct EncInt
     /// Every time the value changes, the encryption keys change too. And it works exactly as an int.
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Content
 

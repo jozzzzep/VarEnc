@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Solution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
+      "projectUniqueName": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Benchmark\\BenchmarkSolution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
       "projectName": "VariableEncryption",
-      "projectPath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Solution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
+      "projectPath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Benchmark\\BenchmarkSolution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
       "packagesPath": "C:\\Users\\Yosef Davidovich\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Solution\\Variable-Encryption\\Variable-Encryption\\obj\\",
+      "outputPath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Benchmark\\BenchmarkSolution\\Variable-Encryption\\Variable-Encryption\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yosef Davidovich\\AppData\\Roaming\\NuGet\\NuGet.Config",

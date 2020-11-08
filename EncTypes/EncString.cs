@@ -7,7 +7,6 @@ public class EncString
     /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Content
 

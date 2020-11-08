@@ -7,7 +7,6 @@ public struct EncLong
     /// Every time the value changes, the encryption keys change too. And it works exactly as an long.
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/Variable-Encryption/wiki/Examples-&-Tutorial
 
     #region Content
 

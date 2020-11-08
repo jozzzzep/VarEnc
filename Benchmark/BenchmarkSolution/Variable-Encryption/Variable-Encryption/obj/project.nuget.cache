@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f9PONGhzGfsrqeFmPMwgRnaMmPkYTIIs7t6wi/8Wxr6mZPVN/U4kr9P0O6RoeJ/bH43juwreFICoXrkkFcCUaA==",
+  "dgSpecHash": "vzyLp2cy7ijfk23moIt2p7JaezUDTHop5UHjM8eQHO+7MgcH8taUbZi3vxhlToKbTObYS11Dq/M2GTl55iyozQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Solution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
+  "projectFilePath": "C:\\Users\\Yosef Davidovich\\Documents\\Github\\Variable-Encryption\\Benchmark\\BenchmarkSolution\\Variable-Encryption\\Variable-Encryption\\VariableEncryption.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
