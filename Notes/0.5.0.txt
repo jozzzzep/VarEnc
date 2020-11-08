@@ -3,16 +3,16 @@ Version 0.5.0 - Release Notes
 # New Encrypted Types
 
 * EncFloat - A type for containing a "Single" type (a float).
- Exactly the same concept as the EncInt struct.
+  Exactly the same concept as the EncInt struct.
 
 * EncDouble - A type for containing a "Double" type.
- Exactly the same concept as the struct above.
+  Exactly the same concept as the struct above.
 
 * EncDecimal - A type for containing a "Decimal" type.
   Exactly the same concept as the struct above.
 
-* EncString - A type for containing a "Decimal" type.
-  Exactly the same concept as the struct above.
+* EncString - An EncType class for a string type,
+  that uses a XOR bitwise encryption.
 
 # Classes and Structs INDEPENDENCIE
 
