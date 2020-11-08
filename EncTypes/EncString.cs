@@ -108,20 +108,6 @@ public class EncString
 
     public char[] ToCharArray() => this.Value.ToCharArray();
 
-    #endregion
-
-    #region Default Overrides
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
     public override string ToString()
     {
         return Value.ToString();

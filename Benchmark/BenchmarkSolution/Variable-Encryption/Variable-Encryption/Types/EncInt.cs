@@ -88,17 +88,6 @@ public struct EncInt
         return ((int)Value).ToString();
     }
 
-    // Not recommended to use
-    public override bool Equals(object obj)
-    {
-        return obj is EncInt eint &&
-               (int)Value == (int)eint.Value;
-    }
-    public override int GetHashCode()
-    {
-        return (int)Value;
-    }
-
     #endregion
 
     #region Operators Overloading

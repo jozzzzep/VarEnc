@@ -88,17 +88,6 @@ public struct EncFloat
         return (Value).ToString();
     }
 
-    // Not recommended to use
-    public override bool Equals(object obj)
-    {
-        return obj is EncFloat ecnFloat &&
-               Value == ecnFloat.Value;
-    }
-    public override int GetHashCode()
-    {
-        return (int)Value;
-    }
-
     #endregion
 
     #region Operators Overloading

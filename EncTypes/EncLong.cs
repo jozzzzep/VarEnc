@@ -84,17 +84,6 @@ public struct EncLong
         return ((long)Value).ToString();
     }
 
-    // Not recommended to use
-    public override bool Equals(object obj)
-    {
-        return obj is EncLong elong &&
-               (long)Value == (long)elong.Value;
-    }
-    public override int GetHashCode()
-    {
-        return (int)Value;
-    }
-
     #endregion
 
     #region Operators Overloading
