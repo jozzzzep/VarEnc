@@ -1,8 +1,12 @@
 # Variable Encryption
 Simple tools for storing values while efficiently keeping them encrypted in the memory.
-* Currnetly supports in C#: int, long, float, double, decimal, string.
+* Currnetly supports in C#: 
+ **int - long - float - double - decimal - string**.
  
-# Latest Release Notes - 0.5.0
+ # [PRESS HERE TO ENTER THE WIKI]
+ 
+ [PRESS HERE TO ENTER THE WIKI]: https://github.com/JosepeDev/Variable-Encryption/wiki
+ 
 # New Encrypted Types
 * **EncFloat** - A type for containing a "Single" type (a float).
  Exactly the same concept as the EncInt struct.
