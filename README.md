@@ -27,8 +27,7 @@ Every single **EncType** now is **independent** and can work alone.
 
 # Benchmark Application
 The **VarEnc** repo now contains a benchmark (exe)cutable to test the efficiency of its types.
-When it’s running, the application will perform **two benchmarks** on the **types** you chose.
-**Each benchmark** will run a certain **amount tests** for each variable type you choose and in **each test**,
+When it’s running, **a benchmark** will run a certain **amount tests** for each variable type you choose and in **each test**,
  the application will **perform changes** to these variables a **certain amount of time**.
 
 ### If it sounds complicated, don't worry. It is very simple and it has a full page in the **WIKI** (:
