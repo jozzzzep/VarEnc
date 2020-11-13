@@ -3,9 +3,9 @@
 * Currnetly supports in C#  
 * **int - long - float - double - decimal - string**.
  
- # [PRESS HERE TO ENTER THE WIKI]
+ # [CLICK HERE TO ENTER THE WIKI]
  
- [PRESS HERE TO ENTER THE WIKI]: https://github.com/JosepeDev/Variable-Encryption/wiki
+ [CLICK HERE TO ENTER THE WIKI]: https://github.com/JosepeDev/Variable-Encryption/wiki
  
 # New Encrypted Types
 * **EncFloat** - A type for containing a "Single" type (a float).
