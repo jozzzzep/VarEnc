@@ -1,4 +1,4 @@
-[Imgur](https://i.imgur.com/HuxyDqh.png)
+![Imgur](https://i.imgur.com/HuxyDqh.png)
 # Variable Encryption
 Simple tools for storing values while efficiently keeping them encrypted in the memory.
 * Currnetly supports in C#  
