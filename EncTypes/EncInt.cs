@@ -8,22 +8,7 @@ public struct EncInt
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
 
-    #region Content
-
-    #region Encryption Key Generator
-
-    // The Random class for getting the random numbers
-    static private Random random = new Random();
-
-    // Returns a random double between 1 and 10
-    public static double GetEncryptionKey()
-    {
-        return (random.NextDouble() * 10);
-    }
-
-    #endregion
-
-    #region Variables
+    #region Variables And Properties
 
     // The encryption values
     private double encryptionKey1;
@@ -37,19 +22,19 @@ public struct EncInt
     {
         set
         {
-            encryptedValue = encrypt(value);
+            encryptedValue = Encrypt(value);
         }
         get
         {
-            return Math.Round(decrypt(encryptedValue));
+            return Math.Round(Decrypt(encryptedValue));
         }
     }
 
     #endregion
 
-    #region Constructors
+    #region Methods
 
-    public static EncInt NewEncInt(int value)
+    private static EncInt NewEncInt(int value)
     {
         EncInt theEncInt = new EncInt
         {
@@ -60,12 +45,12 @@ public struct EncInt
         return theEncInt;
     }
 
-    #endregion
-
-    #region Methods
+    // Encryption Key Generator
+    static private Random random = new Random();
+    public static double GetEncryptionKey() => (random.NextDouble() * 10);
 
     // Takes a given value and returns it encrypted
-    private double encrypt(double value)
+    private double Encrypt(double value)
     {
         double valueToReturn = value;
         valueToReturn += encryptionKey1;
@@ -74,7 +59,7 @@ public struct EncInt
     }
 
     // Takes an encrypted value and returns it decrypted
-    private double decrypt(double value)
+    private double Decrypt(double value)
     {
         double valueToReturn = value;
         valueToReturn /= encryptionKey2;
@@ -119,8 +104,7 @@ public struct EncInt
     /// assign
     public static implicit operator EncInt(int value) => EncInt.NewEncInt(value);
     public static implicit operator int(EncInt eint1) => (int)eint1.Value;
-
-    #endregion
+    public static implicit operator long(EncInt eint1) => (long)eint1.Value;
 
     #endregion
 }

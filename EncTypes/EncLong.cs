@@ -8,22 +8,7 @@ public struct EncLong
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
 
-    #region Content
-
-    #region Encryption Key Generator
-
-    // The Random class for getting the random numbers
-    static private Random random = new Random();
-
-    // Returns a random decimal between 1 and 10
-    public static decimal GetEncryptionKey()
-    {
-        return (decimal)(random.NextDouble() * 10);
-    }
-
-    #endregion
-
-    #region Variables
+    #region Variables And Properties
 
     // The encryption values
     private decimal encryptionKey1;
@@ -37,11 +22,11 @@ public struct EncLong
     {
         set
         {
-            encryptedValue = encrypt(value);
+            encryptedValue = Encrypt(value);
         }
         get
         {
-            return Math.Round(decrypt(encryptedValue));
+            return Math.Round(Decrypt(encryptedValue));
         }
     }
 
@@ -49,7 +34,7 @@ public struct EncLong
 
     #region Methods
 
-    public static EncLong NewEncLong(long value)
+    private static EncLong NewEncLong(long value)
     {
         EncLong theEncLong = new EncLong
         {
@@ -60,8 +45,12 @@ public struct EncLong
         return theEncLong;
     }
 
+    // Encryption Key Generator
+    static private Random random = new Random();
+    public static decimal GetEncryptionKey() => (decimal)(random.NextDouble() * 10);
+
     // Takes a given value and returns it encrypted
-    private decimal encrypt(decimal value)
+    private decimal Encrypt(decimal value)
     {
         decimal valueToReturn = value;
         valueToReturn += encryptionKey1;
@@ -70,7 +59,7 @@ public struct EncLong
     }
 
     // Takes an encrypted value and returns it decrypted
-    private decimal decrypt(decimal value)
+    private decimal Decrypt(decimal value)
     {
         decimal valueToReturn = value;
         valueToReturn /= encryptionKey2;
@@ -101,11 +90,11 @@ public struct EncLong
     public static long operator /(EncLong elong1, long elong2) => (long)elong1.Value / elong2;
     public static long operator %(EncLong elong1, long elong2) => (long)elong1.Value % elong2;
 
-    public static int operator +(EncLong elong1, int elong2) => (int)elong1.Value + elong2;
-    public static int operator -(EncLong elong1, int elong2) => (int)elong1.Value - elong2;
-    public static int operator *(EncLong elong1, int elong2) => (int)elong1.Value * elong2;
-    public static int operator /(EncLong elong1, int elong2) => (int)elong1.Value / elong2;
-    public static int operator %(EncLong elong1, int elong2) => (int)elong1.Value % elong2;
+    public static long operator +(EncLong elong1, int elong2) => (long)elong1.Value + elong2;
+    public static long operator -(EncLong elong1, int elong2) => (long)elong1.Value - elong2;
+    public static long operator *(EncLong elong1, int elong2) => (long)elong1.Value * elong2;
+    public static long operator /(EncLong elong1, int elong2) => (long)elong1.Value / elong2;
+    public static long operator %(EncLong elong1, int elong2) => (long)elong1.Value % elong2;
 
     /// == != < >
     public static bool operator ==(EncLong elong1, int elong2) => (int)elong1.Value == elong2;
@@ -126,9 +115,7 @@ public struct EncLong
     /// assign
     public static implicit operator EncLong(long value) => EncLong.NewEncLong(value);
     public static implicit operator long(EncLong elong1) => (long)elong1.Value;
-    public static implicit operator int(EncLong elong1) => (int)elong1.Value;
-
-    #endregion
+    public static explicit operator int(EncLong elong1) => (int)elong1.Value;
 
     #endregion
 }

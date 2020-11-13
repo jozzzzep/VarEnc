@@ -8,22 +8,7 @@ public struct EncDecimal
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
 
-    #region Content
-
-    #region Encryption Key Generator
-
-    // The Random class for getting the random numbers
-    static private Random random = new Random();
-
-    // Returns a random decimal between 1 and 10
-    public static decimal GetEncryptionKey()
-    {
-        return (decimal)(random.NextDouble());
-    }
-
-    #endregion
-
-    #region Variables
+    #region Variables And Properties
 
     // The encryption values
     private decimal encryptionKey1;
@@ -37,19 +22,19 @@ public struct EncDecimal
     {
         set
         {
-            encryptedValue = encrypt(value);
+            encryptedValue = Encrypt(value);
         }
         get
         {
-            return (decimal)decrypt(encryptedValue);
+            return (decimal)Decrypt(encryptedValue);
         }
     }
 
     #endregion
 
-    #region Constructors
+    #region Methods
 
-    public static EncDecimal NewEncDecimal(decimal value)
+    private static EncDecimal NewEncDecimal(decimal value)
     {
         EncDecimal theEncdecimal = new EncDecimal
         {
@@ -60,12 +45,12 @@ public struct EncDecimal
         return theEncdecimal;
     }
 
-    #endregion
-
-    #region Methods
+    // Encryption key generator
+    static private Random random = new Random();
+    public static decimal GetEncryptionKey() => (decimal)(random.NextDouble());
 
     // Takes a given value and returns it encrypted
-    private decimal encrypt(decimal value)
+    private decimal Encrypt(decimal value)
     {
         decimal valueToReturn = value;
         valueToReturn += encryptionKey1;
@@ -74,7 +59,7 @@ public struct EncDecimal
     }
 
     // Takes an encrypted value and returns it decrypted
-    private decimal decrypt(decimal value)
+    private decimal Decrypt(decimal value)
     {
         decimal valueToReturn = value;
         valueToReturn /= encryptionKey2;
@@ -86,17 +71,6 @@ public struct EncDecimal
     public override string ToString()
     {
         return (Value).ToString();
-    }
-
-    // Not recommended to use
-    public override bool Equals(object obj)
-    {
-        return obj is EncDecimal ecndecimal &&
-               Value == ecndecimal.Value;
-    }
-    public override int GetHashCode()
-    {
-        return (int)Value;
     }
 
     #endregion
@@ -130,8 +104,10 @@ public struct EncDecimal
     /// assign
     public static implicit operator EncDecimal(decimal value) => EncDecimal.NewEncDecimal(value);
     public static implicit operator decimal(EncDecimal eint1) => eint1.Value;
-
-    #endregion
+    public static explicit operator float(EncDecimal eint1) => (float)eint1.Value;
+    public static explicit operator double(EncDecimal eint1) => (double)eint1.Value;
+    public static explicit operator int(EncDecimal eint1) => (int)eint1.Value;
+    public static explicit operator long(EncDecimal eint1) => (long)eint1.Value;
 
     #endregion
 }

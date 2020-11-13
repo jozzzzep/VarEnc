@@ -8,8 +8,6 @@ public class EncString
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
 
-    #region Content
-
     #region Variables And Properties
 
     private string _encryptionKey;
@@ -26,74 +24,22 @@ public class EncString
         get => Value.Length;
     }
 
+    public static string Empty
+    {
+        get => string.Empty;
+    }
+
+    public char this[int index]
+    {
+        get
+        {
+            return Value[index];
+        }
+    }
+
     #endregion
 
     #region Methods
-
-    public static EncString NewEncString(string value)
-    {
-        EncString encString = new EncString
-        {
-            _encryptionKey = RandomString(),
-            Value = value
-        };
-        return encString;
-    }
-
-    public static EncString NewEncString(char[] characters)
-    {
-        string value = new string(characters);
-        EncString encString = new EncString
-        {
-            _encryptionKey = RandomString(),
-            Value = value
-        };
-        return encString;
-    }
-
-    static Random random = new Random();
-
-    public static char RandomChar() => RandomChar(char.MinValue, char.MaxValue - 1);
-    public static char RandomChar(int min, int max)
-    {
-        return (char)(random.Next(min, max));
-    }
-    public static char RandomNormalChar() => RandomChar(48, 125);
-
-
-    public static string RandomString()
-    {
-        char[] chars = new char[100];
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i] = RandomChar();
-        }
-        return new string(chars);
-    }
-    public static string RandomNormalString()
-    {
-        char[] chars = new char[25];
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i] = RandomNormalChar();
-        }
-        return new string(chars);
-    }
-
-
-    public static string EncryptorDecryptor(string data, string key)
-    {
-        int dataLen = data.Length;
-        int keyLen = key.Length;
-        char[] output = new char[dataLen];
-
-        for (int i = 0; i < dataLen; ++i)
-        {
-            output[i] = (char)(data[i] ^ key[i % keyLen]);
-        }
-
-        return new string(output);
-    }
 
     public static string ReplaceAt(string input, int index, char newChar)
     {
@@ -106,11 +52,93 @@ public class EncString
         else return null;
     }
 
+    public bool Equal(EncString encString) => encString.Value == this.Value;
+
+    public bool IsNull() => this.Value == null;
+
     public char[] ToCharArray() => this.Value.ToCharArray();
+
+    public object Clone() => Value.Clone();
 
     public override string ToString()
     {
         return Value.ToString();
+    }
+
+    #endregion
+
+    #region Constructors
+
+    public static EncString NewEncString(string value)
+    {
+        EncString encString = new EncString
+        {
+            _encryptionKey = RandomString(),
+            Value = value
+        };
+        return encString;
+    }
+
+    public static EncString NewEncString(char[] characters) => NewEncString(new string(characters));
+
+    public static EncString NewEncString(char c, int count) => NewEncString(new string(c, count));
+
+    public static EncString NewEncString(char[] value, int startIndex, int length) => NewEncString(new string(value, startIndex, length));
+
+    #endregion
+
+    #region Encryption Decryption
+
+    static Random random = new Random();
+
+    public static char RandomChar() => RandomChar(char.MinValue, char.MaxValue - 1);
+
+    public static char RandomChar(int min, int max)
+    {
+        return (char)(random.Next(min, max));
+    }
+
+    public static char RandomNormalChar() => RandomChar(48, 125);
+
+    public static string RandomString()
+    {
+        char[] chars = new char[100];
+        for (int i = 0; i < chars.Length; i++)
+        {
+            chars[i] = RandomChar();
+        }
+        return new string(chars);
+    }
+
+    public static string RandomNormalString()
+    {
+        char[] chars = new char[25];
+        for (int i = 0; i < chars.Length; i++)
+        {
+            chars[i] = RandomNormalChar();
+        }
+        return new string(chars);
+    }
+
+    private static string EncryptorDecryptor(string data, string key)
+    {
+        if (data == null || key == null)
+        {
+            return null;
+        }
+        else
+        {
+            int dataLen = data.Length;
+            int keyLen = key.Length;
+            char[] output = new char[dataLen];
+
+            for (int i = 0; i < dataLen; ++i)
+            {
+                output[i] = (char)(data[i] ^ key[i % keyLen]);
+            }
+
+            return new string(output);
+        }
     }
 
     #endregion
@@ -121,16 +149,9 @@ public class EncString
     public static bool operator ==(EncString es1, string es2) => es1.Value == es2;
     public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
 
-    public static bool operator ==(EncString es1, EncString es2) => es1.Value == es2.Value;
-    public static bool operator !=(EncString es1, EncString es2) => es1.Value != es2.Value;
-
     /// assign
     public static implicit operator EncString(string value) => EncString.NewEncString(value);
     public static implicit operator string(EncString encString) => encString.Value;
-    public static explicit operator char[](EncString encString) => encString.Value.ToCharArray();
-
-
-    #endregion
 
     #endregion
 }

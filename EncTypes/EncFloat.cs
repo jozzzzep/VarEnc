@@ -8,22 +8,7 @@ public struct EncFloat
     ///
     /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
 
-    #region Content
-
-    #region Encryption Key Generator
-
-    // The Random class for getting the random numbers
-    static private Random random = new Random();
-
-    // Returns a random double between 1 and 10
-    public static double GetEncryptionKey()
-    {
-        return random.NextDouble();
-    }
-
-    #endregion
-
-    #region Variables
+    #region Variables And Properties
 
     // The encryption values
     private double encryptionKey1;
@@ -37,19 +22,19 @@ public struct EncFloat
     {
         set
         {
-            encryptedValue = encrypt(value);
+            encryptedValue = Encrypt(value);
         }
         get
         {
-            return (float)(decrypt(encryptedValue));
+            return (float)(Decrypt(encryptedValue));
         }
     }
 
     #endregion
 
-    #region Constructors
+    #region Methods
 
-    public static EncFloat NewEncFloat(float value)
+    private static EncFloat NewEncFloat(float value)
     {
         EncFloat theEncFloat = new EncFloat
         {
@@ -60,12 +45,12 @@ public struct EncFloat
         return theEncFloat;
     }
 
-    #endregion
-
-    #region Methods
+    // encryption key generator
+    static private Random random = new Random();
+    public static double GetEncryptionKey() => random.NextDouble();
 
     // Takes a given value and returns it encrypted
-    private double encrypt(double value)
+    private double Encrypt(double value)
     {
         double valueToReturn = value;
         valueToReturn += encryptionKey1;
@@ -74,7 +59,7 @@ public struct EncFloat
     }
 
     // Takes an encrypted value and returns it decrypted
-    private double decrypt(double value)
+    private double Decrypt(double value)
     {
         double valueToReturn = value;
         valueToReturn /= encryptionKey2;
@@ -119,8 +104,10 @@ public struct EncFloat
     /// assign
     public static implicit operator EncFloat(float value) => EncFloat.NewEncFloat(value);
     public static implicit operator float(EncFloat eint1) => eint1.Value;
-
-    #endregion
+    public static implicit operator double(EncFloat eint1) => eint1.Value;
+    public static explicit operator decimal(EncFloat eint1) => (decimal)eint1.Value;
+    public static explicit operator int(EncFloat eint1) => (int)eint1.Value;
+    public static explicit operator long(EncFloat eint1) => (long)eint1.Value;
 
     #endregion
 }

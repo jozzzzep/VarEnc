@@ -4,9 +4,9 @@ using System.Text;
 
 struct EncBool
 {
-    /// Of all the encrypted values you could've picked,
-    /// you thought you would need an encrypted bool...
-    /// you're a failure as a human being and a waste of life.
+    /// Of all the encrypted values you could've picked.
+    /// You thought you would need an encrypted bool.
+    /// You're a failure as a human being and a waste of life.
 
     #region Variables And Properties
 
@@ -35,7 +35,6 @@ struct EncBool
         return !boolVar;
     }
     
-
     #endregion
 
     #region Operators Overloading
