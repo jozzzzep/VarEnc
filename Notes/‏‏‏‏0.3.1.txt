@@ -1,7 +1,0 @@
-Version 0.3.1 Release Notes
-
-- Changed the name of the repository from "SimpleEncryptionTools" to "Variable-Encryption"
-- Added a Code of Conduct file
-- Added a Contributing file
-- Added Issue templates
-- Added a social preview image
