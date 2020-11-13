@@ -3,4 +3,4 @@
 * Currnetly supports in C#  
 * **int - long - float - double - decimal - string**.
  
- # [CLICK HERE TO ENTER THE WIKI]
+ # [CLICK HERE TO ENTER THE WIKI](https://github.com/JosepeDev/VarEnc/wiki)
