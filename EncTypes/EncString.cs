@@ -6,7 +6,7 @@ public class EncString
     /// In the memory it is saved as a wierd string that is affected by random very long an wierd key. { encryptionKey }
     /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
     ///
-    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// Wiki page: https://github.com/JosepeDev/VarEnc/wiki
 
     #region Variables And Properties
 

@@ -6,7 +6,7 @@ public struct EncDouble
     /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// Every time the value changes, the encryption keys change too. And it works exactly as an double.
     ///
-    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// Wiki page: https://github.com/JosepeDev/VarEnc/wiki
 
     #region Variables And Properties
 

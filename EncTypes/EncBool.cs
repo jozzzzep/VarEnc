@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-struct EncBool
+public struct EncBool
 {
     /// Of all the encrypted values you could've picked.
     /// You thought you would need an encrypted bool.
