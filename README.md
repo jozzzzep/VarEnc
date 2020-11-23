@@ -4,6 +4,8 @@
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
 - [**Benchmark**](#benchmark)
+  - [Example of usage](#example-of-usage)
+  - [Files](#files)
 
 # EncTypes
 ![img](https://i.imgur.com/rIKRq3i.png)
@@ -19,12 +21,12 @@ This is when you want to use an EncType. Each type does not depend on the other.
 
 ## Which type to use?
 
-- EncInt - For storing an int. Every time you change its value, the random numbers that affect its value change too.
-- EncLong - The same thing as the struct above, but for a 64-bit integer (a long).
-- EncFloat - The same thing as the struct above, but for a Single (float).
-- EncDouble - The same thing as the struct above, but for a Double.
-- EncDecimal - The same thing as the struct above, but for a Decimal.
-- EncString - An EncType class for a string type, that uses an XOR bitwise encryption.
+- **EncInt** - For storing an int. Every time you change its value, the random numbers that affect its value change too.
+- **EncLong** - The same thing as the struct above, but for a 64-bit integer (a long).
+- **EncFloat** - The same thing as the struct above, but for a Single (float).
+- **EncDouble** - The same thing as the struct above, but for a Double.
+- **EncDecimal** - The same thing as the struct above, but for a Decimal.
+- **EncString** - An EncType class for a string type, that uses an XOR bitwise encryption.
 
 You can find the EncTypes library [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/EncTypes)
 
@@ -67,15 +69,29 @@ At first, you'll have to choose the types you want to compare.
 Then how long you want the benchmark to be (Fast, Normal, Long, etc), and after that choose a benchmark preset.  
 After the benchmark is finished, the results will be printed. From there you can press Enter (or any key) and it'll take you back to the main menu.  
 
+### Example of usage:  
+I **opened** the application from the "**Benchmark**" folder.  
+And now it shows **all** the **types** you can **compare**.  
+
+![img](https://i.imgur.com/O9khnDw.jpg)  
+I chose to make a comparison between the **EncInt** and the **int** types.  
+So I typed **1** and pressed Enter.  
+
+![img](https://i.imgur.com/TlD1yM6.jpg)  
+I chose to perform a benchmark of type "**Fastest**".  
+So I typed **1** again and pressed Enter.   
+
+![img](https://i.imgur.com/NT5SHRR.jpg)  
+From the **presets** of type "Fastest" I chose to perform the **first**.  
+So again, I typed **1** and pressed Enter.  
+
+![img](https://i.imgur.com/iyHdlt6.jpg)  
+These are the **results**. It performed **10 tests** on each type.  
+Each test performed **50 changes** to a variable of type **EncInt**, then **int**.  
+It says that the **int** type performed **better** by **1.946%**. (only **0.1 milliseconds**)  
+Be aware that the **shortest** benchmarks are the **least accurate**.  
+**Feel free to test the efficiency of other EncTypes (:**  
+
 ### Files
 
 And you can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
-
-# Classes
-- C#  
-  - **EncInt** (int)
-  - **EncLong** (long)
-  - **EncFloat** (float)
-  - **EncDouble** (double)
-  - **EncDecimal** (decimal)
-  - **EncString** (string) 
