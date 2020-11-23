@@ -1,6 +1,5 @@
 ![Imgur](https://i.imgur.com/2FPrdWN.png)
-#### Simple and easy tools for storing values while efficiently keeping them encrypted in the memory.
-#### Content
+**Content**
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
