@@ -94,4 +94,4 @@ Be aware that the **shortest** benchmarks are the **least accurate**.
 
 ### Files
 
-And you can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
+You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
