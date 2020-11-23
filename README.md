@@ -69,9 +69,9 @@ encryptedString += "more text";
 
 ```
 
-**They will work the same as their normal type.**
+**They will work the same as their normal type.**  
 **Even with Incrementing/Decrementing/Multiplying/Dividing/Comparing.**  
-**But in the background it is encrypted.**
+**But in the background it is encrypted.**  
 **Without you worrying about encryption or decryption, you work with your variables just the same.**  
 **You can also combine and/or compare an EncType with its normal type and vice versa.**  
 
