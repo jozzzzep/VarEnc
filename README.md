@@ -49,8 +49,30 @@ string normalString = "That's a text";
 EncString encryptedString = "That's a text";
 ```
 
-**They will work the same as their normal type. Even with Incrementing/Decrementing/Multiplying/Dividing/Comparing.**  
-**But in the background it is encrypted. Without you worrying about encryption or decryption, you work with your variables just the same.**  
+#### Math
+
+```csharp
+
+// An int example, but works the same with doubles.
+int normalInt = 0;
+EncInt encryptedInt = 0;
+normalInt += 18;
+encryptedInt += 18; 
+normalInt /= 9;
+encryptedInt /= 9; 
+
+// Strings
+string normalString = "That's a text";
+EncString encryptedString = "That's a text";
+normalString += "more text";
+encryptedString += "more text";
+
+```
+
+**They will work the same as their normal type.**
+**Even with Incrementing/Decrementing/Multiplying/Dividing/Comparing.**  
+**But in the background it is encrypted.**
+**Without you worrying about encryption or decryption, you work with your variables just the same.**  
 **You can also combine and/or compare an EncType with its normal type and vice versa.**  
 
 # Benchmark
