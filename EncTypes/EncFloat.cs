@@ -6,7 +6,7 @@ public struct EncFloat
     /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
     /// Every time the value changes, the encryption keys change too. And it works exactly as an flaot.
     ///
-    /// Wiki page: https://github.com/JosepeDev/VarEnc/wiki
+    /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
     #region Variables And Properties
 
@@ -30,6 +30,13 @@ public struct EncFloat
         }
     }
 
+    public float Epsilon { get => Single.Epsilon; }
+    public float MaxValue { get => Single.MaxValue; }
+    public float MinValue { get => Single.MinValue; }
+    public float NaN { get => Single.NaN; }
+    public float NegativeInfinity { get => Single.NegativeInfinity; }
+    public float PositiveInfinity { get => Single.PositiveInfinity; }
+
     #endregion
 
     #region Methods
@@ -47,7 +54,7 @@ public struct EncFloat
 
     // encryption key generator
     static private Random random = new Random();
-    public static double GetEncryptionKey() => random.NextDouble();
+    static private double GetEncryptionKey() => random.NextDouble();
 
     // Takes a given value and returns it encrypted
     private double Encrypt(double value)
@@ -67,11 +74,17 @@ public struct EncFloat
         return valueToReturn;
     }
 
-    // Returns the stored value as a string
-    public override string ToString()
-    {
-        return (Value).ToString();
-    }
+    // Single methods
+    public int CompareTo(Single value) => Value.CompareTo(value);
+    public int CompareTo(object value) => Value.CompareTo(value);
+    public override bool Equals(object obj) => Value.Equals(obj);
+    public bool Equals(Single obj) => Value.Equals(obj);
+    public override int GetHashCode() => Value.GetHashCode();
+    public TypeCode GetTypeCode() => Value.GetTypeCode();
+    public override string ToString() => Value.ToString();
+    public string ToString(IFormatProvider provider) => Value.ToString(provider);
+    public string ToString(string format) => Value.ToString(format);
+    public string ToString(string format, IFormatProvider provider) => Value.ToString(format, provider);
 
     #endregion
 
@@ -84,6 +97,54 @@ public struct EncFloat
     public static EncFloat operator /(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value / eint2.Value);
     public static EncFloat operator %(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value % eint2.Value);
 
+    public static float operator +(EncFloat efloat1, ulong efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, ulong efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, ulong efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, ulong efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, ulong efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, long efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, long efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, long efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, long efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, long efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, uint efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, uint efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, uint efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, uint efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, uint efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, int efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, int efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, int efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, int efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, int efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, ushort efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, ushort efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, ushort efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, ushort efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, ushort efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, short efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, short efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, short efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, short efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, short efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, byte efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, byte efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, byte efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, byte efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, byte efloat2) => efloat1.Value % efloat2;
+
+    public static float operator +(EncFloat efloat1, sbyte efloat2) => efloat1.Value + efloat2;
+    public static float operator -(EncFloat efloat1, sbyte efloat2) => efloat1.Value - efloat2;
+    public static float operator *(EncFloat efloat1, sbyte efloat2) => efloat1.Value * efloat2;
+    public static float operator /(EncFloat efloat1, sbyte efloat2) => efloat1.Value / efloat2;
+    public static float operator %(EncFloat efloat1, sbyte efloat2) => efloat1.Value % efloat2;
+
     public static float operator +(EncFloat efloat1, float efloat2) => efloat1.Value + efloat2;
     public static float operator -(EncFloat efloat1, float efloat2) => efloat1.Value - efloat2;
     public static float operator *(EncFloat efloat1, float efloat2) => efloat1.Value * efloat2;
@@ -91,23 +152,80 @@ public struct EncFloat
     public static float operator %(EncFloat efloat1, float efloat2) => efloat1.Value % efloat2;
 
     /// == != < >
-    public static bool operator ==(EncFloat eint1, float eint2) => eint1.Value == eint2;
-    public static bool operator !=(EncFloat eint1, float eint2) => eint1.Value != eint2;
-    public static bool operator >(EncFloat eint1, float eint2) => eint1.Value > eint2;
-    public static bool operator <(EncFloat eint1, float eint2) => eint1.Value < eint2;
 
     public static bool operator ==(EncFloat eint1, EncFloat eint2) => eint1.Value == eint2.Value;
     public static bool operator !=(EncFloat eint1, EncFloat eint2) => eint1.Value != eint2.Value;
     public static bool operator <(EncFloat eint1, EncFloat eint2) => eint1.Value < eint2.Value;
     public static bool operator >(EncFloat eint1, EncFloat eint2) => eint1.Value > eint2.Value;
 
+    public static bool operator ==(EncFloat eint1, ulong eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, ulong eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, ulong eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, ulong eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, long eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, long eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, long eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, long eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, uint eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, uint eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, uint eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, uint eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, int eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, int eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, int eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, int eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, ushort eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, ushort eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, ushort eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, ushort eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, short eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, short eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, short eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, short eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, byte eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, byte eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, byte eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, byte eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, sbyte eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, sbyte eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, sbyte eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, sbyte eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, decimal eint2) => (decimal)eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, decimal eint2) => (decimal)eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, decimal eint2) => (decimal)eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, decimal eint2) => (decimal)eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, double eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, double eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, double eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, double eint2) => eint1.Value < eint2;
+
+    public static bool operator ==(EncFloat eint1, float eint2) => eint1.Value == eint2;
+    public static bool operator !=(EncFloat eint1, float eint2) => eint1.Value != eint2;
+    public static bool operator >(EncFloat eint1, float eint2) => eint1.Value > eint2;
+    public static bool operator <(EncFloat eint1, float eint2) => eint1.Value < eint2;
+
     /// assign
     public static implicit operator EncFloat(float value) => EncFloat.NewEncFloat(value);
-    public static implicit operator float(EncFloat eint1) => eint1.Value;
-    public static implicit operator double(EncFloat eint1) => eint1.Value;
     public static explicit operator decimal(EncFloat eint1) => (decimal)eint1.Value;
-    public static explicit operator int(EncFloat eint1) => (int)eint1.Value;
+    public static implicit operator double(EncFloat eint1) => eint1.Value;
+    public static implicit operator float(EncFloat eint1) => eint1.Value;
+    public static explicit operator ulong(EncFloat eint1) => (ulong)eint1.Value;
     public static explicit operator long(EncFloat eint1) => (long)eint1.Value;
+    public static explicit operator uint(EncFloat eint1) => (uint)eint1.Value;
+    public static explicit operator int(EncFloat eint1) => (int)eint1.Value;
+    public static explicit operator ushort(EncFloat eint1) => (ushort)eint1.Value;
+    public static explicit operator short(EncFloat eint1) => (short)eint1.Value;
+    public static explicit operator byte(EncFloat eint1) => (byte)eint1.Value;
+    public static explicit operator sbyte(EncFloat eint1) => (sbyte)eint1.Value;
 
     #endregion
 }
