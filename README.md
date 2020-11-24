@@ -6,6 +6,8 @@
 - [**Benchmark**](#benchmark)
   - [Example of usage](#example-of-usage)
   - [Files](#files)
+- [**Documentations**](#documentations)
+  - [CSharp](#csharp)
 
 # EncTypes
 ![img](https://i.imgur.com/rIKRq3i.png)
@@ -117,3 +119,14 @@ Be aware that the **shortest** benchmarks are the **least accurate**.
 ### Files
 
 You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
+
+# Documentations
+Every EncType contains the same methods and fields as its normal type.
+So it'll link you to the official .NET documentaions for eash method/field.
+## CSharp
+- [EncInt](https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=net-5.0)
+- [EncLong](https://docs.microsoft.com/en-us/dotnet/api/system.int64?view=net-5.0)
+- [EncFloat](https://docs.microsoft.com/en-us/dotnet/api/system.single?view=net-5.0)
+- [EncDouble](https://docs.microsoft.com/en-us/dotnet/api/system.double?view=net-5.0)
+- [EncDecimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-5.0)
+- [EncString](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-5.0)
