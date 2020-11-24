@@ -5,7 +5,7 @@ using System.Text;
 public class EncString
 {
     /// A class for storing a string while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a wierd string that is affected by random very long an wierd key. { encryptionKey }
+    /// In the memory it is saved as a wierd string that is affected by a very long random key. { encryptionKey }
     /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
@@ -18,7 +18,7 @@ public class EncString
     /// <summary>
     /// The decrypted value of the stored string.
     /// </summary>
-    public string Value
+    private string Value
     {
         get => EncryptorDecryptor(_encryptedValue, _encryptionKey);
         set => _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
@@ -42,17 +42,6 @@ public class EncString
     #endregion
 
     #region Methods
-
-    public static string ReplaceAt(string input, int index, char newChar)
-    {
-        if (input != null)
-        {
-            char[] chars = input.ToCharArray();
-            chars[index] = newChar;
-            return new string(chars);
-        }
-        else return null;
-    }
 
     public bool IsEqual(EncString encString) => encString.Value == this.Value;
     public bool IsNull() => this.Value == null;
@@ -205,6 +194,17 @@ public class EncString
 
             return new string(output);
         }
+    }
+
+    public static string ReplaceAt(string input, int index, char newChar)
+    {
+        if (input != null)
+        {
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
+        }
+        else return null;
     }
 
     #endregion
