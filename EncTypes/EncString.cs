@@ -124,21 +124,22 @@ public class EncString
 
     #region Constructors
 
-    public static EncString NewEncString(string value)
+    public EncString(string value) => New(value, this);
+
+    public EncString(char[] value) 
+        : this(new string(value)) { }
+
+    public EncString(char c, int count)
+        : this(new string(c, count)) { }
+
+    public EncString(char[] value, int startIndex, int length)
+        : this(new string(value, startIndex, length)) { }
+
+    private static void New(string value, EncString encString)
     {
-        EncString encString = new EncString
-        {
-            _encryptionKey = RandomString(),
-            Value = value
-        };
-        return encString;
+        encString._encryptionKey = RandomString();
+        encString.Value = value;
     }
-
-    public static EncString NewEncString(char[] characters) => NewEncString(new string(characters));
-
-    public static EncString NewEncString(char c, int count) => NewEncString(new string(c, count));
-
-    public static EncString NewEncString(char[] value, int startIndex, int length) => NewEncString(new string(value, startIndex, length));
 
     #endregion
 
@@ -212,7 +213,7 @@ public class EncString
     #region Operators Overloading
 
     /// + 
-    public static EncString operator +(EncString enc, string n) => NewEncString(enc.Value + n);
+    public static EncString operator +(EncString enc, string n) => new EncString(enc.Value + n);
     public static string operator +(string n, EncString enc) => enc.Value + n;
 
     /// == != < >
@@ -220,7 +221,7 @@ public class EncString
     public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
 
     /// assign
-    public static implicit operator EncString(string value) => EncString.NewEncString(value);
+    public static implicit operator EncString(string value) => new EncString(value);
     public static implicit operator string(EncString encString) => encString.Value;
 
     #endregion
