@@ -93,17 +93,17 @@ public struct EncInt
     public static int operator /(EncInt eint1, int eint2) => (int)eint1.Value / eint2;
     public static int operator %(EncInt eint1, int eint2) => (int)eint1.Value % eint2;
 
-    public static int operator +(EncInt eint1, short eint2) => (int)eint1.Value + eint2;
-    public static int operator -(EncInt eint1, short eint2) => (int)eint1.Value - eint2;
-    public static int operator *(EncInt eint1, short eint2) => (int)eint1.Value * eint2;
-    public static int operator /(EncInt eint1, short eint2) => (int)eint1.Value / eint2;
-    public static int operator %(EncInt eint1, short eint2) => (int)eint1.Value % eint2;
-
     public static int operator +(EncInt eint1, ushort eint2) => (int)eint1.Value + eint2;
     public static int operator -(EncInt eint1, ushort eint2) => (int)eint1.Value - eint2;
     public static int operator *(EncInt eint1, ushort eint2) => (int)eint1.Value * eint2;
     public static int operator /(EncInt eint1, ushort eint2) => (int)eint1.Value / eint2;
     public static int operator %(EncInt eint1, ushort eint2) => (int)eint1.Value % eint2;
+
+    public static int operator +(EncInt eint1, short eint2) => (int)eint1.Value + eint2;
+    public static int operator -(EncInt eint1, short eint2) => (int)eint1.Value - eint2;
+    public static int operator *(EncInt eint1, short eint2) => (int)eint1.Value * eint2;
+    public static int operator /(EncInt eint1, short eint2) => (int)eint1.Value / eint2;
+    public static int operator %(EncInt eint1, short eint2) => (int)eint1.Value % eint2;
 
     public static int operator +(EncInt eint1, byte eint2) => (int)eint1.Value + eint2;
     public static int operator -(EncInt eint1, byte eint2) => (int)eint1.Value - eint2;
@@ -116,36 +116,43 @@ public struct EncInt
     public static int operator *(EncInt eint1, sbyte eint2) => (int)eint1.Value * eint2;
     public static int operator /(EncInt eint1, sbyte eint2) => (int)eint1.Value / eint2;
     public static int operator %(EncInt eint1, sbyte eint2) => (int)eint1.Value % eint2;
-    /// == != < >
-    public static bool operator ==(EncInt eint1, int eint2) => (int)eint1.Value == eint2;
-    public static bool operator !=(EncInt eint1, int eint2) => (int)eint1.Value != eint2;
-    public static bool operator >(EncInt eint1, int eint2) => (int)eint1.Value > eint2;
-    public static bool operator <(EncInt eint1, int eint2) => (int)eint1.Value < eint2;
 
-    public static bool operator ==(EncInt eint1, long eint2) => (long)eint1.Value == eint2;
-    public static bool operator !=(EncInt eint1, long eint2) => (long)eint1.Value != eint2;
-    public static bool operator >(EncInt eint1, long eint2) => (long)eint1.Value > eint2;
-    public static bool operator <(EncInt eint1, long eint2) => (long)eint1.Value < eint2;
+    /// == != < >
+
+    public static bool operator ==(EncInt eint1, EncInt eint2) => (int)eint1.Value == (int)eint2.Value;
+    public static bool operator !=(EncInt eint1, EncInt eint2) => (int)eint1.Value != (int)eint2.Value;
+    public static bool operator <(EncInt eint1, EncInt eint2) => (int)eint1.Value < (int)eint2.Value;
+    public static bool operator >(EncInt eint1, EncInt eint2) => (int)eint1.Value > (int)eint2.Value;
 
     public static bool operator ==(EncInt eint1, ulong eint2) => (ulong)eint1.Value == eint2;
     public static bool operator !=(EncInt eint1, ulong eint2) => (ulong)eint1.Value != eint2;
     public static bool operator >(EncInt eint1, ulong eint2) => (ulong)eint1.Value > eint2;
     public static bool operator <(EncInt eint1, ulong eint2) => (ulong)eint1.Value < eint2;
 
+    public static bool operator ==(EncInt eint1, long eint2) => (long)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, long eint2) => (long)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, long eint2) => (long)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, long eint2) => (long)eint1.Value < eint2;
+
     public static bool operator ==(EncInt eint1, uint eint2) => (uint)eint1.Value == eint2;
     public static bool operator !=(EncInt eint1, uint eint2) => (uint)eint1.Value != eint2;
     public static bool operator >(EncInt eint1, uint eint2) => (uint)eint1.Value > eint2;
     public static bool operator <(EncInt eint1, uint eint2) => (uint)eint1.Value < eint2;
 
-    public static bool operator ==(EncInt eint1, short eint2) => (short)eint1.Value == eint2;
-    public static bool operator !=(EncInt eint1, short eint2) => (short)eint1.Value != eint2;
-    public static bool operator >(EncInt eint1, short eint2) => (short)eint1.Value > eint2;
-    public static bool operator <(EncInt eint1, short eint2) => (short)eint1.Value < eint2;
+    public static bool operator ==(EncInt eint1, int eint2) => (int)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, int eint2) => (int)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, int eint2) => (int)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, int eint2) => (int)eint1.Value < eint2;
 
     public static bool operator ==(EncInt eint1, ushort eint2) => (ushort)eint1.Value == eint2;
     public static bool operator !=(EncInt eint1, ushort eint2) => (ushort)eint1.Value != eint2;
     public static bool operator >(EncInt eint1, ushort eint2) => (ushort)eint1.Value > eint2;
     public static bool operator <(EncInt eint1, ushort eint2) => (ushort)eint1.Value < eint2;
+
+    public static bool operator ==(EncInt eint1, short eint2) => (short)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, short eint2) => (short)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, short eint2) => (short)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, short eint2) => (short)eint1.Value < eint2;
 
     public static bool operator ==(EncInt eint1, byte eint2) => (byte)eint1.Value == eint2;
     public static bool operator !=(EncInt eint1, byte eint2) => (byte)eint1.Value != eint2;
@@ -157,23 +164,33 @@ public struct EncInt
     public static bool operator >(EncInt eint1, sbyte eint2) => (sbyte)eint1.Value > eint2;
     public static bool operator <(EncInt eint1, sbyte eint2) => (sbyte)eint1.Value < eint2;
 
-    public static bool operator ==(EncInt eint1, EncInt eint2) => (int)eint1.Value == (int)eint2.Value;
-    public static bool operator !=(EncInt eint1, EncInt eint2) => (int)eint1.Value != (int)eint2.Value;
-    public static bool operator <(EncInt eint1, EncInt eint2) => (int)eint1.Value < (int)eint2.Value;
-    public static bool operator >(EncInt eint1, EncInt eint2) => (int)eint1.Value > (int)eint2.Value;
+    public static bool operator ==(EncInt eint1, decimal eint2) => (decimal)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, decimal eint2) => (decimal)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, decimal eint2) => (decimal)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, decimal eint2) => (decimal)eint1.Value < eint2;
+
+    public static bool operator ==(EncInt eint1, double eint2) => (double)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, double eint2) => (double)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, double eint2) => (double)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, double eint2) => (double)eint1.Value < eint2;
+
+    public static bool operator ==(EncInt eint1, float eint2) => (float)eint1.Value == eint2;
+    public static bool operator !=(EncInt eint1, float eint2) => (float)eint1.Value != eint2;
+    public static bool operator >(EncInt eint1, float eint2) => (float)eint1.Value > eint2;
+    public static bool operator <(EncInt eint1, float eint2) => (float)eint1.Value < eint2;
 
     /// assign
     public static implicit operator EncInt(int value) => EncInt.NewEncInt(value);
-    public static implicit operator int(EncInt eint1) => (int)eint1.Value;
+    public static explicit operator ulong(EncInt eint1) => (ulong)eint1.Value;
     public static implicit operator long(EncInt eint1) => (long)eint1.Value;
     public static explicit operator uint(EncInt eint1) => (uint)eint1.Value;
-    public static explicit operator ulong(EncInt eint1) => (ulong)eint1.Value;
-    public static explicit operator short(EncInt eint1) => (short)eint1.Value;
+    public static implicit operator int(EncInt eint1) => (int)eint1.Value;
     public static explicit operator ushort(EncInt eint1) => (ushort)eint1.Value;
+    public static explicit operator short(EncInt eint1) => (short)eint1.Value;
     public static explicit operator byte(EncInt eint1) => (byte)eint1.Value;
     public static explicit operator sbyte(EncInt eint1) => (sbyte)eint1.Value;
     public static explicit operator decimal(EncInt eint1) => (decimal)eint1.Value;
-    public static explicit operator double(EncInt eint1) => (double)eint1.Value;
+    public static explicit operator double(EncInt eint1) => eint1.Value;
     public static explicit operator float(EncInt eint1) => (float)eint1.Value;
 
     #endregion
