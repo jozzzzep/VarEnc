@@ -53,7 +53,7 @@ public struct EncDecimal
 
     // Encryption key generator
     static private Random random = new Random();
-    private static decimal GetEncryptionKey() => (decimal)(random.NextDouble());
+    static private decimal GetEncryptionKey() => (decimal)(random.NextDouble());
 
     // Takes a given value and returns it encrypted
     private decimal Encrypt(decimal value)

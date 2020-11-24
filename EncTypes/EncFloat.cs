@@ -54,7 +54,7 @@ public struct EncFloat
 
     // encryption key generator
     static private Random random = new Random();
-    public static double GetEncryptionKey() => random.NextDouble();
+    static private double GetEncryptionKey() => random.NextDouble();
 
     // Takes a given value and returns it encrypted
     private double Encrypt(double value)
