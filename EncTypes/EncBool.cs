@@ -11,10 +11,14 @@ public struct EncBool
     #region Variables And Properties
 
     readonly bool _value;
-    bool Value
+
+    public bool Value
     {
         get => Decrypt(_value);
     }
+
+    public static string FalseString { get => Boolean.FalseString; }
+    public static string TrueString { get => Boolean.TrueString; }
 
     #endregion
 
@@ -34,7 +38,16 @@ public struct EncBool
     {
         return !boolVar;
     }
-    
+
+    public int CompareTo(Boolean value) => Value.CompareTo(value);
+    public int CompareTo(object obj) => Value.CompareTo(obj);
+    public Boolean Equals(Boolean obj) => Value.Equals(obj);
+    public override Boolean Equals(object obj) => Value.Equals(obj);
+    public override int GetHashCode() => Value.GetHashCode();
+    public TypeCode GetTypeCode() => Value.GetTypeCode();
+    public override string ToString() => Value.ToString();
+    public string ToString(IFormatProvider provider) => Value.ToString(provider);
+
     #endregion
 
     #region Operators Overloading
