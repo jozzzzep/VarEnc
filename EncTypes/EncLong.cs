@@ -180,14 +180,14 @@ public struct EncLong
 
     /// assign
     public static implicit operator EncLong(long value) => EncLong.NewEncLong(value);
-    public static implicit operator long(EncLong elong1) => (long)elong1.Value;
     public static explicit operator ulong(EncLong elong1) => (ulong)elong1.Value;
+    public static implicit operator long(EncLong elong1) => (long)elong1.Value;
     public static explicit operator uint(EncLong elong1) => (uint)elong1.Value;
     public static explicit operator int(EncLong elong1) => (int)elong1.Value;
     public static explicit operator ushort(EncLong elong1) => (ushort)elong1.Value;
     public static explicit operator short(EncLong elong1) => (short)elong1.Value;
-    public static explicit operator sbyte(EncLong elong1) => (sbyte)elong1.Value;
     public static explicit operator byte(EncLong elong1) => (byte)elong1.Value;
+    public static explicit operator sbyte(EncLong elong1) => (sbyte)elong1.Value;
     public static explicit operator decimal(EncLong elong1) => elong1.Value;
     public static explicit operator double(EncLong elong1) => (double)elong1.Value;
     public static explicit operator float(EncLong elong1) => (float)elong1.Value;
