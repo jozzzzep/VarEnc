@@ -30,7 +30,7 @@ This is when you want to use an EncType. Each type does not depend on the other.
 - **EncDecimal** - The same thing as the struct above, but for a Decimal.
 - **EncString** - An EncType class for a string type, that uses an XOR bitwise encryption.
 
-You can find the EncTypes library [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/EncTypes)
+You can find the EncTypes folder [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/EncTypes)
 
 ## Examples
 
