@@ -126,7 +126,7 @@ public class EncString
 
     public EncString(string value) => New(value, this);
 
-    public EncString(char[] value) 
+    public EncString(char[] value)
         : this(new string(value)) { }
 
     public EncString(char c, int count)
@@ -147,31 +147,19 @@ public class EncString
 
     static Random random = new Random();
 
-    public static char RandomChar() => RandomChar(char.MinValue, char.MaxValue - 1);
+    static int RandomLength() => random.Next(10, 150);
 
-    public static char RandomChar(int min, int max)
+    static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
     {
         return (char)(random.Next(min, max));
     }
 
-    public static char RandomNormalChar() => RandomChar(48, 125);
-
-    public static string RandomString()
+    static string RandomString()
     {
-        char[] chars = new char[100];
+        char[] chars = new char[RandomLength()];
         for (int i = 0; i < chars.Length; i++)
         {
             chars[i] = RandomChar();
-        }
-        return new string(chars);
-    }
-
-    public static string RandomNormalString()
-    {
-        char[] chars = new char[25];
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i] = RandomNormalChar();
         }
         return new string(chars);
     }
@@ -195,17 +183,6 @@ public class EncString
 
             return new string(output);
         }
-    }
-
-    public static string ReplaceAt(string input, int index, char newChar)
-    {
-        if (input != null)
-        {
-            char[] chars = input.ToCharArray();
-            chars[index] = newChar;
-            return new string(chars);
-        }
-        else return null;
     }
 
     #endregion
