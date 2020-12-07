@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using static Utilities;
 
 static class MenuSystem
 {
+    static ChoosingState currentState;
     static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
     static private string choiceText = "Type the number of your choice and press ENTER";
@@ -24,6 +26,7 @@ static class MenuSystem
                 {
                     "Current version - 0.8.0",
                     "Welcome to the console app for speedtesting the VarEnc features.",
+                    "If you already know the numbers of your choices, you can input them all together. (seperated with spaces)",
                     "These are the types you can speedtest:"
                 };
                 textToReturn = text1;
@@ -56,17 +59,17 @@ static class MenuSystem
         }
         return textToReturn;
     }
-    
+
     public static Action GetSelectionsList(int sectionNum)
     {
         Action returnThis;
         switch (sectionNum)
         {
-            case 0: 
+            case 0:
                 returnThis = DisplayComparisonsList;
                 break;
 
-            case 1: 
+            case 1:
                 returnThis = DisplayBenchmarkPresetGroupList;
                 break;
 
@@ -182,32 +185,45 @@ static class MenuSystem
         }
         else
         {
-            try
+            int indexOfFirstSpace = line.IndexOf(' ');
+            if (line.Contains(" ") && indexOfFirstSpace != (line.Length - 1) && Char.IsDigit(line[indexOfFirstSpace + 1]) && Char.IsDigit(line[indexOfFirstSpace - 1]))
             {
-                int inputNum = Convert.ToInt32(line);
-                if (IsNumberValid(inputNum, GetMaxValid(sectionNum)))
+                string[] entries = line.Split(' ');
+                List<int> e = new List<int>();
+
+                for (int i = 0; i < entries.Length; i++)
                 {
-                    // if the input is valid,
-                    // add the data from the user's input and print the next section
+                    if (ContainingOnlyDigits(entries[i]))
+                    {
+                        e.Add(int.Parse(entries[i]));
+                    }
+                }
+
+                for (int i = 0; i < e.Count; i++)
+                {
+                    bool choosing = (i + 1 == e.Count) ? true : false;
+                    AddDataFromInput((int)currentState, e[i], choosing);
+                }
+            }
+            else
+            {
+                if (ContainingOnlyDigits(line))
+                {
+                    int inputNum = int.Parse(line);
                     AddDataFromInput(sectionNum, inputNum);
                 }
                 else
                 {
-                    ActiveError("Number is invalid");
+                    ActiveError("Invalid input");
                 }
-            }
-            catch (Exception ex)
-            {
-                ActiveError(string.Format("Input is not a number. Input: <{0}>. Exception message: <{1}>", line, ex.Message));
             }
         }
     }
 
-    static bool IsNumberValid(int num, int max) => (num != 0 && num <= max);
-    
     public static void StartProgram()
     {
         currentBenchmarkData = null;
+        currentState = ChoosingState.ChoosingComparisons;
         PrintSection(0);
     }
 
@@ -235,32 +251,41 @@ static class MenuSystem
         GetInputForNextSection(sectionNum);
     }
 
-    public static void AddDataFromInput(int sectionNum, int input)
+    public static void AddDataFromInput(int sectionNum, int input, bool printAfter = true)
     {
         // Adds the data by the user's input
         // Prints the next section
         // Or starts the benchmark if it is the last section
-
-        int inputForArray = input - 1;
-        switch (sectionNum)
+        if (IsNumberValid(input, GetMaxValid(sectionNum)))
         {
-            case 0:
-                currentBenchmarkData = new BenchmarkData(BenchmarksManager.comparisons[inputForArray]);
-                PrintSection(1);
-                break;
+            int inputForArray = input - 1;
+            switch (sectionNum)
+            {
+                case 0:
+                    currentBenchmarkData = new BenchmarkData(BenchmarksManager.comparisons[inputForArray]);
+                    currentState = ChoosingState.ChoosingDuration;
+                    if (printAfter) PrintSection(1);
+                    break;
 
-            case 1:
-                currentBenchmarkPresetGroup = BenchmarksManager.benchmarkPresetGroups[inputForArray];
-                PrintSection(2);
-                break;
+                case 1:
+                    currentBenchmarkPresetGroup = BenchmarksManager.benchmarkPresetGroups[inputForArray];
+                    currentState = ChoosingState.ChoosingPreset;
+                    if (printAfter) PrintSection(2);
+                    break;
 
-            case 2:
-                currentBenchmarkData.InputPreset(currentBenchmarkPresetGroup.presets[inputForArray], currentBenchmarkPresetGroup.Name, input);
-                BenchmarksManager.RunBenchmarks(currentBenchmarkData);
-                break;
+                case 2:
+                    currentState = ChoosingState.Complete;
+                    currentBenchmarkData.InputPreset(currentBenchmarkPresetGroup.presets[inputForArray], currentBenchmarkPresetGroup.Name, input);
+                    BenchmarksManager.RunBenchmarks(currentBenchmarkData);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            ActiveError("Number is invalid");
         }
     }
 }

@@ -168,6 +168,20 @@ static public class Utilities
         return highest + 1;
     }
 
+    public static bool IsNumberValid(int num, int max) => (num != 0 && num <= max);
+
+    public static bool ContainingOnlyDigits(string s)
+    {
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (!Char.IsDigit(s[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     #endregion
 
     #region Get Random Stuff

@@ -142,7 +142,7 @@ public static class BenchmarksManager
 
         for (int i = 0; i < testsAmount; i++)
         {
-            WriteLine("It will stop when it'll reach " + changesAmount);
+            WriteLine("Test {0}/{1}: It will make {2} changes in each test.", i + 1, testsAmount, changesAmount);
 
             // benchmark
             testsStopWatch.Restart();
