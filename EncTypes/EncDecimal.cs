@@ -38,17 +38,14 @@ public struct EncDecimal
 
     #endregion
 
-    #region Methods
+    #region Methods & Constructors
 
-    private static EncDecimal NewEncDecimal(decimal value)
+    private EncDecimal(decimal value)
     {
-        EncDecimal theEncdecimal = new EncDecimal
-        {
-            encryptionKey1 = GetEncryptionKey(),
-            encryptionKey2 = GetEncryptionKey(),
-            Value = value
-        };
-        return theEncdecimal;
+        encryptionKey1 = GetEncryptionKey();
+        encryptionKey2 = GetEncryptionKey();
+        encryptedValue = 0;
+        Value = value;
     }
 
     // Encryption key generator
@@ -91,11 +88,11 @@ public struct EncDecimal
 
     /// + - * / %
      
-    public static EncDecimal operator +(EncDecimal eint1, EncDecimal eint2) => EncDecimal.NewEncDecimal(eint1.Value + eint2.Value);
-    public static EncDecimal operator -(EncDecimal eint1, EncDecimal eint2) => EncDecimal.NewEncDecimal(eint1.Value - eint2.Value);
-    public static EncDecimal operator *(EncDecimal eint1, EncDecimal eint2) => EncDecimal.NewEncDecimal(eint1.Value * eint2.Value);
-    public static EncDecimal operator /(EncDecimal eint1, EncDecimal eint2) => EncDecimal.NewEncDecimal(eint1.Value / eint2.Value);
-    public static EncDecimal operator %(EncDecimal eint1, EncDecimal eint2) => EncDecimal.NewEncDecimal(eint1.Value % eint2.Value);
+    public static EncDecimal operator +(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Value + eint2.Value);
+    public static EncDecimal operator -(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Value - eint2.Value);
+    public static EncDecimal operator *(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Value * eint2.Value);
+    public static EncDecimal operator /(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Value / eint2.Value);
+    public static EncDecimal operator %(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Value % eint2.Value);
 
     public static decimal operator +(EncDecimal edecimal1, ulong edecimal2) => edecimal1.Value + edecimal2;
     public static decimal operator -(EncDecimal edecimal1, ulong edecimal2) => edecimal1.Value - edecimal2;
@@ -227,7 +224,7 @@ public struct EncDecimal
 
     /// assign
     
-    public static implicit operator EncDecimal(decimal value) => EncDecimal.NewEncDecimal(value);
+    public static implicit operator EncDecimal(decimal value) => new EncDecimal(value);
     public static implicit operator decimal(EncDecimal eint1) => eint1.Value;
     public static explicit operator double(EncDecimal eint1) => (double)eint1.Value;
     public static explicit operator float(EncDecimal eint1) => (float)eint1.Value;

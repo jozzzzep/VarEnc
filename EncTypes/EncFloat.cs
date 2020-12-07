@@ -39,7 +39,15 @@ public struct EncFloat
 
     #endregion
 
-    #region Methods
+    #region Methods & Constructors
+
+    private EncFloat(float value)
+    {
+        encryptionKey1 = GetEncryptionKey();
+        encryptionKey2 = GetEncryptionKey();
+        encryptedValue = 0;
+        Value = value;
+    }
 
     private static EncFloat NewEncFloat(float value)
     {
@@ -91,11 +99,11 @@ public struct EncFloat
     #region Operators Overloading
 
     /// + - * / %
-    public static EncFloat operator +(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value + eint2.Value);
-    public static EncFloat operator -(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value - eint2.Value);
-    public static EncFloat operator *(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value * eint2.Value);
-    public static EncFloat operator /(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value / eint2.Value);
-    public static EncFloat operator %(EncFloat eint1, EncFloat eint2) => EncFloat.NewEncFloat(eint1.Value % eint2.Value);
+    public static EncFloat operator +(EncFloat eint1, EncFloat eint2) => new EncFloat(eint1.Value + eint2.Value);
+    public static EncFloat operator -(EncFloat eint1, EncFloat eint2) => new EncFloat(eint1.Value - eint2.Value);
+    public static EncFloat operator *(EncFloat eint1, EncFloat eint2) => new EncFloat(eint1.Value * eint2.Value);
+    public static EncFloat operator /(EncFloat eint1, EncFloat eint2) => new EncFloat(eint1.Value / eint2.Value);
+    public static EncFloat operator %(EncFloat eint1, EncFloat eint2) => new EncFloat(eint1.Value % eint2.Value);
 
     public static float operator +(EncFloat efloat1, ulong efloat2) => efloat1.Value + efloat2;
     public static float operator -(EncFloat efloat1, ulong efloat2) => efloat1.Value - efloat2;
@@ -214,7 +222,7 @@ public struct EncFloat
     public static bool operator <(EncFloat eint1, float eint2) => eint1.Value < eint2;
 
     /// assign
-    public static implicit operator EncFloat(float value) => EncFloat.NewEncFloat(value);
+    public static implicit operator EncFloat(float value) => new EncFloat(value);
     public static explicit operator decimal(EncFloat eint1) => (decimal)eint1.Value;
     public static implicit operator double(EncFloat eint1) => eint1.Value;
     public static implicit operator float(EncFloat eint1) => eint1.Value;

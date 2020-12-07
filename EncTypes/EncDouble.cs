@@ -39,17 +39,14 @@ public struct EncDouble
 
     #endregion
 
-    #region Methods
+    #region Methods & Constructors
 
-    private static EncDouble NewEncDouble(double value)
+    private EncDouble(double value)
     {
-        EncDouble theEncFloat = new EncDouble
-        {
-            encryptionKey1 = GetEncryptionKey(),
-            encryptionKey2 = GetEncryptionKey(),
-            Value = value
-        };
-        return theEncFloat;
+        encryptionKey1 = GetEncryptionKey();
+        encryptionKey2 = GetEncryptionKey();
+        encryptedValue = 0;
+        Value = value;
     }
 
     // Encryption key generator
@@ -91,11 +88,11 @@ public struct EncDouble
     #region Operators Overloading
 
     /// + - * / %
-    public static EncDouble operator +(EncDouble eint1, EncDouble eint2) => EncDouble.NewEncDouble(eint1.Value + eint2.Value);
-    public static EncDouble operator -(EncDouble eint1, EncDouble eint2) => EncDouble.NewEncDouble(eint1.Value - eint2.Value);
-    public static EncDouble operator *(EncDouble eint1, EncDouble eint2) => EncDouble.NewEncDouble(eint1.Value * eint2.Value);
-    public static EncDouble operator /(EncDouble eint1, EncDouble eint2) => EncDouble.NewEncDouble(eint1.Value / eint2.Value);
-    public static EncDouble operator %(EncDouble eint1, EncDouble eint2) => EncDouble.NewEncDouble(eint1.Value % eint2.Value);
+    public static EncDouble operator +(EncDouble eint1, EncDouble eint2) => new EncDouble(eint1.Value + eint2.Value);
+    public static EncDouble operator -(EncDouble eint1, EncDouble eint2) => new EncDouble(eint1.Value - eint2.Value);
+    public static EncDouble operator *(EncDouble eint1, EncDouble eint2) => new EncDouble(eint1.Value * eint2.Value);
+    public static EncDouble operator /(EncDouble eint1, EncDouble eint2) => new EncDouble(eint1.Value / eint2.Value);
+    public static EncDouble operator %(EncDouble eint1, EncDouble eint2) => new EncDouble(eint1.Value % eint2.Value);
 
     public static double operator +(EncDouble edouble1, ulong edouble2) => edouble1.Value + edouble2;
     public static double operator -(EncDouble edouble1, ulong edouble2) => edouble1.Value - edouble2;
@@ -220,7 +217,7 @@ public struct EncDouble
     public static bool operator <(EncDouble eint1, float eint2) => eint1.Value < eint2;
 
     /// assign
-    public static implicit operator EncDouble(double value) => EncDouble.NewEncDouble(value);
+    public static implicit operator EncDouble(double value) => new EncDouble(value);
     public static explicit operator decimal(EncDouble eint1) => (decimal)eint1.Value;
     public static implicit operator double(EncDouble eint1) => eint1.Value;
     public static explicit operator float(EncDouble eint1) => (float)eint1.Value;

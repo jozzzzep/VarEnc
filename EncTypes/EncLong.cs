@@ -35,17 +35,14 @@ public struct EncLong
 
     #endregion
 
-    #region Methods
+    #region Methods & Constructors
 
-    private static EncLong NewEncLong(long value)
+    private EncLong(long value)
     {
-        EncLong theEncLong = new EncLong
-        {
-            encryptionKey1 = GetEncryptionKey(),
-            encryptionKey2 = GetEncryptionKey(),
-            Value = value
-        };
-        return theEncLong;
+        encryptionKey1 = GetEncryptionKey();
+        encryptionKey2 = GetEncryptionKey();
+        encryptedValue = 0;
+        Value = value;
     }
 
     // Encryption Key Generator
@@ -87,11 +84,11 @@ public struct EncLong
     #region Operators Overloading
 
     /// + - * / %
-    public static EncLong operator +(EncLong elong1, EncLong elong2) => EncLong.NewEncLong((long)(elong1.Value + elong2.Value));
-    public static EncLong operator -(EncLong elong1, EncLong elong2) => EncLong.NewEncLong((long)(elong1.Value - elong2.Value));
-    public static EncLong operator *(EncLong elong1, EncLong elong2) => EncLong.NewEncLong((long)(elong1.Value * elong2.Value));
-    public static EncLong operator /(EncLong elong1, EncLong elong2) => EncLong.NewEncLong((long)(elong1.Value / elong2.Value));
-    public static EncLong operator %(EncLong elong1, EncLong elong2) => EncLong.NewEncLong((long)(elong1.Value % elong2.Value));
+    public static EncLong operator +(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value + elong2.Value));
+    public static EncLong operator -(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value - elong2.Value));
+    public static EncLong operator *(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value * elong2.Value));
+    public static EncLong operator /(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value / elong2.Value));
+    public static EncLong operator %(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value % elong2.Value));
 
     public static long operator +(EncLong elong1, long elong2) => (long)elong1.Value + elong2;
     public static long operator -(EncLong elong1, long elong2) => (long)elong1.Value - elong2;
@@ -179,7 +176,7 @@ public struct EncLong
     public static bool operator >(EncLong elong1, EncLong elong2) => (long)elong1.Value > (long)elong2.Value;
 
     /// assign
-    public static implicit operator EncLong(long value) => EncLong.NewEncLong(value);
+    public static implicit operator EncLong(long value) => new EncLong(value);
     public static explicit operator ulong(EncLong elong1) => (ulong)elong1.Value;
     public static implicit operator long(EncLong elong1) => (long)elong1.Value;
     public static explicit operator uint(EncLong elong1) => (uint)elong1.Value;

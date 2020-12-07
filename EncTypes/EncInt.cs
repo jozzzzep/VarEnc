@@ -31,15 +31,12 @@ public struct EncInt
 
     #region Methods
 
-    private static EncInt NewEncInt(int value)
+    private EncInt(int value)
     {
-        EncInt theEncInt = new EncInt
-        {
-            encryptionKey1 = GetEncryptionKey(),
-            encryptionKey2 = GetEncryptionKey(),
-            Value = value
-        };
-        return theEncInt;
+        encryptionKey1 = GetEncryptionKey();
+        encryptionKey2 = GetEncryptionKey();
+        encryptedValue = 0;
+        Value = value;
     }
 
     // Encryption Key Generator
@@ -81,11 +78,11 @@ public struct EncInt
     #region Operators Overloading
 
     /// + - * / %
-    public static EncInt operator +(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value + eint2.Value));
-    public static EncInt operator -(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value - eint2.Value));
-    public static EncInt operator *(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value * eint2.Value));
-    public static EncInt operator /(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value / eint2.Value));
-    public static EncInt operator %(EncInt eint1, EncInt eint2) => EncInt.NewEncInt((int)(eint1.Value % eint2.Value));
+    public static EncInt operator +(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value + eint2.Value));
+    public static EncInt operator -(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value - eint2.Value));
+    public static EncInt operator *(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value * eint2.Value));
+    public static EncInt operator /(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value / eint2.Value));
+    public static EncInt operator %(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value % eint2.Value));
 
     public static int operator +(EncInt eint1, int eint2) => (int)eint1.Value + eint2;
     public static int operator -(EncInt eint1, int eint2) => (int)eint1.Value - eint2;
@@ -180,7 +177,7 @@ public struct EncInt
     public static bool operator <(EncInt eint1, float eint2) => (float)eint1.Value < eint2;
 
     /// assign
-    public static implicit operator EncInt(int value) => EncInt.NewEncInt(value);
+    public static implicit operator EncInt(int value) => new EncInt(value);
     public static explicit operator ulong(EncInt eint1) => (ulong)eint1.Value;
     public static implicit operator long(EncInt eint1) => (long)eint1.Value;
     public static explicit operator uint(EncInt eint1) => (uint)eint1.Value;
