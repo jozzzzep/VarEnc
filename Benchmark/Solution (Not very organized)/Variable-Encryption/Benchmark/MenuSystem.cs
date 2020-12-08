@@ -4,6 +4,7 @@ using static Utilities;
 
 static class MenuSystem
 {
+    static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static ChoosingState currentState;
     static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
@@ -233,6 +234,7 @@ static class MenuSystem
 
     public static void StartProgram()
     {
+        Console.Title = titleOfApplication;
         currentBenchmarkData = null;
         currentState = ChoosingState.ChoosingComparisons;
         PrintSection(0);
