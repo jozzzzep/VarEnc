@@ -35,6 +35,11 @@ static public class Utilities
         }
     }
 
+    static public void WriteLine()
+    {
+        Console.WriteLine("  " + "");
+    }
+
     static public void WriteLine(string s)
     {
         if (s != null)
@@ -180,6 +185,11 @@ static public class Utilities
             }
         }
         return true;
+    }
+
+    public static int GetSize(Type t)
+    {
+        return System.Runtime.InteropServices.Marshal.SizeOf(t);
     }
 
     #endregion
