@@ -196,8 +196,8 @@ public static class BenchmarksManager
         int higherLength = GetTheHigherLength(currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName);
         string firstTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.firstTypeName.Length);
         string secondTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.secondTypeName.Length);
-        double changesPerSec1 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalMilliseconds);
-        double changesPerSec2 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalMilliseconds);
+        double changesPerSec1 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalSeconds);
+        double changesPerSec2 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalSeconds);
 
         string[] afterBenchmarkLines =
         {
