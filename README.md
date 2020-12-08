@@ -4,6 +4,7 @@
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
 - [**Benchmark**](#benchmark)
+  - [Performance](#performance)
   - [Example of usage](#example-of-usage)
   - [Files](#files)
 - [**Documentations**](#documentations)
@@ -92,6 +93,30 @@ In each test, the application will change the value of a certain variable-type a
 At first, you'll have to choose the types you want to compare.  
 Then how long you want the benchmark to be (Fast, Normal, Long, etc), and after that choose a benchmark preset.  
 After the benchmark is finished, the results will be printed. From there you can press Enter (or any key) and it'll take you back to the main menu.  
+
+### Performance
+
+I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and these are the results:  
+| Comparison                                              | CPS (Changes per second) |
+|---------------------------------------------------------|:------------------------:|
+| **EncInt** - int (Similar to **EncLong**)                       |     10,608 - 596,246     |
+| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     15,137 - 329,739     |
+| **EncString** - string                                      |       368 - 13,579       |  
+
+This is the size of each EncType compared to its normal type
+|         Types        | Size in bytes |
+|:--------------------:|:-------------:|
+|     int - EncInt     |     4 - 24    |
+|    long - EncLong    |     8 - 48    |
+|   float - EncFloat   |     4 - 24    |
+|  double - EncDouble  |     8 - 24    |
+| decimal - EncDecimal |    16 - 48    |
+
+It may seem heavy but it's **very light** considering its **simple** and **efficient encryption**.  
+In a game where you want to have an encrypted "**score**" for the player, you can just **switch** the score's variable **type** from an **int** to an **EncInt**.  
+They **work** the same, **behave** the same, and have the same **methods** and **functionality**.  
+How many time you change the score variable? How many variables you want to be encrypted?  
+Even if you'll have **100 encrypted variables** that you want to change **at once** (it is probably unnecessary to have all of them enc), you can do it and you'll have exactly the same **framerate**. It is a **very light** encryption solution.  
 
 ### Example of usage:  
 I **opened** the application from the "**Benchmark**" folder.  
