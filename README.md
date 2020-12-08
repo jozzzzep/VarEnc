@@ -122,11 +122,11 @@ Even if you'll have **100 encrypted variables** that you want to change **at onc
 I **opened** the application from the "**Benchmark**" folder.  
 And now it shows **all** the **types** you can **compare**.  
 
-![img](https://i.imgur.com/O9khnDw.jpg)  
-I chose to make a comparison between the **EncInt** and the **int** types.  
-So I typed **1** and pressed Enter.  
+![img](https://i.imgur.com/vuzWLeA.jpg)  
+I chose to make a comparison between the **EncString** and its first version, the **EncString (0.5.0)**.  
+So I typed **11** and pressed Enter.  
 
-![img](https://i.imgur.com/TlD1yM6.jpg)  
+![img](https://i.imgur.com/4lOG5MR.jpg)  
 I chose to perform a benchmark of type "**Fastest**".  
 So I typed **1** again and pressed Enter.   
 
