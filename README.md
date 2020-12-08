@@ -1,4 +1,4 @@
-![Imgur](https://i.imgur.com/2FPrdWN.png)
+![Imgur](https://i.imgur.com/jnXHECv.png)
 **Content**
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
@@ -11,7 +11,7 @@
   - [CSharp](#csharp)
 
 # EncTypes
-![img](https://i.imgur.com/rIKRq3i.png)
+![img](https://i.imgur.com/F2fxgOn.png)
 
 **A group of classes and structures for storing values while efficiently keeping it encrypted in the memory.**  
 **In memory, they are saved as a "weird" value that is affected by random values (encryption keys).**  
@@ -79,7 +79,7 @@ encryptedString += "more text";
 **You can also combine and/or compare an EncType with its normal type and vice versa.**  
 
 # Benchmark
-![img](https://i.imgur.com/ZiTbLZv.png)
+![img](https://i.imgur.com/C8YKbnd.png)
 
 The VarEnc repo contains a benchmark console application to test the efficiency of its types.  
 When it's running, the application will perform a certain amount of tests on the types you chose.  
