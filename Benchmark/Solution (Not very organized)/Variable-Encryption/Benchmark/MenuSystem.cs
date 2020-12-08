@@ -24,10 +24,11 @@ static class MenuSystem
             case 0:
                 string[] text1 =
                 {
-                    "Current version - 0.8.0",
-                    "Welcome to the console app for speedtesting the VarEnc features.",
-                    "If you already know the numbers of your choices, you can input them all together. (seperated with spaces)",
-                    "These are the types you can speedtest:"
+                    "- Current version - 0.8.0",
+                    "- Welcome to the console app for speedtesting the VarEnc features.",
+                    "- If you already know the numbers of your choices, you can input them all together. (seperated with spaces)",
+                    "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes.",
+                    "- These are the types you can compare:"
                 };
                 textToReturn = text1;
                 break;
@@ -178,11 +179,21 @@ static class MenuSystem
     {
         // save input from user
         var line = Console.ReadLine();
+        
+        
 
         if (String.IsNullOrWhiteSpace(line))
         {
             ActiveError("Empty input");
         }
+
+        // input for seeing the sizes of the types
+        else if (currentState == ChoosingState.ChoosingComparisons && line.Contains("s"))
+        {
+            PrintSizesOfTypes();
+        }
+
+        // input for benchmark
         else
         {
             int indexOfFirstSpace = line.IndexOf(' ');
@@ -287,5 +298,35 @@ static class MenuSystem
         {
             ActiveError("Number is invalid");
         }
+    }
+
+    public static void PrintSizesOfTypes()
+    {
+        Console.Clear();
+
+        SeparationLine();
+        WriteLine("These are the sizes of each type, in bytes.");
+        SeparationLineSmall();
+
+        WriteLine("int        size: {0}", GetSize(typeof(int)));
+        WriteLine("EncInt     size: {0}", GetSize(typeof(EncInt)));
+        WriteLine();
+        WriteLine("long       size: {0}", GetSize(typeof(long)));
+        WriteLine("EncLong    size: {0}", GetSize(typeof(EncLong)));
+        WriteLine();
+        WriteLine("float      size: {0}", GetSize(typeof(float)));
+        WriteLine("EncFloat   size: {0}", GetSize(typeof(EncFloat)));
+        WriteLine();
+        WriteLine("double     size: {0}", GetSize(typeof(double)));
+        WriteLine("EncDouble  size: {0}", GetSize(typeof(EncDouble)));
+        WriteLine();
+        WriteLine("decimal    size: {0}", GetSize(typeof(decimal)));
+        WriteLine("EncDecimal size: {0}", GetSize(typeof(EncDecimal)));
+
+        SeparationLineSmall();
+        WriteLine("Press any to return to the menu");
+        SeparationLine();
+        Console.ReadKey();
+        StartProgram();
     }
 }
