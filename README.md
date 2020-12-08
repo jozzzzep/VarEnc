@@ -99,9 +99,9 @@ After the benchmark is finished, the results will be printed. From there you can
 I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and these are the results:  
 | Comparison                                              | CPS (Changes per second) |
 |---------------------------------------------------------|:------------------------:|
-| **EncInt** - int (Similar to **EncLong**)                       |     10,608 - 596,246     |
-| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     15,137 - 329,739     |
-| **EncString** - string                                      |       368 - 13,579       |  
+| **EncInt** - int (Similar to **EncLong**)                       |     10,608,568 - 596,246,010     |
+| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     15,137,881 - 329,739,613     |
+| **EncString** - string                                      |       368,102 - 13,579,435       |  
 
 This is the size of each EncType compared to its normal type
 |         Types        | Size in bytes |
@@ -138,13 +138,24 @@ So I typed **4** and pressed Enter.
 ![img](https://i.imgur.com/8mjwNFG.jpg)  
 These are the **results**. It performed **10 tests** on each type.  
 Each test performed **100,000 changes** to a variable on type **EncString**, then **EncString's first version (0.5.0)**.  
-It says that the **EncString** type performed **better** by **29.140987%**.
+It says that the **EncString** type performed **better** by **29.140987%**.  
+It also says shows the **amount of changes** you can perform **in a second** on each type.  
 Be aware that the **shortest** benchmarks are the **least accurate**.  
-**Feel free to test the efficiency of other EncTypes (:** 
+
+### Multiple Choices At Once
+I could perform the same benchmark as before, by inputting all the choices at once.  
+Before, we typed **"11"**, pressed Enter, then **"1"**, pressed Enter, and then **"4"**, and pressed Enter again.  
+We can do it faster just by typing **"11 1 4"** (separate each choice with a space) and pressing Enter.  
+
+### Seeing the sizes of the types
+By typing **"size"** or **"s"** in the opening menu, you can see the sizes of every type in bytes.  
+
+![img](https://i.imgur.com/qHPx9CA.jpg)
+
 
 ### Files
-
-You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
+You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)  
+You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution%20(Not%20very%20organized)) folder  
 
 # Documentations
 **Every EncType contains the same methods and fields as its normal type.**  
