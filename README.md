@@ -128,18 +128,19 @@ So I typed **11** and pressed Enter.
 
 ![img](https://i.imgur.com/4lOG5MR.jpg)  
 I chose to perform a benchmark of type "**Fastest**".  
-So I typed **1** again and pressed Enter.   
+So I typed **1** and pressed Enter.   
 
-![img](https://i.imgur.com/NT5SHRR.jpg)  
-From the **presets** of type "Fastest" I chose to perform the **first**.  
-So again, I typed **1** and pressed Enter.  
+![img](https://i.imgur.com/OffKwtz.jpg)  
+From the **presets** of type "Fastest" I chose to perform the **fourth**.
+The fourth one will perform **10** test, in each test, **100,000** changes.  
+So I typed **4** and pressed Enter.  
 
-![img](https://i.imgur.com/iyHdlt6.jpg)  
+![img](https://i.imgur.com/8mjwNFG.jpg)  
 These are the **results**. It performed **10 tests** on each type.  
-Each test performed **50 changes** to a variable of type **EncInt**, then **int**.  
-It says that the **int** type performed **better** by **1.946%**. (only **0.1 milliseconds**)  
+Each test performed **100,000 changes** to a variable on type **EncString**, then **EncString's first version (0.5.0)**.  
+It says that the **EncString** type performed **better** by **29.140987%**.
 Be aware that the **shortest** benchmarks are the **least accurate**.  
-**Feel free to test the efficiency of other EncTypes (:**  
+**Feel free to test the efficiency of other EncTypes (:** 
 
 ### Files
 
