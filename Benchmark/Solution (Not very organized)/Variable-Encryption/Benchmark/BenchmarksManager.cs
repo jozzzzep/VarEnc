@@ -196,16 +196,16 @@ public static class BenchmarksManager
         int higherLength = GetTheHigherLength(currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName);
         string firstTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.firstTypeName.Length);
         string secondTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.secondTypeName.Length);
-        double changesPerSec1 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalSeconds);
-        double changesPerSec2 = ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalSeconds);
+        decimal changesPerSec1 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalSeconds);
+        decimal changesPerSec2 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalSeconds);
 
         string[] afterBenchmarkLines =
         {
             string.Format("{0}" + firstTypeSpaces + "average: {1}", currentBenchmarkResults.firstTypeName, currentBenchmarkResults.firstBenchmarkAverage),
             string.Format("{0}" + secondTypeSpaces + "average: {1}", currentBenchmarkResults.secondTypeName, currentBenchmarkResults.secondBenchmarkAverage),
             " ",
-            string.Format("{0}" + firstTypeSpaces + "changes per second: {1}", currentBenchmarkResults.firstTypeName, (int)changesPerSec1),
-            string.Format("{0}" + secondTypeSpaces + "changes per second: {1}", currentBenchmarkResults.secondTypeName, (int)changesPerSec2),
+            string.Format("{0}" + firstTypeSpaces + "changes per second: {1}", currentBenchmarkResults.firstTypeName, (long)changesPerSec1),
+            string.Format("{0}" + secondTypeSpaces + "changes per second: {1}", currentBenchmarkResults.secondTypeName, (long)changesPerSec2),
             " ",
             string.Format("The type {0} performed better by {1}%", currentBenchmarkResults.BetterTypeName, currentBenchmarkResults.GetHowMuchBetterPercentage()),
         };
@@ -215,14 +215,11 @@ public static class BenchmarksManager
         WriteLines(afterBenchmarkLines);
         SeparationLineSmall();
         WriteLine("Press any key to return to the menu");
-        Utilities.SeparationLine();
+        SeparationLine();
         currentBenchmarkResults = null;
         Console.ReadKey();
         MenuSystem.StartProgram();
     }
-    
-    static double ChangesPerSecond(int changes, double seconds)
-    {
-        return (changes / seconds);
-    }
+
+    static double ChangesPerSecond(int changes, double seconds) => (changes / seconds);
 }
