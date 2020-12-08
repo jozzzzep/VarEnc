@@ -26,7 +26,7 @@ static class MenuSystem
                 {
                     "- Current version - 0.8.0",
                     "- Welcome to the console app for speedtesting the VarEnc features.",
-                    "- If you already know the numbers of your choices, you can input them all together. (seperated with spaces)",
+                    "- If you already know the numbers of your choices, you can input them all together. (separated with spaces)",
                     "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes.",
                     "- These are the types you can compare:"
                 };
