@@ -144,18 +144,18 @@ Be aware that the **shortest** benchmarks are the **least accurate**.
 
 ### Multiple Choices At Once
 I could perform the same benchmark as before, by inputting all the choices at once.  
-Before, we typed **11**, pressed Enter, then **1**, pressed Enter, and then **4**, and pressed Enter again.  
-We can do it faster just by typing **"11 1 4"** and pressing Enter.  
+Before, we typed **"11"**, pressed Enter, then **"1"**, pressed Enter, and then **"4"**, and pressed Enter again.  
+We can do it faster just by typing **"11 1 4"** (separate each choice with a space) and pressing Enter.  
 
 ### Seeing the sizes of the types
-By typing **"size"** or **s** in the opening menu, you can see the sizes of every type in bytes.  
+By typing **"size"** or **"s"** in the opening menu, you can see the sizes of every type in bytes.  
 
 ![img](https://i.imgur.com/qHPx9CA.jpg)
 
 
 ### Files
-
-You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)
+You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)  
+You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution%20(Not%20very%20organized)) folder  
 
 # Documentations
 **Every EncType contains the same methods and fields as its normal type.**  
