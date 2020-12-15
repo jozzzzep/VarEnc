@@ -9,6 +9,16 @@
     public TypeInBenchmark benchmark1;
     public TypeInBenchmark benchmark2;
 
+    public bool IsValid
+    {
+        get =>
+            changesAmount > 0 &&
+            testsAmount > 0 &&
+            !string.IsNullOrEmpty(benchmarkPresetGroupName) &&
+            benchmark1 != null &&
+            benchmark2 != null;
+    }
+
     public BenchmarkData(TypeInBenchmark _benchmark1, TypeInBenchmark _benchmark2, int _howMuchToIncrement, int _testsAmount)
     {
         changesAmount = _howMuchToIncrement;

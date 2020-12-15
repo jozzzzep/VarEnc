@@ -4,6 +4,7 @@ using static Utilities;
 
 static class MenuSystem
 {
+    static string currentVersion = "- Current version - 0.9.0";
     static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static ChoosingState currentState;
     public static BenchmarkData currentBenchmarkData;
@@ -20,15 +21,20 @@ static class MenuSystem
     static string[] SectionText(int stepNum)
     {
         string[] textToReturn;
+        string previousBenchmarkText = 
+            (currentBenchmarkData == null || !currentBenchmarkData.IsValid) 
+            ? "" 
+            : "\n  - Type the letter \"p\" or the word \"prev\" to see the size of each type in bytes.";
+
         switch (stepNum)
         {
             case 0:
                 string[] text1 =
                 {
-                    "- Current version - 0.8.0",
+                    currentVersion,
                     "- Welcome to the console app for speedtesting the VarEnc features.",
                     "- If you already know the numbers of your choices, you can input them all together. (separated with spaces)",
-                    "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes.",
+                    "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes." + previousBenchmarkText,
                     "- These are the types you can compare:"
                 };
                 textToReturn = text1;
@@ -193,6 +199,12 @@ static class MenuSystem
             PrintSizesOfTypes();
         }
 
+        // input for seeing the sizes of the types
+        else if (currentState == ChoosingState.ChoosingComparisons && line.Contains("p") && currentBenchmarkData != null && currentBenchmarkData.IsValid)
+        {
+            BenchmarksManager.RunBenchmark(currentBenchmarkData);
+        }
+
         // input for benchmark
         else
         {
@@ -233,7 +245,6 @@ static class MenuSystem
     public static void StartProgram()
     {
         Console.Title = titleOfApplication;
-        currentBenchmarkData = null;
         currentState = ChoosingState.ChoosingComparisons;
         PrintSection(0);
     }
