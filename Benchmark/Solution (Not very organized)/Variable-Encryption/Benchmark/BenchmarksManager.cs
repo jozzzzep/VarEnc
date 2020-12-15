@@ -28,8 +28,11 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncString (0.6.0)", WL_EncString_0_6_0), 
         new TypeInBenchmark("EncInt (0.3.0)", WL_EncInt_0_3_0), // 14
         new TypeInBenchmark("EncInt (0.7.0)", WL_EncInt_0_7_0),
-        new TypeInBenchmark("EncDouble (0.5.0)", WL_EncDouble_0_5_0), // 16
-        new TypeInBenchmark("EncDouble (0.7.0)", WL_EncDouble_0_7_0), 
+        new TypeInBenchmark("EncInt (0.8.0)", WL_EncInt_0_8_0), // 16
+        new TypeInBenchmark("EncDouble (0.5.0)", WL_EncDouble_0_5_0), 
+        new TypeInBenchmark("EncDouble (0.7.0)", WL_EncDouble_0_7_0), // 18
+        new TypeInBenchmark("EncDouble (0.8.0)", WL_EncDouble_0_8_0), 
+        new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0), // 20
     };
 
     static public BenchmarkData[] comparisons =
@@ -37,15 +40,18 @@ public static class BenchmarksManager
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[1]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[14]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[15]),
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[16]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[3]),
         new BenchmarkData(benchmarkTypes[4], benchmarkTypes[5]),
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[7]),
-        new BenchmarkData(benchmarkTypes[6], benchmarkTypes[16]),
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[17]),
+        new BenchmarkData(benchmarkTypes[6], benchmarkTypes[18]),
+        new BenchmarkData(benchmarkTypes[6], benchmarkTypes[19]),
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[9]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[11]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[12]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[13]),
+        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[20]),
     };
 
     static BenchmarkPreset[] benchmarkPresetsFastest =
@@ -116,7 +122,7 @@ public static class BenchmarksManager
         new BenchmarkPresetGroup("Very Long", benchmarkPresetsVeryLong),
     };
 
-    public static void RunBenchmarks(BenchmarkData benchmarkData)
+    public static void RunBenchmark(BenchmarkData benchmarkData)
     {
         Console.Clear();
 
@@ -214,11 +220,20 @@ public static class BenchmarksManager
         SeparationLineSmall();
         WriteLines(afterBenchmarkLines);
         SeparationLineSmall();
+        WriteLine("Press Space to run again the same benchmark");
         WriteLine("Press any key to return to the menu");
         SeparationLine();
         currentBenchmarkResults = null;
-        Console.ReadKey();
-        MenuSystem.StartProgram();
+
+        var k = Console.ReadKey();
+        if (k.Key == ConsoleKey.Spacebar)
+        {
+            RunBenchmark(MenuSystem.currentBenchmarkData);
+        }
+        else
+        {
+            MenuSystem.StartProgram();
+        }
     }
 
     static double ChangesPerSecond(int changes, double seconds) => (changes / seconds);

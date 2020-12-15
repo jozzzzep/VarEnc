@@ -6,13 +6,13 @@ static class MenuSystem
 {
     static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static ChoosingState currentState;
-    static BenchmarkData currentBenchmarkData;
+    public static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
     static private string choiceText = "Type the number of your choice and press ENTER";
 
     static private string[] sectionsTitle =
     {
-        "Step #1: VARIABLE TYPE",
+        "Step #1: TYPES TO COMPARE",
         "Step #2: BENCHMARK DURATION",
         "Step #3: BENCHMARK PRESET"
     };
@@ -39,7 +39,6 @@ static class MenuSystem
                 {
                     string.Format("You chose to compare the types {0} and {1}", currentBenchmarkData.benchmark1.typeName, currentBenchmarkData.benchmark2.typeName),
                     "Now choose how long you want the benchmark to be.",
-                    "Be aware that the \"Fastest\" benchmarks are the least accurate."
                 };
                 textToReturn = text2;
                 break;
@@ -197,8 +196,7 @@ static class MenuSystem
         // input for benchmark
         else
         {
-            int indexOfFirstSpace = line.IndexOf(' ');
-            if (line.Contains(" ") && indexOfFirstSpace != (line.Length - 1) && Char.IsDigit(line[indexOfFirstSpace + 1]) && Char.IsDigit(line[indexOfFirstSpace - 1]))
+            if (line.Contains(" ") && ContainingDigits(line))
             {
                 string[] entries = line.Split(' ');
                 List<int> e = new List<int>();
@@ -289,7 +287,7 @@ static class MenuSystem
                 case 2:
                     currentState = ChoosingState.Complete;
                     currentBenchmarkData.InputPreset(currentBenchmarkPresetGroup.presets[inputForArray], currentBenchmarkPresetGroup.Name, input);
-                    BenchmarksManager.RunBenchmarks(currentBenchmarkData);
+                    BenchmarksManager.RunBenchmark(currentBenchmarkData);
                     break;
 
                 default:

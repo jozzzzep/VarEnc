@@ -177,6 +177,7 @@ static public class Utilities
 
     public static bool ContainingOnlyDigits(string s)
     {
+        if (string.IsNullOrWhiteSpace(s)) return false;
         for (int i = 0; i < s.Length; i++)
         {
             if (!Char.IsDigit(s[i]))
@@ -185,6 +186,19 @@ static public class Utilities
             }
         }
         return true;
+    }
+
+    public static bool ContainingDigits(string s)
+    {
+        if (string.IsNullOrWhiteSpace(s)) return false;
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (Char.IsDigit(s[i]))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int GetSize(Type t)
