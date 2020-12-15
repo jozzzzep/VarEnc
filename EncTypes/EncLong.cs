@@ -11,23 +11,16 @@ public struct EncLong
     #region Variables And Properties
 
     // The encryption values
-    private decimal encryptionKey1;
-    private decimal encryptionKey2;
+    private readonly decimal encryptionKey1;
+    private readonly decimal encryptionKey2;
 
     // The encrypted value stored in memory
-    private decimal encryptedValue;
+    private readonly decimal encryptedValue;
 
     // The decrypted value
     private decimal Value
     {
-        set
-        {
-            encryptedValue = Encrypt(value);
-        }
-        get
-        {
-            return Math.Round(Decrypt(encryptedValue));
-        }
+        get => Math.Round(Decrypt());
     }
 
     public long MaxValue { get => Int64.MaxValue; }
@@ -37,35 +30,21 @@ public struct EncLong
 
     #region Methods & Constructors
 
-    private EncLong(long value)
+    private EncLong(decimal value)
     {
-        encryptionKey1 = GetEncryptionKey();
-        encryptionKey2 = GetEncryptionKey();
-        encryptedValue = 0;
-        Value = value;
+        encryptionKey1 = (decimal)random.NextDouble();
+        encryptionKey2 = (decimal)random.NextDouble();
+        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
     // Encryption Key Generator
     static private Random random = new Random();
-    static private decimal GetEncryptionKey() => (decimal)(random.NextDouble() * 10);
 
     // Takes a given value and returns it encrypted
-    private decimal Encrypt(decimal value)
-    {
-        decimal valueToReturn = value;
-        valueToReturn += encryptionKey1;
-        valueToReturn *= encryptionKey2;
-        return valueToReturn;
-    }
+    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value + k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt(decimal value)
-    {
-        decimal valueToReturn = value;
-        valueToReturn /= encryptionKey2;
-        valueToReturn -= encryptionKey1;
-        return valueToReturn;
-    }
+    private decimal Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
 
     // Int64 methods
     public int CompareTo(object value) => ((long)Value).CompareTo(value);
@@ -84,11 +63,11 @@ public struct EncLong
     #region Operators Overloading
 
     /// + - * / %
-    public static EncLong operator +(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value + elong2.Value));
-    public static EncLong operator -(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value - elong2.Value));
-    public static EncLong operator *(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value * elong2.Value));
-    public static EncLong operator /(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value / elong2.Value));
-    public static EncLong operator %(EncLong elong1, EncLong elong2) => new EncLong((long)(elong1.Value % elong2.Value));
+    public static EncLong operator +(EncLong elong1, EncLong elong2) => new EncLong(Math.Round(elong1.Decrypt() + elong2.Decrypt()));
+    public static EncLong operator -(EncLong elong1, EncLong elong2) => new EncLong(Math.Round(elong1.Decrypt() - elong2.Decrypt()));
+    public static EncLong operator *(EncLong elong1, EncLong elong2) => new EncLong(Math.Round(elong1.Decrypt() * elong2.Decrypt()));
+    public static EncLong operator /(EncLong elong1, EncLong elong2) => new EncLong(Math.Round(elong1.Decrypt() / elong2.Decrypt()));
+    public static EncLong operator %(EncLong elong1, EncLong elong2) => new EncLong(Math.Round(elong1.Decrypt() % elong2.Decrypt()));
 
     public static long operator +(EncLong elong1, long elong2) => (long)elong1.Value + elong2;
     public static long operator -(EncLong elong1, long elong2) => (long)elong1.Value - elong2;

@@ -12,8 +12,8 @@ public class EncString
 
     #region Variables And Properties
 
-    private string _encryptionKey;
-    private string _encryptedValue;
+    private readonly string _encryptionKey;
+    private readonly string _encryptedValue;
 
     /// <summary>
     /// The decrypted value of the stored string.
@@ -21,7 +21,6 @@ public class EncString
     private string Value
     {
         get => EncryptorDecryptor(_encryptedValue, _encryptionKey);
-        set => _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
     }
 
     public int Length
@@ -124,7 +123,11 @@ public class EncString
 
     #region Constructors
 
-    public EncString(string value) => New(value, this);
+    public EncString(string value)
+    {
+        _encryptionKey = RandomString();
+        _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
+    }
 
     public EncString(char[] value)
         : this(new string(value)) { }
@@ -135,11 +138,6 @@ public class EncString
     public EncString(char[] value, int startIndex, int length)
         : this(new string(value, startIndex, length)) { }
 
-    private static void New(string value, EncString encString)
-    {
-        encString._encryptionKey = RandomString();
-        encString.Value = value;
-    }
 
     #endregion
 
@@ -166,7 +164,7 @@ public class EncString
 
     private static string EncryptorDecryptor(string data, string key)
     {
-        if (data == null || key == null)
+        if (data == null)
         {
             return null;
         }
