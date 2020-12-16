@@ -11,23 +11,16 @@ public struct EncFloat
     #region Variables And Properties
 
     // The encryption values
-    private double encryptionKey1;
-    private double encryptionKey2;
+    private readonly double encryptionKey1;
+    private readonly double encryptionKey2;
 
     // The encrypted value stored in memory
-    private double encryptedValue;
+    private readonly double encryptedValue;
 
     // The decrypted value
     private float Value
     {
-        set
-        {
-            encryptedValue = Encrypt(value);
-        }
-        get
-        {
-            return (float)(Decrypt(encryptedValue));
-        }
+        get => (float)Decrypt();
     }
 
     public float Epsilon { get => Single.Epsilon; }
@@ -43,44 +36,19 @@ public struct EncFloat
 
     private EncFloat(float value)
     {
-        encryptionKey1 = GetEncryptionKey();
-        encryptionKey2 = GetEncryptionKey();
-        encryptedValue = 0;
-        Value = value;
-    }
-
-    private static EncFloat NewEncFloat(float value)
-    {
-        EncFloat theEncFloat = new EncFloat
-        {
-            encryptionKey1 = GetEncryptionKey(),
-            encryptionKey2 = GetEncryptionKey(),
-            Value = value
-        };
-        return theEncFloat;
+        encryptionKey1 = random.NextDouble();
+        encryptionKey2 = random.NextDouble();
+        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
     // encryption key generator
     static private Random random = new Random();
-    static private double GetEncryptionKey() => random.NextDouble();
 
     // Takes a given value and returns it encrypted
-    private double Encrypt(double value)
-    {
-        double valueToReturn = value;
-        valueToReturn += encryptionKey1;
-        valueToReturn *= encryptionKey2;
-        return valueToReturn;
-    }
+    private static double Encrypt(double value, double k1, double k2) => (value + k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt(double value)
-    {
-        double valueToReturn = value;
-        valueToReturn /= encryptionKey2;
-        valueToReturn -= encryptionKey1;
-        return valueToReturn;
-    }
+    private double Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
 
     // Single methods
     public int CompareTo(Single value) => Value.CompareTo(value);

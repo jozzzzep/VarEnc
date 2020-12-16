@@ -11,23 +11,16 @@ public struct EncDecimal
     #region Variables And Properties
 
     // The encryption values
-    private decimal encryptionKey1;
-    private decimal encryptionKey2;
+    private readonly decimal encryptionKey1;
+    private readonly decimal encryptionKey2;
 
     // The encrypted value stored in memory
-    private decimal encryptedValue;
+    private readonly decimal encryptedValue;
 
     // The decrypted value
-    public decimal Value
+    private decimal Value
     {
-        set
-        {
-            encryptedValue = Encrypt(value);
-        }
-        get
-        {
-            return (decimal)Decrypt(encryptedValue);
-        }
+        get => Decrypt();
     }
 
     public Decimal MaxValue { get => Decimal.MaxValue; }
@@ -42,33 +35,19 @@ public struct EncDecimal
 
     private EncDecimal(decimal value)
     {
-        encryptionKey1 = GetEncryptionKey();
-        encryptionKey2 = GetEncryptionKey();
-        encryptedValue = 0;
-        Value = value;
+        encryptionKey1 = (decimal)random.NextDouble();
+        encryptionKey2 = (decimal)random.NextDouble();
+        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
     // Encryption key generator
     static private Random random = new Random();
-    static private decimal GetEncryptionKey() => (decimal)(random.NextDouble());
 
     // Takes a given value and returns it encrypted
-    private decimal Encrypt(decimal value)
-    {
-        decimal valueToReturn = value;
-        valueToReturn += encryptionKey1;
-        valueToReturn *= encryptionKey2;
-        return valueToReturn;
-    }
+    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value + k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt(decimal value)
-    {
-        decimal valueToReturn = value;
-        valueToReturn /= encryptionKey2;
-        valueToReturn -= encryptionKey1;
-        return valueToReturn;
-    }
+    private decimal Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
 
     // Overrides
     public int CompareTo(Decimal value) => Value.CompareTo(value);

@@ -11,17 +11,16 @@ public struct EncInt
     #region Variables And Properties
 
     // The encryption values
-    private double encryptionKey1;
-    private double encryptionKey2;
+    private readonly double encryptionKey1;
+    private readonly double encryptionKey2;
 
     // The encrypted value stored in memory
-    private double encryptedValue;
+    private readonly double encryptedValue;
 
     // The decrypted value
     private double Value
     {
-        set => encryptedValue = Encrypt(value);
-        get => Math.Round(Decrypt(encryptedValue));
+        get => Math.Round(Decrypt());
     }
 
     public int MaxValue { get => Int32.MaxValue; }
@@ -30,36 +29,22 @@ public struct EncInt
     #endregion
 
     #region Methods
-
-    private EncInt(int value)
+    
+    private EncInt(double value)
     {
-        encryptionKey1 = GetEncryptionKey();
-        encryptionKey2 = GetEncryptionKey();
-        encryptedValue = 0;
-        Value = value;
+        encryptionKey1 = random.NextDouble();
+        encryptionKey2 = random.NextDouble();
+        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
     // Encryption Key Generator
     static private Random random = new Random();
-    static private double GetEncryptionKey() => (random.NextDouble() * 10);
 
     // Takes a given value and returns it encrypted
-    private double Encrypt(double value)
-    {
-        double valueToReturn = value;
-        valueToReturn += encryptionKey1;
-        valueToReturn *= encryptionKey2;
-        return valueToReturn;
-    }
+    private static double Encrypt(double value, double k1, double k2) => (value + k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt(double value)
-    {
-        double valueToReturn = value;
-        valueToReturn /= encryptionKey2;
-        valueToReturn -= encryptionKey1;
-        return valueToReturn;
-    }
+    private double Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
 
     // Int32 methods
     public Int32 CompareTo(object value) => ((int)Value).CompareTo(value);
@@ -78,11 +63,11 @@ public struct EncInt
     #region Operators Overloading
 
     /// + - * / %
-    public static EncInt operator +(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value + eint2.Value));
-    public static EncInt operator -(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value - eint2.Value));
-    public static EncInt operator *(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value * eint2.Value));
-    public static EncInt operator /(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value / eint2.Value));
-    public static EncInt operator %(EncInt eint1, EncInt eint2) => new EncInt((int)(eint1.Value % eint2.Value));
+    public static EncInt operator +(EncInt eint1, EncInt eint2) => new EncInt((int)Math.Round(eint1.Decrypt() + eint2.Decrypt()));
+    public static EncInt operator -(EncInt eint1, EncInt eint2) => new EncInt((int)Math.Round(eint1.Decrypt() - eint2.Decrypt()));
+    public static EncInt operator *(EncInt eint1, EncInt eint2) => new EncInt((int)Math.Round(eint1.Decrypt() * eint2.Decrypt()));
+    public static EncInt operator /(EncInt eint1, EncInt eint2) => new EncInt((int)Math.Round(eint1.Decrypt() / eint2.Decrypt()));
+    public static EncInt operator %(EncInt eint1, EncInt eint2) => new EncInt((int)Math.Round(eint1.Decrypt() % eint2.Decrypt()));
 
     public static int operator +(EncInt eint1, int eint2) => (int)eint1.Value + eint2;
     public static int operator -(EncInt eint1, int eint2) => (int)eint1.Value - eint2;
@@ -116,10 +101,10 @@ public struct EncInt
 
     /// == != < >
 
-    public static bool operator ==(EncInt eint1, EncInt eint2) => (int)eint1.Value == (int)eint2.Value;
-    public static bool operator !=(EncInt eint1, EncInt eint2) => (int)eint1.Value != (int)eint2.Value;
-    public static bool operator <(EncInt eint1, EncInt eint2) => (int)eint1.Value < (int)eint2.Value;
-    public static bool operator >(EncInt eint1, EncInt eint2) => (int)eint1.Value > (int)eint2.Value;
+    public static bool operator ==(EncInt eint1, EncInt eint2) => eint1.Value == eint2.Value;
+    public static bool operator !=(EncInt eint1, EncInt eint2) => eint1.Value != eint2.Value;
+    public static bool operator <(EncInt eint1, EncInt eint2) => eint1.Value < eint2.Value;
+    public static bool operator >(EncInt eint1, EncInt eint2) => eint1.Value > eint2.Value;
 
     public static bool operator ==(EncInt eint1, ulong eint2) => (ulong)eint1.Value == eint2;
     public static bool operator !=(EncInt eint1, ulong eint2) => (ulong)eint1.Value != eint2;

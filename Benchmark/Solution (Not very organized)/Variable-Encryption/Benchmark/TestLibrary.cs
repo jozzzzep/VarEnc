@@ -56,6 +56,15 @@ static public class TestLibrary
         }
     }
 
+    public static void WL_EncInt_0_8_0(int amount)
+    {
+        EncInt_0_8_0 number1 = 0;
+        while (number1 < amount)
+        {
+            number1++;
+        }
+    }
+
     public static void WL_Long(int amount)
     {
         long number1 = 0;
@@ -140,6 +149,17 @@ static public class TestLibrary
         }
     }
 
+    public static void WL_EncDouble_0_8_0(int amount)
+    {
+        EncDouble_0_8_0 number1 = RandomDouble();
+        int timesIncremented = 0;
+        while (timesIncremented < amount)
+        {
+            number1 += 0.46772781036222716d;
+            timesIncremented++;
+        }
+    }
+
     public static void WL_Decimal(int amount)
     {
         decimal number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
@@ -216,6 +236,23 @@ static public class TestLibrary
     public static void WL_EncString_0_6_0(int amount)
     {
         EncString_0_6_0 stringVar = RandomString();
+        int currentPos = 0;
+        int timesIncremented = 0;
+        while (timesIncremented < amount)
+        {
+            timesIncremented++;
+            stringVar = StringReplaceAt(stringVar, currentPos, RandomCharNormal());
+            currentPos++;
+            if (currentPos >= stringVar.Length)
+            {
+                currentPos = 0;
+            }
+        }
+    }
+
+    public static void WL_EncString_0_8_0(int amount)
+    {
+        EncString_0_8_0 stringVar = RandomString();
         int currentPos = 0;
         int timesIncremented = 0;
         while (timesIncremented < amount)
