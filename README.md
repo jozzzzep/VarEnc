@@ -131,7 +131,7 @@ I chose to perform a benchmark of type "**Fastest**".
 So I typed **1** and pressed Enter.   
 
 ![img](https://i.imgur.com/OffKwtz.jpg)  
-From the **presets** of type "Fastest" I chose to perform the **fourth**.
+From the **presets** of type "Fastest" I chose to perform the **fourth**.  
 The fourth one will perform **10** test, in each test, **100,000** changes.  
 So I typed **4** and pressed Enter.  
 
@@ -140,9 +140,12 @@ These are the **results**. It performed **10 tests** on each type.
 Each test performed **100,000 changes** to a variable on type **EncString**, then **EncString's first version (0.5.0)**.  
 It says that the **EncString** type performed **better** by **29.140987%**.  
 It also says shows the **amount of changes** you can perform **in a second** on each type.  
-Be aware that the **shortest** benchmarks are the **least accurate**.  
 
-### Multiple Choices At Once
+### Run benchmark again
+You can **run again** the same benchmark by pressing **Space** when the results are shown.  
+You can also run the previous benchmark again by typing **"p"** or **"prev"**.  
+
+### Multiple choices at once
 I could perform the same benchmark as before, by inputting all the choices at once.  
 Before, we typed **"11"**, pressed Enter, then **"1"**, pressed Enter, and then **"4"**, and pressed Enter again.  
 We can do it faster just by typing **"11 1 4"** (separate each choice with a space) and pressing Enter.  
