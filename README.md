@@ -99,9 +99,9 @@ After the benchmark is finished, the results will be printed. From there you can
 I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and these are the results:  
 | Comparison                                              | CPS (Changes per second) |
 |---------------------------------------------------------|:------------------------:|
-| **EncInt** - int (Similar to **EncLong**)                       |     10,608,568 - 596,246,010     |
-| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     15,137,881 - 329,739,613     |
-| **EncString** - string                                      |       368,102 - 13,579,435       |  
+| **EncInt** - int (Similar to **EncLong**)                       |     14,617,745 - 525,762,355     |
+| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     20,719,376 - 329,739,613     |
+| **EncString** - string                                      |       373,450 - 13,579,435       |  
 
 This is the size of each EncType compared to its normal type
 |         Types        | Size in bytes |
@@ -116,7 +116,7 @@ It may seem heavy but it's **very light** considering its **simple** and **effic
 In a game where you want to have an encrypted "**score**" for the player, you can just **switch** the score's variable **type** from an **int** to an **EncInt**.  
 They **work** the same, **behave** the same, and have the same **methods** and **functionality**.  
 How many time you change the score variable? How many variables you want to be encrypted?  
-Even if you'll have **100 encrypted variables** that you want to change **at once** (it is probably unnecessary to have all of them enc), you can do it and you'll have exactly the same **framerate**. It is a **very light** encryption solution.  
+Even if you'll have **10,000,000 encrypted variables** that you want to change **at once** (it is probably unnecessary to have all of them enc), you can do it and you'll have exactly the same **framerate**. It is a **very light** encryption solution.  
 
 ### Example of usage:  
 I **opened** the application from the "**Benchmark**" folder.  
