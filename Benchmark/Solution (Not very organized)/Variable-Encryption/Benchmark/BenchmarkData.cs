@@ -19,6 +19,20 @@
             benchmark2 != null;
     }
 
+    public bool ComparingStrings
+    {
+        get
+        {
+            if (benchmark1 == null || benchmark2 == null) return false;
+            else
+            {
+                return 
+                    benchmark1.typeName.Contains("String") ||
+                    benchmark2.typeName.Contains("String");
+            }
+        }
+    }
+
     public BenchmarkData(TypeInBenchmark _benchmark1, TypeInBenchmark _benchmark2, int _howMuchToIncrement, int _testsAmount)
     {
         changesAmount = _howMuchToIncrement;
@@ -42,7 +56,14 @@
 
     public void InputPreset(BenchmarkPreset benchmarkPreset, string presetGroupName, int presetNum)
     {
-        changesAmount = benchmarkPreset.ChangesAmount;
+        if (ComparingStrings)
+        {
+            changesAmount = benchmarkPreset.ChangesAmount / 50;
+        }
+        else
+        {
+            changesAmount = benchmarkPreset.ChangesAmount;
+        }
         testsAmount = benchmarkPreset.TestsAmount;
         benchmarkPresetGroupName = presetGroupName;
         benchmarkPresetNumber = presetNum;
