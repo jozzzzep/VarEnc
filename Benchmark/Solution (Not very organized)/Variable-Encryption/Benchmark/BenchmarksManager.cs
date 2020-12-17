@@ -33,25 +33,36 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncDouble (0.7.0)", WL_EncDouble_0_7_0), // 18
         new TypeInBenchmark("EncDouble (0.8.0)", WL_EncDouble_0_8_0), 
         new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0), // 20
+        new TypeInBenchmark("EncInt (0.9.0)", WL_EncInt_0_9_0), 
+        new TypeInBenchmark("EncString (0.9.0)", WL_EncString_0_9_0), // 22
     };
 
     static public BenchmarkData[] comparisons =
     {
+        // EncInt
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[1]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[14]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[15]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[16]),
-        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[3]),
-        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[5]),
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[21]),
+
+        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[3]), // long
+        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[5]), // float
+
+        // EncDouble
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[7]),
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[17]),
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[18]),
         new BenchmarkData(benchmarkTypes[6], benchmarkTypes[19]),
-        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[9]),
+
+        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[9]), // decimal
+
+        // EncString
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[11]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[12]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[13]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[20]),
+        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[22]),
     };
 
     static BenchmarkPreset[] benchmarkPresetsFastest =
@@ -160,7 +171,7 @@ public static class BenchmarksManager
             timeSpans.Add(testsStopWatch.Elapsed);
         }
 
-        WriteLine(" ");
+        WriteLine();
         TimeSpan average = GetAverage(timeSpans);
         DisplayAverage(average);
         currentBenchmarkResults.SetAverageTimeSpan(average);
