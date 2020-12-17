@@ -126,7 +126,7 @@ This is the size of each EncType compared to its normal type
 |     int - EncInt     |     4 - 24    |
 |    long - EncLong    |     8 - 48    |
 |   float - EncFloat   |     4 - 24    |
-|  double - EncDouble  |     8 - 24    |
+|  double - EncDouble  |     8 - 48    |
 | decimal - EncDecimal |    16 - 48    |
 
 It may seem heavy but it's **very light** considering its **simple** and **efficient encryption**.  
