@@ -122,19 +122,14 @@ static class MenuSystem
         for (int i = 0; i < group.presets.Length; i++)
         {
             int number = i + 1;
-            int changesAmount =
-                (currentBenchmarkData.ComparingStrings)
-                ? group.presets[i].ChangesAmount / 50
-                : group.presets[i].ChangesAmount;
-
             string[] lines =
             {
                 "",
                 string.Format("PRESET #{0}:", number),
                 string.Format("-{0} Tests", group.presets[i].TestsAmount),
-                string.Format("-{0} Changes", changesAmount)
+                string.Format("-{0} Changes", group.presets[i].ChangesAmount)
             };
-            WriteLines(lines);
+            Utilities.WriteLines(lines);
         }
     }
 
