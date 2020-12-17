@@ -1,4 +1,10 @@
 ![Imgur](https://i.imgur.com/jnXHECv.png)
+<p align="center">
+        <img src="https://img.shields.io/codefactor/grade/github/JosepeDev/VarEnc/main">
+        <img src="https://img.shields.io/github/search/JosepeDev/VarEnc/main">
+        <img src="https://img.shields.io/github/languages/code-size/JosepeDev/VarEnc">
+</p>
+
 **Content**
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
