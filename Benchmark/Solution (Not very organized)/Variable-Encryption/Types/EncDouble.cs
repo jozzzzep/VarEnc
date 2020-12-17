@@ -36,8 +36,8 @@ public struct EncDouble
 
     private EncDouble(double value)
     {
-        encryptionKey1 = random.NextDouble();
-        encryptionKey2 = random.NextDouble();
+        encryptionKey1 = random.NextDouble() * 0.001;
+        encryptionKey2 = random.NextDouble() * 100;
         encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
@@ -45,10 +45,10 @@ public struct EncDouble
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static double Encrypt(double value, double k1, double k2) => (value + k1) * k2;
+    private static double Encrypt(double value, double k1, double k2) => (value * k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
+    private double Decrypt() => (encryptedValue / encryptionKey2) / encryptionKey1;
 
     // Overrides
     public int CompareTo(object value) => Value.CompareTo(value);

@@ -35,8 +35,8 @@ public struct EncDecimal
 
     private EncDecimal(decimal value)
     {
-        encryptionKey1 = (decimal)random.NextDouble();
-        encryptionKey2 = (decimal)random.NextDouble();
+        encryptionKey1 = (decimal)(random.NextDouble() * 0.001);
+        encryptionKey2 = (decimal)(random.NextDouble() * 100);
         encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
@@ -44,10 +44,10 @@ public struct EncDecimal
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value + k1) * k2;
+    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value * k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
+    private decimal Decrypt() => (encryptedValue / encryptionKey2) / encryptionKey1;
 
     // Overrides
     public int CompareTo(Decimal value) => Value.CompareTo(value);
