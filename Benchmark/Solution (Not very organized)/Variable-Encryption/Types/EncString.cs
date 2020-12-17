@@ -20,7 +20,7 @@ public class EncString
     /// </summary>
     private string Value
     {
-        get => EncryptorDecryptor(_encryptedValue, _encryptionKey);
+        get => Decrypt();
     }
 
     public int Length
@@ -126,7 +126,7 @@ public class EncString
     public EncString(string value)
     {
         _encryptionKey = RandomString();
-        _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
+        _encryptedValue = Encrypt(value, _encryptionKey);
     }
 
     public EncString(char[] value)
@@ -145,24 +145,17 @@ public class EncString
 
     static Random random = new Random();
 
-    static int RandomLength() => random.Next(10, 150);
-
-    static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
-    {
-        return (char)(random.Next(min, max));
-    }
-
     static string RandomString()
     {
-        char[] chars = new char[RandomLength()];
+        char[] chars = new char[random.Next(10, 100)]; // random length
         for (int i = 0; i < chars.Length; i++)
         {
-            chars[i] = RandomChar();
+            chars[i] = (char)(random.Next(char.MinValue, char.MinValue)); // random chars
         }
         return new string(chars);
     }
 
-    private static string EncryptorDecryptor(string data, string key)
+    private static string Encrypt(string data, string key)
     {
         if (data == null)
         {
@@ -177,6 +170,27 @@ public class EncString
             for (int i = 0; i < dataLen; ++i)
             {
                 output[i] = (char)(data[i] ^ key[i % keyLen]);
+            }
+
+            return new string(output);
+        }
+    }
+
+    private string Decrypt()
+    {
+        if (_encryptedValue == null)
+        {
+            return null;
+        }
+        else
+        {
+            int dataLen = _encryptedValue.Length;
+            int keyLen = _encryptionKey.Length;
+            char[] output = new char[dataLen];
+
+            for (int i = 0; i < dataLen; ++i)
+            {
+                output[i] = (char)(_encryptedValue[i] ^ _encryptionKey[i % keyLen]);
             }
 
             return new string(output);
