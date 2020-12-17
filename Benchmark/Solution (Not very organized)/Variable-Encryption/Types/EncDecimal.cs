@@ -23,11 +23,11 @@ public struct EncDecimal
         get => Decrypt();
     }
 
-    public Decimal MaxValue { get => Decimal.MaxValue; }
-    public Decimal MinValue { get => Decimal.MinValue; }
-    public Decimal MinusOne { get => Decimal.MinusOne; }
-    public Decimal One { get => Decimal.One; }
-    public Decimal Zero { get => Decimal.Zero; }
+    public static Decimal MaxValue { get => Decimal.MaxValue; }
+    public static Decimal MinValue { get => Decimal.MinValue; }
+    public static Decimal MinusOne { get => Decimal.MinusOne; }
+    public static Decimal One { get => Decimal.One; }
+    public static Decimal Zero { get => Decimal.Zero; }
 
     #endregion
 

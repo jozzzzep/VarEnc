@@ -23,8 +23,8 @@ public struct EncInt
         get => (int)Decrypt();
     }
 
-    public int MaxValue { get => Int32.MaxValue; }
-    public int MinValue { get => Int32.MinValue; }
+    public static int MaxValue { get => Int32.MaxValue; }
+    public static int MinValue { get => Int32.MinValue; }
 
     private EncInt(double value)
     {

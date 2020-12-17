@@ -23,12 +23,12 @@ public struct EncFloat
         get => (float)Decrypt();
     }
 
-    public float Epsilon { get => Single.Epsilon; }
-    public float MaxValue { get => Single.MaxValue; }
-    public float MinValue { get => Single.MinValue; }
-    public float NaN { get => Single.NaN; }
-    public float NegativeInfinity { get => Single.NegativeInfinity; }
-    public float PositiveInfinity { get => Single.PositiveInfinity; }
+    public static float Epsilon { get => Single.Epsilon; }
+    public static float MaxValue { get => Single.MaxValue; }
+    public static float MinValue { get => Single.MinValue; }
+    public static float NaN { get => Single.NaN; }
+    public static float NegativeInfinity { get => Single.NegativeInfinity; }
+    public static float PositiveInfinity { get => Single.PositiveInfinity; }
 
     #endregion
 

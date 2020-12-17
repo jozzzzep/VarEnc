@@ -23,8 +23,8 @@ public struct EncLong
         get => (long)Decrypt();
     }
 
-    public long MaxValue { get => Int64.MaxValue; }
-    public long MinValue { get => Int64.MinValue; }
+    public static long MaxValue { get => Int64.MaxValue; }
+    public static long MinValue { get => Int64.MinValue; }
 
     private EncLong(decimal value)
     {

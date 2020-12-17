@@ -23,12 +23,12 @@ public struct EncDouble
         get => Decrypt();
     }
 
-    public Double Epsilon { get => Double.Epsilon; }
-    public Double MaxValue { get => Double.MaxValue; }
-    public Double MinValue { get => Double.MinValue; }
-    public Double NaN { get => Double.NaN; }
-    public Double NegativeInfinity { get => Double.NegativeInfinity; }
-    public Double PositiveInfinity { get => Double.PositiveInfinity; }
+    public static Double Epsilon { get => Double.Epsilon; }
+    public static Double MaxValue { get => Double.MaxValue; }
+    public static Double MinValue { get => Double.MinValue; }
+    public static Double NaN { get => Double.NaN; }
+    public static Double NegativeInfinity { get => Double.NegativeInfinity; }
+    public static Double PositiveInfinity { get => Double.PositiveInfinity; }
 
     #endregion
 
