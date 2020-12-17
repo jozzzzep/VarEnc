@@ -99,9 +99,9 @@ After the benchmark is finished, the results will be printed. From there you can
 I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and these are the results:  
 | Comparison                                              | CPS (Changes per second) |
 |---------------------------------------------------------|:------------------------:|
-| **EncInt** - int (Similar to **EncLong**)                       |     14,617,745 - 525,762,355     |
-| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     20,719,376 - 329,739,613     |
-| **EncString** - string                                      |       373,450 - 13,579,435       |  
+| **EncInt** - int (Similar to **EncLong**)                       |     16,019,622 - 525,762,355     |
+| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     20,155,276 - 329,739,613     |
+| **EncString** - string                                      |       501,253 - 13,579,435       |  
 
 This is the size of each EncType compared to its normal type
 |         Types        | Size in bytes |
