@@ -7,7 +7,6 @@
 </p>
 <p align="center">
         <img src="https://img.shields.io/github/search/JosepeDev/VarEnc/main">
-        <img src="https://img.shields.io/github/languages/code-size/JosepeDev/VarEnc">
         <img src="https://img.shields.io/github/downloads/JosepeDev/VarEnc/total">
 </p>
 <p align="center">
