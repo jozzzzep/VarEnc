@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class TypeInBenchmark
 {
+    /// Represents a type in the benchmark
+    /// - Contains the type's name
+    /// - Contains a pointer to its benchmark while loop
+
     public string typeName;
     public Action<int> benchmarkWhileLoop;
 
