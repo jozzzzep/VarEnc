@@ -315,11 +315,11 @@ public static class BenchmarksManager
         var k = Console.ReadKey();
         if (k.Key == key_runSameBenchmarkAgain)
         {
-            RunBenchmark(MenuSystem.currentBenchmarkData);
+            RunBenchmark(VarEncBenchmark.currentBenchmarkData);
         }
         else
         {
-            MenuSystem.StartProgram();
+            VarEncBenchmark.StartProgram();
         }
     }
 

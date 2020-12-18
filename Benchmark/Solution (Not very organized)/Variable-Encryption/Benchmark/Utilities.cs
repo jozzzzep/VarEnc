@@ -20,7 +20,7 @@ static public class Utilities
 
         QuickDrawMenu(errorMessage);
         Console.ReadKey();
-        MenuSystem.StartProgram();
+        VarEncBenchmark.StartProgram();
     }
 
     static public void ActiveError(Exception exception, string msg = "Invalid input") => ActiveError(msg + ". Exeption message: <" + exception.Message + ">");

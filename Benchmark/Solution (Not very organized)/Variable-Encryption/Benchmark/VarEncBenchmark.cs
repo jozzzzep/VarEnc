@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using static Utilities;
 
-static class MenuSystem
+static class VarEncBenchmark
 {
+    /// The main class of the application
+    /// - Displays the menu and its sections
+    /// - Contains the content of each section in the menu
+    /// - Manage input from the user and use it
+
     static ChoosingState currentSection;
     public static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
