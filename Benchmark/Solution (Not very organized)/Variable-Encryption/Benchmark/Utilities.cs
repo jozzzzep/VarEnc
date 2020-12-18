@@ -102,7 +102,7 @@ static public class Utilities
 
     #endregion
 
-    #region Special Methods
+    #region General Methods
 
     public static TimeSpan GetAverage(List<TimeSpan> ts_list)
     {
@@ -148,20 +148,7 @@ static public class Utilities
         }
     }
 
-    public static string StringReplaceAt(string input, int index, char newChar)
-    {
-        if (input != null)
-        {
-            char[] chars = input.ToCharArray();
-            chars[index] = newChar;
-            return new string(chars);
-        }
-        else return null;
-    }
-
     public static int GetTheHigherLength(string s1, string s2) => (s1.Length >= s2.Length) ? s1.Length + 1 : s2.Length + 1;
-
-    public static bool IsNumberValid(int num, int max) => (num != 0 && num <= max);
 
     public static bool ContainingOnlyDigits(string s)
     {
@@ -187,29 +174,6 @@ static public class Utilities
             }
         }
         return false;
-    }
-
-    #endregion
-
-    #region Get Random Stuff
-
-    static Random random = new Random();
-
-    public static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
-    {
-        return (char)(random.Next(min, max));
-    }
-
-    public static char RandomCharNormal() => RandomChar(48, 125);
-
-    public static string RandomString()
-    {
-        char[] chars = new char[25];
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i] = RandomCharNormal();
-        }
-        return new string(chars);
     }
 
     #endregion
