@@ -4,7 +4,7 @@ using static Utilities;
 
 static class MenuSystem
 {
-    static string currentVersion = "- Current version - 0.9.0";
+    static string currentVersion = "- Current version - 1.0.0";
     static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static ChoosingState currentState;
     public static BenchmarkData currentBenchmarkData;
@@ -24,7 +24,7 @@ static class MenuSystem
         string previousBenchmarkText = 
             (currentBenchmarkData == null || !currentBenchmarkData.IsValid) 
             ? "" 
-            : "\n  - Type the letter \"p\" or the word \"prev\" to see the size of each type in bytes.";
+            : "\n  - Type the letter \"p\" or the word \"prev\" to run again the previous benchmark.";
 
         switch (stepNum)
         {
@@ -194,12 +194,10 @@ static class MenuSystem
         return highest + 1;
     }
 
-    public static void GetInputForNextSection(int sectionNum)
+    public static void GetInput(int sectionNum)
     {
         // save input from user
-        var line = Console.ReadLine();
-        
-        
+        var line = Console.ReadLine();        
 
         if (String.IsNullOrWhiteSpace(line))
         {
@@ -212,46 +210,55 @@ static class MenuSystem
             PrintSizesOfTypes();
         }
 
-        // input for seeing the sizes of the types
+        // input for running the previous benchmark
         else if (currentState == ChoosingState.ChoosingComparisons && line.Contains("p") && currentBenchmarkData != null && currentBenchmarkData.IsValid)
         {
             BenchmarksManager.RunBenchmark(currentBenchmarkData);
         }
-
-        // input for benchmark
-        else
+        else // normal choosing input
         {
+            // if there are spaces, it means the user inputed many choices separated with spaces
             if (line.Contains(" ") && ContainingDigits(line))
             {
-                string[] entries = line.Split(' ');
-                List<int> e = new List<int>();
-
-                for (int i = 0; i < entries.Length; i++)
-                {
-                    if (ContainingOnlyDigits(entries[i]))
-                    {
-                        e.Add(int.Parse(entries[i]));
-                    }
-                }
-
-                for (int i = 0; i < e.Count; i++)
-                {
-                    bool choosing = (i + 1 == e.Count) ? true : false;
-                    AddDataFromInput((int)currentState, e[i], choosing);
-                }
+                ApplyMultipleInputs(sectionNum, line);
             }
             else
             {
-                if (ContainingOnlyDigits(line))
-                {
-                    int inputNum = int.Parse(line);
-                    AddDataFromInput(sectionNum, inputNum);
-                }
-                else
-                {
-                    ActiveError("Invalid input");
-                }
+                ApplySingleInput(sectionNum, line);
             }
+        }
+    }
+
+    public static void ApplyMultipleInputs(int sectionNum, string inputs)
+    {
+        string[] entries = inputs.Split(' ');
+        List<int> e = new List<int>();
+
+        for (int i = 0; i < entries.Length; i++)
+        {
+            if (ContainingOnlyDigits(entries[i]))
+            {
+                e.Add(int.Parse(entries[i]));
+            }
+        }
+
+        for (int i = 0; i < e.Count; i++)
+        {
+            bool choosing = (i + 1 == e.Count) ? true : false;
+            AddDataFromInput((int)currentState, e[i], choosing);
+        }
+    }
+
+    public static void ApplySingleInput(int sectionNum, string input)
+    {
+        if (ContainingOnlyDigits(input))
+        {
+            int inputNum = int.Parse(input);
+            AddDataFromInput(sectionNum, inputNum);
+        }
+        else
+        {
+            ActiveError("Invalid input");
         }
     }
 
@@ -283,7 +290,7 @@ static class MenuSystem
         SeparationLine();
 
         // get input for next section
-        GetInputForNextSection(sectionNum);
+        GetInput(sectionNum);
     }
 
     public static void AddDataFromInput(int sectionNum, int input, bool printAfter = true)
