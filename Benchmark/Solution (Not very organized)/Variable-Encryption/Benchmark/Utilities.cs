@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 static public class Utilities
@@ -160,19 +161,6 @@ static public class Utilities
 
     public static int GetTheHigherLength(string s1, string s2) => (s1.Length >= s2.Length) ? s1.Length + 1 : s2.Length + 1;
 
-    public static int GetTheHighestLength(string[] sr)
-    {
-        int highest = 0;
-        for (int i = 0; i < sr.Length; i++)
-        {
-            if (sr[i].Length > highest)
-            {
-                highest = sr[i].Length;
-            }
-        }
-        return highest + 1;
-    }
-
     public static bool IsNumberValid(int num, int max) => (num != 0 && num <= max);
 
     public static bool ContainingOnlyDigits(string s)
@@ -201,18 +189,11 @@ static public class Utilities
         return false;
     }
 
-    public static int GetSize(Type t)
-    {
-        return System.Runtime.InteropServices.Marshal.SizeOf(t);
-    }
-
     #endregion
 
     #region Get Random Stuff
 
     static Random random = new Random();
-
-    static public double RandomDouble() => random.NextDouble();
 
     public static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
     {
