@@ -4,59 +4,95 @@ using static Utilities;
 
 static class MenuSystem
 {
-    static string currentVersion = "- Current version - 1.0.0";
-    static string titleOfApplication = "VarEnc's Benchmarking Console Application";
-    static ChoosingState currentState;
+    static ChoosingState currentSection;
     public static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
+
+    public static void StartProgram()
+    {
+        // Setup console application
+        Console.Title = titleOfApplication;
+
+        // Set currunt section
+        currentSection = ChoosingState.ChoosingComparisons;
+
+        // Print first menu section
+        PrintSection();
+    }
+
+    #region Sections Content
+
+    static string currentVersion = "- Current version - 1.0.0";
+    static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static private string choiceText = "Type the number of your choice and press ENTER";
 
-    static private string[] sectionsTitle =
+    static private string[] sectionTitles =
     {
         "Step #1: TYPES TO COMPARE",
         "Step #2: BENCHMARK DURATION",
         "Step #3: BENCHMARK PRESET"
     };
 
-    static string[] SectionText(int stepNum)
+    static void PrintSectionTitle()
+    {
+        switch (currentSection)
+        {
+            case ChoosingState.ChoosingComparisons:
+                WriteLine("Step #1: TYPES TO COMPARE");
+                break;
+
+            case ChoosingState.ChoosingDuration:
+                WriteLine("Step #2: BENCHMARK DURATION");
+                break;
+
+            case ChoosingState.ChoosingPreset:
+                WriteLine("Step #3: BENCHMARK PRESET");
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    static void PrintSectionText()
     {
         string[] textToReturn;
-        string previousBenchmarkText = 
-            (currentBenchmarkData == null || !currentBenchmarkData.IsValid) 
-            ? "" 
+        string previousBenchmarkText =
+            (currentBenchmarkData == null || !currentBenchmarkData.IsValid)
+            ? ""
             : "\n  - Type the letter \"p\" or the word \"prev\" to run again the previous benchmark.";
 
-        switch (stepNum)
+        switch (currentSection)
         {
-            case 0:
+            case ChoosingState.ChoosingComparisons:
                 string[] text1 =
                 {
-                    currentVersion,
-                    "- Welcome to the console app for speedtesting the VarEnc features.",
-                    "- If you already know the numbers of your choices, you can input them all together. (separated with spaces)",
-                    "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes." + previousBenchmarkText,
-                    "- These are the types you can compare:"
-                };
+                        currentVersion,
+                        "- Welcome to the console app for speedtesting the VarEnc features.",
+                        "- If you already know the numbers of your choices, you can input them all together. (separated with spaces)",
+                        "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes." + previousBenchmarkText,
+                        "- These are the types you can compare:"
+                    };
                 textToReturn = text1;
                 break;
 
-            case 1:
+            case ChoosingState.ChoosingDuration:
                 string[] text2 =
                 {
-                    string.Format("You chose to compare the types {0} and {1}", currentBenchmarkData.benchmark1.typeName, currentBenchmarkData.benchmark2.typeName),
-                    "Now choose how long you want the benchmark to be.",
-                };
+                        string.Format("You chose to compare the types {0} and {1}", currentBenchmarkData.benchmark1.typeName, currentBenchmarkData.benchmark2.typeName),
+                        "Now choose how long you want the benchmark to be.",
+                    };
                 textToReturn = text2;
                 break;
 
-            case 2:
+            case ChoosingState.ChoosingPreset:
                 string[] text3 =
                 {
-                    string.Format("You chose to compare the types {0} and {1}", currentBenchmarkData.benchmark1.typeName, currentBenchmarkData.benchmark2.typeName),
-                    string.Format("You chose to perform a benchmark of type {0}", currentBenchmarkPresetGroup.Name),
-                    "When running, the benchmark will perform a certain amount tests for the variable types you chose.",
-                    "and in each test, the application will perform changes to these variables a certain amount of time."
-                };
+                        string.Format("You chose to compare the types {0} and {1}", currentBenchmarkData.benchmark1.typeName, currentBenchmarkData.benchmark2.typeName),
+                        string.Format("You chose to perform a benchmark of type {0}", currentBenchmarkPresetGroup.Name),
+                        "When running, the benchmark will perform a certain amount tests for the variable types you chose.",
+                        "and in each test, the application will perform changes to these variables a certain amount of time."
+                    };
                 textToReturn = text3;
                 break;
 
@@ -64,58 +100,80 @@ static class MenuSystem
                 textToReturn = null;
                 break;
         }
-        return textToReturn;
+
+        if (textToReturn != null) WriteLines(textToReturn);
     }
 
-    public static Action GetSelectionsList(int sectionNum)
+    static void PrintSectionChoicesList()
     {
-        Action returnThis;
-        switch (sectionNum)
+        switch (currentSection)
         {
-            case 0:
-                returnThis = DisplayComparisonsList;
+            case ChoosingState.ChoosingComparisons:
+                PrintComparisonsList();
                 break;
 
-            case 1:
-                returnThis = DisplayBenchmarkPresetGroupList;
+            case ChoosingState.ChoosingDuration:
+                PrintBenchmarkPresetGroupList();
                 break;
 
-            case 2:
-                returnThis = DisplayBenchmarkPresetGroup;
+            case ChoosingState.ChoosingPreset:
+                PrintBenchmarkPresetGroup();
                 break;
 
             default:
-                returnThis = null;
                 break;
         }
-        return returnThis;
     }
 
-    public static int GetMaxValid(int sectionNum)
+    // Section #1
+    public static void PrintComparisonsList()
     {
-        int returnThis;
-        switch (sectionNum)
+        // number in list of choices 
+        int number = 0;
+
+        // foreach chunk
+        for (int i1 = 0; i1 < BenchmarksManager.comparisonsChunks.Length; i1++)
         {
-            case 0:
-                returnThis = BenchmarksManager.comparisons.Length;
-                break;
+            // print chunk content
+            for (int i2 = 0; i2 < BenchmarksManager.comparisonsChunks[i1]; i2++)
+            {
+                // measure spacing
+                int firstTypeLength = BenchmarksManager.comparisons[number].benchmark1.typeName.Length;
+                string spaces1 = new string(' ', 3 - HowManyDigits(number + 1));
+                string spaces2 = new string(' ', GetSpacesLength() - firstTypeLength);
 
-            case 1:
-                returnThis = BenchmarksManager.benchmarkPresetGroups.Length;
-                break;
+                // construct line
+                string line = string.Format(
+                        "{0}." + spaces1 + "{1}" + spaces2 + "vs {2}",
+                        number + 1, BenchmarksManager.comparisons[number].benchmark1.typeName,
+                        BenchmarksManager.comparisons[number].benchmark2.typeName);
 
-            case 2:
-                returnThis = currentBenchmarkPresetGroup.presets.Length;
-                break;
+                // print line and increase number
+                WriteLine(line);
+                number++;
+            }
 
-            default:
-                returnThis = 0;
-                break;
+            // if it is the last option in the chunk, print an empty line and continue to the next chunk
+            if (i1 < BenchmarksManager.comparisonsChunks.Length - 1)
+            {
+                WriteLine();
+            }
         }
-        return returnThis;
     }
 
-    public static void DisplayBenchmarkPresetGroup(BenchmarkPresetGroup _group)
+    // Section #2
+    public static void PrintBenchmarkPresetGroupList()
+    {
+        for (int i = 0; i < BenchmarksManager.benchmarkPresetGroups.Length; i++)
+        {
+            int number = i + 1;
+            string spaces = new string(' ', 5 - HowManyDigits(number));
+            WriteLine(string.Format("{0}." + spaces + "{1}", number, BenchmarksManager.benchmarkPresetGroups[i].Name));
+        }
+    }
+
+    // Section #3
+    public static void PrintBenchmarkPresetGroup(BenchmarkPresetGroup _group)
     {
         BenchmarkPresetGroup group = _group;
         WriteLine(string.Format("These are the {0} benchmark presets:", group.Name));
@@ -138,199 +196,10 @@ static class MenuSystem
         }
     }
 
-    public static void DisplayBenchmarkPresetGroup()
-    {
-        DisplayBenchmarkPresetGroup(currentBenchmarkPresetGroup);
-    }
+    public static void PrintBenchmarkPresetGroup() => PrintBenchmarkPresetGroup(currentBenchmarkPresetGroup);
 
-    public static void DisplayBenchmarkPresetGroup(int groupNum)
-    {
-        DisplayBenchmarkPresetGroup(BenchmarksManager.benchmarkPresetGroups[groupNum]);
-    }
 
-    public static void DisplayBenchmarkPresetGroupList()
-    {
-        for (int i = 0; i < BenchmarksManager.benchmarkPresetGroups.Length; i++)
-        {
-            int number = i + 1;
-            string spaces = new string(' ', 5 - HowManyDigits(number));
-            WriteLine(string.Format("{0}." + spaces + "{1}", number, BenchmarksManager.benchmarkPresetGroups[i].Name));
-        }
-    }
-
-    public static void DisplayComparisonsList()
-    {
-        int number = 0;
-        for (int i1 = 0; i1 < BenchmarksManager.comparisonsChunks.Length; i1++)
-        {
-            for (int i2 = 0; i2 < BenchmarksManager.comparisonsChunks[i1]; i2++)
-            {
-                int currentL = BenchmarksManager.comparisons[number].benchmark1.typeName.Length;
-                string spaces1 = new string(' ', 3 - HowManyDigits(number + 1));
-                string spaces2 = new string(' ', GetTheSpacesLength() - currentL);
-                string line = string.Format(
-                        "{0}." + spaces1 + "{1}" + spaces2 + "vs {2}",
-                        number + 1, BenchmarksManager.comparisons[number].benchmark1.typeName,
-                        BenchmarksManager.comparisons[number].benchmark2.typeName);
-                WriteLine(line);
-                number++;
-            }
-
-            if (i1 < BenchmarksManager.comparisonsChunks.Length - 1)
-            {
-                WriteLine();
-            }
-        }
-    }
-
-    public static int GetTheSpacesLength()
-    {
-        int highest = 0;
-        for (int i = 0; i < BenchmarksManager.comparisons.Length; i++)
-        {
-            int current = BenchmarksManager.comparisons[i].benchmark1.typeName.Length;
-            if (current > highest) highest = current;
-        }
-        return highest + 1;
-    }
-
-    public static void GetInput(int sectionNum)
-    {
-        // save input from user
-        var line = Console.ReadLine();        
-
-        if (String.IsNullOrWhiteSpace(line))
-        {
-            ActiveError("Empty input");
-        }
-
-        // input for seeing the sizes of the types
-        else if (currentState == ChoosingState.ChoosingComparisons && line.Contains("s"))
-        {
-            PrintSizesOfTypes();
-        }
-
-        // input for running the previous benchmark
-        else if (currentState == ChoosingState.ChoosingComparisons && line.Contains("p") && currentBenchmarkData != null && currentBenchmarkData.IsValid)
-        {
-            BenchmarksManager.RunBenchmark(currentBenchmarkData);
-        }
-        else // normal choosing input
-        {
-            // if there are spaces, it means the user inputed many choices separated with spaces
-            if (line.Contains(" ") && ContainingDigits(line))
-            {
-                ApplyMultipleInputs(sectionNum, line);
-            }
-            else
-            {
-                ApplySingleInput(sectionNum, line);
-            }
-        }
-    }
-
-    public static void ApplyMultipleInputs(int sectionNum, string inputs)
-    {
-        string[] entries = inputs.Split(' ');
-        List<int> e = new List<int>();
-
-        for (int i = 0; i < entries.Length; i++)
-        {
-            if (ContainingOnlyDigits(entries[i]))
-            {
-                e.Add(int.Parse(entries[i]));
-            }
-        }
-
-        for (int i = 0; i < e.Count; i++)
-        {
-            bool choosing = (i + 1 == e.Count) ? true : false;
-            AddDataFromInput((int)currentState, e[i], choosing);
-        }
-    }
-
-    public static void ApplySingleInput(int sectionNum, string input)
-    {
-        if (ContainingOnlyDigits(input))
-        {
-            int inputNum = int.Parse(input);
-            AddDataFromInput(sectionNum, inputNum);
-        }
-        else
-        {
-            ActiveError("Invalid input");
-        }
-    }
-
-    public static void StartProgram()
-    {
-        Console.Title = titleOfApplication;
-        currentState = ChoosingState.ChoosingComparisons;
-        PrintSection(0);
-    }
-
-    public static void PrintSection(int sectionNum)
-    {
-        // clear previous text
-        Console.Clear();
-
-        // section's description
-        SeparationLine();
-        WriteLines(SectionText(sectionNum));
-
-        // section's title
-        SeparationLineSmall();
-        WriteLine(sectionsTitle[sectionNum]);
-        SeparationLineSmall();
-
-        // section's list of choices
-        GetSelectionsList(sectionNum)();
-        SeparationLineSmall();
-        WriteLine(choiceText);
-        SeparationLine();
-
-        // get input for next section
-        GetInput(sectionNum);
-    }
-
-    public static void AddDataFromInput(int sectionNum, int input, bool printAfter = true)
-    {
-        // Adds the data by the user's input
-        // Prints the next section
-        // Or starts the benchmark if it is the last section
-        if (IsNumberValid(input, GetMaxValid(sectionNum)))
-        {
-            int inputForArray = input - 1;
-            switch (sectionNum)
-            {
-                case 0:
-                    currentBenchmarkData = new BenchmarkData(BenchmarksManager.comparisons[inputForArray]);
-                    currentState = ChoosingState.ChoosingDuration;
-                    if (printAfter) PrintSection(1);
-                    break;
-
-                case 1:
-                    currentBenchmarkPresetGroup = BenchmarksManager.benchmarkPresetGroups[inputForArray];
-                    currentState = ChoosingState.ChoosingPreset;
-                    if (printAfter) PrintSection(2);
-                    break;
-
-                case 2:
-                    currentState = ChoosingState.Complete;
-                    currentBenchmarkData.InputPreset(currentBenchmarkPresetGroup.presets[inputForArray], currentBenchmarkPresetGroup.Name, input);
-                    BenchmarksManager.RunBenchmark(currentBenchmarkData);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            ActiveError("Number is invalid");
-        }
-    }
-
+    // Special Section -  input "s" in the menu
     public static void PrintSizesOfTypes()
     {
         Console.Clear();
@@ -362,4 +231,179 @@ static class MenuSystem
         Console.ReadKey();
         StartProgram();
     }
+
+    public static void PrintSection()
+    {
+        // clear previous text
+        Console.Clear();
+
+        // section's description
+        SeparationLine();
+        PrintSectionText();
+
+        // section's title
+        SeparationLineSmall();
+        PrintSectionTitle();
+        SeparationLineSmall();
+
+        // section's list of choices
+        PrintSectionChoicesList();
+        SeparationLineSmall();
+        WriteLine(choiceText);
+        SeparationLine();
+
+        // get input for next section
+        GetInput();
+    }
+
+    public static int GetSpacesLength()
+    {
+        int highest = 0;
+        for (int i = 0; i < BenchmarksManager.comparisons.Length; i++)
+        {
+            int current = BenchmarksManager.comparisons[i].benchmark1.typeName.Length;
+            if (current > highest) highest = current;
+        }
+        return highest + 1;
+    }
+
+    #endregion
+
+    #region Input
+
+    public static bool IsNumberValid(int num)
+    {
+        int max;
+
+        switch (currentSection)
+        {
+            case ChoosingState.ChoosingComparisons:
+                max = BenchmarksManager.comparisons.Length;
+                break;
+
+            case ChoosingState.ChoosingDuration:
+                max = BenchmarksManager.benchmarkPresetGroups.Length;
+                break;
+
+            case ChoosingState.ChoosingPreset:
+                max = currentBenchmarkPresetGroup.presets.Length;
+                break;
+
+            default:
+                max = 0;
+                break;
+        }
+
+        return (num != 0 && num <= max);
+    }
+
+    public static void GetInput()
+    {
+        // save input from user
+        var line = Console.ReadLine();
+
+        if (String.IsNullOrWhiteSpace(line))
+        {
+            ActiveError("Empty input");
+        }
+
+        // input for seeing the sizes of the types
+        else if (currentSection == ChoosingState.ChoosingComparisons && line.Contains("s"))
+        {
+            PrintSizesOfTypes();
+        }
+
+        // input for running the previous benchmark
+        else if (currentSection == ChoosingState.ChoosingComparisons && line.Contains("p") && currentBenchmarkData != null && currentBenchmarkData.IsValid)
+        {
+            BenchmarksManager.RunBenchmark(currentBenchmarkData);
+        }
+        else // normal choosing input
+        {
+            // if there are spaces, it means the user inputed many choices separated with spaces
+            if (line.Contains(" ") && ContainingDigits(line))
+            {
+                ApplyMultipleInputs(line);
+            }
+            else
+            {
+                ApplySingleInput(line);
+            }
+        }
+    }
+
+    public static void ApplyMultipleInputs(string inputs)
+    {
+        string[] entries = inputs.Split(' ');
+        List<int> e = new List<int>();
+
+        for (int i = 0; i < entries.Length; i++)
+        {
+            if (ContainingOnlyDigits(entries[i]))
+            {
+                e.Add(int.Parse(entries[i]));
+            }
+        }
+
+        for (int i = 0; i < e.Count; i++)
+        {
+            bool choosing = (i + 1 == e.Count) ? true : false;
+            AddDataFromInput(e[i], choosing);
+        }
+    }
+
+    public static void ApplySingleInput(string input)
+    {
+        if (ContainingOnlyDigits(input))
+        {
+            int inputNum = int.Parse(input);
+            AddDataFromInput(inputNum);
+        }
+        else
+        {
+            ActiveError("Invalid input");
+        }
+    }
+
+    public static void AddDataFromInput(int input, bool printAfter = true)
+    {
+        // Adds the data by the user's input
+        // Prints the next section
+        // Or starts the benchmark if it is the last section
+
+        if (IsNumberValid(input))
+        {
+            int inputForArray = input - 1;
+            switch (currentSection)
+            {
+                case ChoosingState.ChoosingComparisons:
+                    currentBenchmarkData = new BenchmarkData(BenchmarksManager.comparisons[inputForArray]);
+                    currentSection = ChoosingState.ChoosingDuration;
+                    if (printAfter) PrintSection();
+                    break;
+
+                case ChoosingState.ChoosingDuration:
+                    currentBenchmarkPresetGroup = BenchmarksManager.benchmarkPresetGroups[inputForArray];
+                    currentSection = ChoosingState.ChoosingPreset;
+                    if (printAfter) PrintSection();
+                    break;
+
+                case ChoosingState.ChoosingPreset:
+                    currentSection = ChoosingState.Complete;
+                    currentBenchmarkData.InputPreset(currentBenchmarkPresetGroup.presets[inputForArray], currentBenchmarkPresetGroup.Name, input);
+                    BenchmarksManager.RunBenchmark(currentBenchmarkData);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        else
+        {
+            ActiveError("Number is invalid. Number: <" + input + ">");
+        }
+    }
+
+    #endregion
 }
