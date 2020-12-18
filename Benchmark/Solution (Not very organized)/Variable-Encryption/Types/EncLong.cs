@@ -10,37 +10,51 @@ public struct EncLong
 
     #region Variables - Properties - Methods - Constructors
 
-    // The encryption values
-    private readonly decimal encryptionKey1;
-    private readonly decimal encryptionKey2;
+    private readonly byte[] encryptionKeys;
 
     // The encrypted value stored in memory
-    private readonly decimal encryptedValue;
+    private readonly byte[] encryptedValue;
 
     // The decrypted value
     private long Value
     {
-        get => (long)Decrypt();
+        get => Decrypt();
     }
 
     public static long MaxValue { get => Int64.MaxValue; }
     public static long MinValue { get => Int64.MinValue; }
 
-    private EncLong(decimal value)
+    private EncLong(long value)
     {
-        encryptionKey1 = (decimal)(random.NextDouble() * 0.001);
-        encryptionKey2 = (decimal)(random.NextDouble() * 100);
-        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
+        encryptionKeys = new byte[8];
+        random.NextBytes(encryptionKeys);
+        encryptedValue = Encrypt(value, encryptionKeys);
     }
 
     // Encryption Key Generator
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value + k1) * k2;
+    private static byte[] Encrypt(long value, byte[] keys)
+    {
+        var valueBytes = BitConverter.GetBytes(value);
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] ^= keys[i];
+        }
+        return valueBytes;
+    }
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt() => ((encryptedValue / encryptionKey2) - encryptionKey1) + 0.5m;
+    private long Decrypt()
+    {
+        var valueBytes = new byte[8];
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
+        }
+        return BitConverter.ToInt64(valueBytes);
+    }
 
     // Int64 methods
     public int CompareTo(object value) => Value.CompareTo(value);
@@ -161,6 +175,12 @@ public struct EncLong
 
     /// assign
     public static implicit operator EncLong(long value) => new EncLong(value);
+    public static implicit operator EncLong(int value) => new EncLong(value);
+    public static implicit operator EncLong(uint value) => new EncLong(value);
+    public static implicit operator EncLong(ushort value) => new EncLong(value);
+    public static implicit operator EncLong(short value) => new EncLong(value);
+    public static implicit operator EncLong(byte value) => new EncLong(value);
+    public static implicit operator EncLong(sbyte value) => new EncLong(value);
     public static explicit operator ulong(EncLong elong1) => (ulong)elong1.Value;
     public static implicit operator long(EncLong elong1) => elong1.Value;
     public static explicit operator uint(EncLong elong1) => (uint)elong1.Value;

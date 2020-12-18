@@ -11,11 +11,10 @@ public struct EncDouble
     #region Variables And Properties
 
     // The encryption values
-    private readonly double encryptionKey1;
-    private readonly double encryptionKey2;
+    private readonly byte[] encryptionKeys;
 
     // The encrypted value stored in memory
-    private readonly double encryptedValue;
+    private readonly byte[] encryptedValue;
 
     // The decrypted value
     public double Value
@@ -36,19 +35,35 @@ public struct EncDouble
 
     private EncDouble(double value)
     {
-        encryptionKey1 = random.NextDouble() * 0.001;
-        encryptionKey2 = random.NextDouble() * 100;
-        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
+        encryptionKeys = new byte[8];
+        random.NextBytes(encryptionKeys);
+        encryptedValue = Encrypt(value, encryptionKeys);
     }
 
     // Encryption key generator
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static double Encrypt(double value, double k1, double k2) => (value * k1) * k2;
+    private static byte[] Encrypt(double value, byte[] keys)
+    {
+        var valueBytes = BitConverter.GetBytes(value);
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] ^= keys[i];
+        }
+        return valueBytes;
+    }
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt() => (encryptedValue / encryptionKey2) / encryptionKey1;
+    private double Decrypt()
+    {
+        var valueBytes = new byte[8];
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
+        }
+        return BitConverter.ToDouble(valueBytes);
+    }
 
     // Overrides
     public int CompareTo(object value) => Value.CompareTo(value);

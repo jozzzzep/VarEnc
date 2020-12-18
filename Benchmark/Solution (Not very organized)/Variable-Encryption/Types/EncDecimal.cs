@@ -10,12 +10,10 @@ public struct EncDecimal
 
     #region Variables And Properties
 
-    // The encryption values
-    private readonly decimal encryptionKey1;
-    private readonly decimal encryptionKey2;
+    private readonly int[] encryptionKeys;
 
     // The encrypted value stored in memory
-    private readonly decimal encryptedValue;
+    private readonly int[] encryptedValue;
 
     // The decrypted value
     private decimal Value
@@ -35,19 +33,44 @@ public struct EncDecimal
 
     private EncDecimal(decimal value)
     {
-        encryptionKey1 = (decimal)(random.NextDouble() * 0.001);
-        encryptionKey2 = (decimal)(random.NextDouble() * 100);
-        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
+        encryptionKeys = EncKeys();
+        encryptedValue = Encrypt(value, encryptionKeys);
     }
 
     // Encryption key generator
     static private Random random = new Random();
 
+    private static int[] EncKeys()
+    {
+        var arr = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            arr[i] = random.Next();
+        }
+        return arr;
+    }
+
     // Takes a given value and returns it encrypted
-    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value * k1) * k2;
+    private static int[] Encrypt(decimal value, int[] keys)
+    {
+        var valueInBits = decimal.GetBits(value);
+        for (int i = 0; i < 4; i++)
+        {
+            valueInBits[i] ^= keys[i];
+        }
+        return valueInBits;
+    }
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt() => (encryptedValue / encryptionKey2) / encryptionKey1;
+    private decimal Decrypt()
+    {
+        var decrypted = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            decrypted[i] = encryptedValue[i] ^ encryptionKeys[i];
+        }
+        return new decimal(decrypted);
+    }
 
     // Overrides
     public int CompareTo(Decimal value) => Value.CompareTo(value);
