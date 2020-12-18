@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Utilities;
 
 static public class TestLibrary
 {
-    #region Tests
-
     /// A test is a while-loop.
-    /// A test performs a certain amout of changes on a variable.
+    /// A test performs a certain amout of changes to a variable.
     /// There's a while-loop for each variable type you can compare.
 
-    public static void WL_Invisible(int amount)
-    {
-        int number1 = 0;
-        while (number1 < amount)
-        {
-            number1++;
-        }
-    }
+    #region Int/Long Tests
 
     public static void WL_Int(int amount)
     {
@@ -127,6 +117,10 @@ static public class TestLibrary
             number1++;
         }
     }
+
+    #endregion
+
+    #region Float/Double/Decimal Tests
 
     public static void WL_Float(int amount)
     {
@@ -263,6 +257,10 @@ static public class TestLibrary
         }
     }
 
+    #endregion
+
+    #region String Tests
+
     public static void WL_String(int amount)
     {
         string stringVar = RandomString();
@@ -363,6 +361,40 @@ static public class TestLibrary
                 currentPos = 0;
             }
         }
+    }
+
+    #endregion
+
+    #region Utils For Class
+
+    static Random random = new Random();
+
+    public static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
+    {
+        return (char)(random.Next(min, max));
+    }
+
+    public static char RandomCharNormal() => RandomChar(48, 125);
+
+    public static string RandomString()
+    {
+        char[] chars = new char[25];
+        for (int i = 0; i < chars.Length; i++)
+        {
+            chars[i] = RandomCharNormal();
+        }
+        return new string(chars);
+    }
+
+    public static string StringReplaceAt(string input, int index, char newChar)
+    {
+        if (input != null)
+        {
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
+        }
+        else return null;
     }
 
     #endregion
