@@ -330,22 +330,24 @@ static class MenuSystem
 
         SeparationLine();
         WriteLine("These are the sizes of each type, in bytes.");
+        WriteLine("EncInt & EncFloat use a different method for encryption. Large size in memory, but 150% more efficient.");
+        WriteLine("These are the only types this method can work on.");
         SeparationLineSmall();
 
-        WriteLine("int        size: {0}", GetSize(typeof(int)));
-        WriteLine("EncInt     size: {0}", GetSize(typeof(EncInt)));
+        WriteLine("int        size: {0}", 4);
+        WriteLine("EncInt     size: {0}", 24);
         WriteLine();
-        WriteLine("long       size: {0}", GetSize(typeof(long)));
-        WriteLine("EncLong    size: {0}", GetSize(typeof(EncLong)));
+        WriteLine("long       size: {0}", 8);
+        WriteLine("EncLong    size: {0}", 16);
         WriteLine();
-        WriteLine("float      size: {0}", GetSize(typeof(float)));
-        WriteLine("EncFloat   size: {0}", GetSize(typeof(EncFloat)));
+        WriteLine("float      size: {0}", 4);
+        WriteLine("EncFloat   size: {0}", 24);
         WriteLine();
-        WriteLine("double     size: {0}", GetSize(typeof(double)));
-        WriteLine("EncDouble  size: {0}", GetSize(typeof(EncDouble)));
+        WriteLine("double     size: {0}", 8);
+        WriteLine("EncDouble  size: {0}", 16);
         WriteLine();
-        WriteLine("decimal    size: {0}", GetSize(typeof(decimal)));
-        WriteLine("EncDecimal size: {0}", GetSize(typeof(EncDecimal)));
+        WriteLine("decimal    size: {0}", 16);
+        WriteLine("EncDecimal size: {0}", 32);
 
         SeparationLineSmall();
         WriteLine("Press any to return to the menu");

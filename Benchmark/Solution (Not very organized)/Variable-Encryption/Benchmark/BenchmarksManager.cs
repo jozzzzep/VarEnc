@@ -25,26 +25,26 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncString", WL_EncString), // 10
         new TypeInBenchmark("string", WL_String),
         new TypeInBenchmark("EncString (0.5.0)", WL_EncString_0_5_0), // 12
-        new TypeInBenchmark("EncString (0.6.0)", WL_EncString_0_6_0),
+        new TypeInBenchmark("EncString (0.7.0)", WL_EncString_0_7_0),
         new TypeInBenchmark("EncInt (0.3.0)", WL_EncInt_0_3_0), // 14
         new TypeInBenchmark("EncInt (0.7.0)", WL_EncInt_0_7_0),
         new TypeInBenchmark("EncInt (0.8.0)", WL_EncInt_0_8_0), // 16
         new TypeInBenchmark("EncDouble (0.5.0)", WL_EncDouble_0_5_0),
-        new TypeInBenchmark("EncDouble (0.7.0)", WL_EncDouble_0_7_0), // 18
-        new TypeInBenchmark("EncDouble (0.8.0)", WL_EncDouble_0_8_0),
-        new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0), // 20
-        new TypeInBenchmark("EncInt (0.9.0)", WL_EncInt_0_9_0),
-        new TypeInBenchmark("EncString (0.9.0)", WL_EncString_0_9_0), // 22
-        new TypeInBenchmark("EncLong (0.3.0)", WL_EncLong_0_3_0),
-        new TypeInBenchmark("EncLong (0.7.0)", WL_EncLong_0_7_0), // 24
-        new TypeInBenchmark("EncLong (0.8.0)", WL_EncLong_0_8_0),
-        new TypeInBenchmark("EncLong (0.9.0)", WL_EncLong_0_9_0), // 26
-        new TypeInBenchmark("EncDecimal (0.5.0)", WL_EncDecimal_0_5_0),
-        new TypeInBenchmark("EncDecimal (0.7.0)", WL_EncDecimal_0_7_0), // 28
+        new TypeInBenchmark("EncDouble (0.8.0)", WL_EncDouble_0_8_0), // 18
+        new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0), 
+        new TypeInBenchmark("EncInt (0.9.0)", WL_EncInt_0_9_0), // 20
+        new TypeInBenchmark("EncString (0.9.0)", WL_EncString_0_9_0), 
+        new TypeInBenchmark("EncLong (0.3.0)", WL_EncLong_0_3_0), // 22
+        new TypeInBenchmark("EncLong (0.7.0)", WL_EncLong_0_7_0), 
+        new TypeInBenchmark("EncLong (0.8.0)", WL_EncLong_0_8_0), // 24
+        new TypeInBenchmark("EncLong (0.9.0)", WL_EncLong_0_9_0), 
+        new TypeInBenchmark("EncDecimal (0.5.0)", WL_EncDecimal_0_5_0), // 26
         new TypeInBenchmark("EncDecimal (0.8.0)", WL_EncDecimal_0_8_0),
-        new TypeInBenchmark("EncDecimal (0.9.0)", WL_EncDecimal_0_9_0), // 30
+        new TypeInBenchmark("EncDecimal (0.9.0)", WL_EncDecimal_0_9_0), // 28
         new TypeInBenchmark("EncDouble (0.9.0)", WL_EncDouble_0_9_0),
-
+        new TypeInBenchmark("EncFloat (0.5.0)", WL_EncFloat_0_5_0), // 30
+        new TypeInBenchmark("EncFloat (0.8.0)", WL_EncFloat_0_8_0),
+        new TypeInBenchmark("EncFloat (0.9.0)", WL_EncFloat_0_9_0), // 32
     };
 
     static public BenchmarkData[] comparisons =
@@ -61,30 +61,34 @@ public static class BenchmarksManager
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[14]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[15]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[16]),
-        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[21]),
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[20]),
 
         // EncLong
+        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[22]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[23]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[24]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[25]),
-        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[26]),
+
+        // EncFloat
+        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[30]),
+        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[31]),
+        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[32]),
 
         // EncDecimal
+        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[26]),
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[27]),
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[28]),
-        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[29]),
-        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[30]),
 
         // EncString
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[12]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[13]),
-        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[20]),
-        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[22]),
+        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[19]),
+        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[21]),
     };
 
     static public int[] comparisonsChunks =
     {
-        6, 4, 4, 4, 4
+        6, 4, 4, 3, 3, 4
     };
 
 
