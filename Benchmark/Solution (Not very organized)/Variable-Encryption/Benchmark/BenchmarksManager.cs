@@ -7,6 +7,12 @@ using static TestLibrary;
 
 public static class BenchmarksManager
 {
+    /// Uses of this class:
+    /// - Runs the benchmark and its tests
+    /// - Contains the data about the benchmark presets
+    /// - Contains the list the of types in the benchmark
+    /// - Displays the benchmark results
+
     static BenchmarkResults currentBenchmarkResults;
     static Stopwatch testsStopWatch;
     static ConsoleKey key_runSameBenchmarkAgain = ConsoleKey.Spacebar;
