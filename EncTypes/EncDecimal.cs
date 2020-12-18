@@ -3,19 +3,19 @@
 public struct EncDecimal
 {
     /// A struct for storing a Decimal while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an deciaml.
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
+    /// Every time the value changes, the encryption keys change too. And it works exactly as a deciaml.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
     #region Variables And Properties
 
-    // The encryption values
-    private readonly decimal encryptionKey1;
-    private readonly decimal encryptionKey2;
+    private readonly int[] encryptionKeys;
 
     // The encrypted value stored in memory
-    private readonly decimal encryptedValue;
+    private readonly int[] encryptedValue;
 
     // The decrypted value
     private decimal Value
@@ -23,31 +23,56 @@ public struct EncDecimal
         get => Decrypt();
     }
 
-    public Decimal MaxValue { get => Decimal.MaxValue; }
-    public Decimal MinValue { get => Decimal.MinValue; }
-    public Decimal MinusOne { get => Decimal.MinusOne; }
-    public Decimal One { get => Decimal.One; }
-    public Decimal Zero { get => Decimal.Zero; }
+    public static Decimal MaxValue { get => Decimal.MaxValue; }
+    public static Decimal MinValue { get => Decimal.MinValue; }
+    public static Decimal MinusOne { get => Decimal.MinusOne; }
+    public static Decimal One { get => Decimal.One; }
+    public static Decimal Zero { get => Decimal.Zero; }
 
     #endregion
 
-    #region Methods & Constructors
+    #region Methods And Constructors
 
     private EncDecimal(decimal value)
     {
-        encryptionKey1 = (decimal)random.NextDouble();
-        encryptionKey2 = (decimal)random.NextDouble();
-        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
+        encryptionKeys = EncKeys();
+        encryptedValue = Encrypt(value, encryptionKeys);
     }
 
     // Encryption key generator
     static private Random random = new Random();
 
+    private static int[] EncKeys()
+    {
+        var arr = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            arr[i] = random.Next();
+        }
+        return arr;
+    }
+
     // Takes a given value and returns it encrypted
-    private static decimal Encrypt(decimal value, decimal k1, decimal k2) => (value + k1) * k2;
+    private static int[] Encrypt(decimal value, int[] keys)
+    {
+        var valueInBits = decimal.GetBits(value);
+        for (int i = 0; i < 4; i++)
+        {
+            valueInBits[i] ^= keys[i];
+        }
+        return valueInBits;
+    }
 
     // Takes an encrypted value and returns it decrypted
-    private decimal Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
+    private decimal Decrypt()
+    {
+        var decrypted = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            decrypted[i] = encryptedValue[i] ^ encryptionKeys[i];
+        }
+        return new decimal(decrypted);
+    }
 
     // Overrides
     public int CompareTo(Decimal value) => Value.CompareTo(value);
@@ -204,6 +229,17 @@ public struct EncDecimal
     /// assign
     
     public static implicit operator EncDecimal(decimal value) => new EncDecimal(value);
+    public static explicit operator EncDecimal(double value) => new EncDecimal((decimal)value);
+    public static explicit operator EncDecimal(float value) => new EncDecimal((decimal)value);
+    public static implicit operator EncDecimal(ulong value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(long value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(uint value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(int value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(ushort value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(short value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(byte value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(sbyte value) => new EncDecimal(value);
+
     public static implicit operator decimal(EncDecimal eint1) => eint1.Value;
     public static explicit operator double(EncDecimal eint1) => (double)eint1.Value;
     public static explicit operator float(EncDecimal eint1) => (float)eint1.Value;

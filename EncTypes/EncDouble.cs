@@ -3,19 +3,20 @@
 public struct EncDouble
 {
     /// A struct for storing a Double while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an double.
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
+    /// Every time the value changes, the encryption keys change too. And it works exactly as a double.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
     #region Variables And Properties
 
     // The encryption values
-    private readonly double encryptionKey1;
-    private readonly double encryptionKey2;
+    private readonly byte[] encryptionKeys;
 
     // The encrypted value stored in memory
-    private readonly double encryptedValue;
+    private readonly byte[] encryptedValue;
 
     // The decrypted value
     public double Value
@@ -23,32 +24,48 @@ public struct EncDouble
         get => Decrypt();
     }
 
-    public Double Epsilon { get => Double.Epsilon; }
-    public Double MaxValue { get => Double.MaxValue; }
-    public Double MinValue { get => Double.MinValue; }
-    public Double NaN { get => Double.NaN; }
-    public Double NegativeInfinity { get => Double.NegativeInfinity; }
-    public Double PositiveInfinity { get => Double.PositiveInfinity; }
+    public static Double Epsilon { get => Double.Epsilon; }
+    public static Double MaxValue { get => Double.MaxValue; }
+    public static Double MinValue { get => Double.MinValue; }
+    public static Double NaN { get => Double.NaN; }
+    public static Double NegativeInfinity { get => Double.NegativeInfinity; }
+    public static Double PositiveInfinity { get => Double.PositiveInfinity; }
 
     #endregion
 
-    #region Methods & Constructors
+    #region Methods And Constructors
 
     private EncDouble(double value)
     {
-        encryptionKey1 = random.NextDouble();
-        encryptionKey2 = random.NextDouble();
-        encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
+        encryptionKeys = new byte[8];
+        encryptedValue = Encrypt(value, encryptionKeys);
     }
 
     // Encryption key generator
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static double Encrypt(double value, double k1, double k2) => (value + k1) * k2;
+    private static byte[] Encrypt(double value, byte[] keys)
+    {
+        random.NextBytes(keys);
+        var valueBytes = BitConverter.GetBytes(value);
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] ^= keys[i];
+        }
+        return valueBytes;
+    }
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
+    private double Decrypt()
+    {
+        var valueBytes = new byte[8];
+        for (int i = 0; i < 8; i++)
+        {
+            valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
+        }
+        return BitConverter.ToDouble(valueBytes);
+    }
 
     // Overrides
     public int CompareTo(object value) => Value.CompareTo(value);
@@ -196,7 +213,18 @@ public struct EncDouble
     public static bool operator <(EncDouble eint1, float eint2) => eint1.Value < eint2;
 
     /// assign
+    public static implicit operator EncDouble(ulong value) => new EncDouble(value);
+    public static implicit operator EncDouble(long value) => new EncDouble(value);
+    public static implicit operator EncDouble(uint value) => new EncDouble(value);
+    public static implicit operator EncDouble(int value) => new EncDouble(value);
+    public static implicit operator EncDouble(ushort value) => new EncDouble(value);
+    public static implicit operator EncDouble(short value) => new EncDouble(value);
+    public static implicit operator EncDouble(byte value) => new EncDouble(value);
+    public static implicit operator EncDouble(sbyte value) => new EncDouble(value);
+    public static explicit operator EncDouble(decimal value) => new EncDouble((double)value);
     public static implicit operator EncDouble(double value) => new EncDouble(value);
+    public static implicit operator EncDouble(float value) => new EncDouble(value);
+
     public static explicit operator decimal(EncDouble eint1) => (decimal)eint1.Value;
     public static implicit operator double(EncDouble eint1) => eint1.Value;
     public static explicit operator float(EncDouble eint1) => (float)eint1.Value;

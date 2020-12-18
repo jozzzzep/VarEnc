@@ -8,13 +8,17 @@ public struct EncBool
     /// You thought you would need an encrypted bool.
     /// You're a failure as a human being and a waste of life.
 
-    #region Variables And Properties
+    #region Variables
 
     readonly bool _value;
 
+    #endregion
+
+    #region Properties
+
     public bool Value
     {
-        get => Decrypt(_value);
+        get => Decrypt();
     }
 
     public static string FalseString { get => Boolean.FalseString; }
@@ -34,9 +38,10 @@ public struct EncBool
     {
         return !boolVar;
     }
-    static bool Decrypt(bool boolVar)
+
+    bool Decrypt()
     {
-        return !boolVar;
+        return !_value;
     }
 
     public int CompareTo(Boolean value) => Value.CompareTo(value);

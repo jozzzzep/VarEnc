@@ -4,23 +4,25 @@ using System.Text;
 
 public class EncString
 {
-    /// A class for storing a string while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a wierd string that is affected by a very long random key. { encryptionKey }
-    /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
+    /// A class for storing a string while efficiently keeping it encrypted in the memory
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a wierd char array that is affected by random keys { encryptionKeys }
+    /// Every time the value of the string changes, the encryption keys change too. And it works exactly as a string
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
     #region Variables And Properties
 
-    private readonly string _encryptionKey;
-    private readonly string _encryptedValue;
+    private readonly char[] _encryptionKeys;
+    private readonly char[] _encryptedValue;
 
     /// <summary>
     /// The decrypted value of the stored string.
     /// </summary>
     private string Value
     {
-        get => EncryptorDecryptor(_encryptedValue, _encryptionKey);
+        get => Decrypt();
     }
 
     public int Length
@@ -41,8 +43,7 @@ public class EncString
     #endregion
 
     #region Methods
-
-    public bool IsEqual(EncString encString) => encString.Value == this.Value;
+    public bool IsObjectEqual(EncString encString) => encString == this;
     public bool IsNull() => this.Value == null;
     public object Clone() => Value.Clone();
     public override bool Equals(object obj) => Value.Equals(obj);
@@ -125,8 +126,8 @@ public class EncString
 
     public EncString(string value)
     {
-        _encryptionKey = RandomString();
-        _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
+        _encryptionKeys = EncKeys();
+        _encryptedValue = Encrypt(value, _encryptionKeys);
     }
 
     public EncString(char[] value)
@@ -145,24 +146,17 @@ public class EncString
 
     static Random random = new Random();
 
-    static int RandomLength() => random.Next(10, 150);
-
-    static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
+    static char[] EncKeys()
     {
-        return (char)(random.Next(min, max));
-    }
-
-    static string RandomString()
-    {
-        char[] chars = new char[RandomLength()];
+        char[] chars = new char[random.Next(10, 100)]; // random length
         for (int i = 0; i < chars.Length; i++)
         {
-            chars[i] = RandomChar();
+            chars[i] = (char)(random.Next(char.MinValue, char.MinValue)); // random chars
         }
-        return new string(chars);
+        return chars;
     }
 
-    private static string EncryptorDecryptor(string data, string key)
+    private static char[] Encrypt(string data, char[] key)
     {
         if (data == null)
         {
@@ -177,6 +171,27 @@ public class EncString
             for (int i = 0; i < dataLen; ++i)
             {
                 output[i] = (char)(data[i] ^ key[i % keyLen]);
+            }
+
+            return output;
+        }
+    }
+
+    private string Decrypt()
+    {
+        if (_encryptedValue == null)
+        {
+            return null;
+        }
+        else
+        {
+            int dataLen = _encryptedValue.Length;
+            int keyLen = _encryptionKeys.Length;
+            char[] output = new char[dataLen];
+
+            for (int i = 0; i < dataLen; ++i)
+            {
+                output[i] = (char)(_encryptedValue[i] ^ _encryptionKeys[i % keyLen]);
             }
 
             return new string(output);
@@ -194,9 +209,12 @@ public class EncString
     /// == != < >
     public static bool operator ==(EncString es1, string es2) => es1.Value == es2;
     public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
+    public static bool operator ==(EncString es1, EncString es2) => es1.Value == es2.Value;
+    public static bool operator !=(EncString es1, EncString es2) => es1.Value != es2.Value;
 
     /// assign
     public static implicit operator EncString(string value) => new EncString(value);
+    public static explicit operator EncString(char[] value) => new EncString(value);
     public static implicit operator string(EncString encString) => encString.Value;
 
     #endregion

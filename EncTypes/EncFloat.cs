@@ -2,9 +2,11 @@
 
 public struct EncFloat
 {
-    /// A struct for storing a Single while efficiently keeping it encrypted in the memory.
+    /// A struct for storing a Single (float) while efficiently keeping it encrypted in the memory.
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
     /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an flaot.
+    /// Every time the value changes, the encryption keys change too. And it works exactly as an float.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
@@ -23,21 +25,20 @@ public struct EncFloat
         get => (float)Decrypt();
     }
 
-    public float Epsilon { get => Single.Epsilon; }
-    public float MaxValue { get => Single.MaxValue; }
-    public float MinValue { get => Single.MinValue; }
-    public float NaN { get => Single.NaN; }
-    public float NegativeInfinity { get => Single.NegativeInfinity; }
-    public float PositiveInfinity { get => Single.PositiveInfinity; }
+    public static float Epsilon { get => Single.Epsilon; }
+    public static float MaxValue { get => Single.MaxValue; }
+    public static float MinValue { get => Single.MinValue; }
+    public static float NaN { get => Single.NaN; }
+    public static float NegativeInfinity { get => Single.NegativeInfinity; }
+    public static float PositiveInfinity { get => Single.PositiveInfinity; }
 
     #endregion
 
-    #region Methods & Constructors
-
+    #region Methods And Constructors
     private EncFloat(float value)
     {
-        encryptionKey1 = random.NextDouble();
-        encryptionKey2 = random.NextDouble();
+        encryptionKey1 = random.NextDouble() * 0.001;
+        encryptionKey2 = random.NextDouble() * 100;
         encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
@@ -45,10 +46,10 @@ public struct EncFloat
     static private Random random = new Random();
 
     // Takes a given value and returns it encrypted
-    private static double Encrypt(double value, double k1, double k2) => (value + k1) * k2;
+    private static double Encrypt(double value, double k1, double k2) => (value * k1) * k2;
 
     // Takes an encrypted value and returns it decrypted
-    private double Decrypt() => (encryptedValue / encryptionKey2) - encryptionKey1;
+    private double Decrypt() => (encryptedValue / encryptionKey2) / encryptionKey1;
 
     // Single methods
     public int CompareTo(Single value) => Value.CompareTo(value);
@@ -190,7 +191,18 @@ public struct EncFloat
     public static bool operator <(EncFloat eint1, float eint2) => eint1.Value < eint2;
 
     /// assign
+    public static implicit operator EncFloat(ulong value) => new EncFloat(value);
+    public static implicit operator EncFloat(long value) => new EncFloat(value);
+    public static implicit operator EncFloat(uint value) => new EncFloat(value);
+    public static implicit operator EncFloat(int value) => new EncFloat(value);
+    public static implicit operator EncFloat(ushort value) => new EncFloat(value);
+    public static implicit operator EncFloat(short value) => new EncFloat(value);
+    public static implicit operator EncFloat(byte value) => new EncFloat(value);
+    public static implicit operator EncFloat(sbyte value) => new EncFloat(value);
+    public static explicit operator EncFloat(decimal value) => new EncFloat((float)value);
+    public static explicit operator EncFloat(double value) => new EncFloat((float)value);
     public static implicit operator EncFloat(float value) => new EncFloat(value);
+
     public static explicit operator decimal(EncFloat eint1) => (decimal)eint1.Value;
     public static implicit operator double(EncFloat eint1) => eint1.Value;
     public static implicit operator float(EncFloat eint1) => eint1.Value;
