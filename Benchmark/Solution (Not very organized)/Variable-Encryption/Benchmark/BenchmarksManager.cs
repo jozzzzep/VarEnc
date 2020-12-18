@@ -8,8 +8,71 @@ using static TestLibrary;
 public static class BenchmarksManager
 {
     static BenchmarkResults currentBenchmarkResults;
-    private static Stopwatch testsStopWatch;
-    
+    static Stopwatch testsStopWatch;
+    static ConsoleKey key_runSameBenchmarkAgain = ConsoleKey.Spacebar;
+
+    #region ResultsText
+
+    static string[] resultsTitle =
+        {
+            "  _____  ______  _____ _    _ _   _______ _____",
+            " |  __ \\|  ____|/ ____| |  | | | |__   __/ ____|",
+            " | |__) | |__  | (___ | |  | | |    | | | (___  ",
+            " |  _  /|  __|  \\___ \\| |  | | |    | |  \\___ \\",
+            " | | \\ \\| |____ ____) | |__| | |____| |  ____) |",
+            " |_|  \\_\\______|_____/ \\____/|______|_| |_____/ ",
+            ""
+        };
+
+    static string[] ResultsDescription
+    {
+        get
+        {
+            string[] description =
+                {
+                string.Format("A comparison between the types {0} and {1}", currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName),
+                string.Format("Benchmark #{0} of type [{1}]", currentBenchmarkResults.presetNumber, currentBenchmarkResults.presetGroupName)
+            };
+
+            return description;
+        }
+    }
+
+    static string[] ResultsAnalysis
+    {
+        get
+        {
+            int higherLength = GetTheHigherLength(currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName);
+            string firstTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.firstTypeName.Length);
+            string secondTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.secondTypeName.Length);
+            decimal changesPerSec1 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalSeconds);
+            decimal changesPerSec2 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalSeconds);
+
+            string[] afterBenchmarkLines =
+            {
+                string.Format("{0}" + firstTypeSpaces + "average: {1}", currentBenchmarkResults.firstTypeName, currentBenchmarkResults.firstBenchmarkAverage),
+                string.Format("{0}" + secondTypeSpaces + "average: {1}", currentBenchmarkResults.secondTypeName, currentBenchmarkResults.secondBenchmarkAverage),
+                " ",
+                string.Format("{0}" + firstTypeSpaces + "changes per second: {1}", currentBenchmarkResults.firstTypeName, (long)changesPerSec1),
+                string.Format("{0}" + secondTypeSpaces + "changes per second: {1}", currentBenchmarkResults.secondTypeName, (long)changesPerSec2),
+                " ",
+                string.Format("The type {0} performed better by {1}%", currentBenchmarkResults.BetterTypeName, currentBenchmarkResults.GetHowMuchBetterPercentage())
+            };
+
+            return afterBenchmarkLines;
+        }
+    }
+
+    static string[] resultsBottomText =
+    {
+        "Press Space to run again the same benchmark",
+        "Press any other key to return to the menu",
+    };
+
+    #endregion
+
+    #region Types And Comparisons
+
     static public TypeInBenchmark[] benchmarkTypes =
     {
         new TypeInBenchmark("EncInt", WL_EncInt), // 0
@@ -31,13 +94,13 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncInt (0.8.0)", WL_EncInt_0_8_0), // 16
         new TypeInBenchmark("EncDouble (0.5.0)", WL_EncDouble_0_5_0),
         new TypeInBenchmark("EncDouble (0.8.0)", WL_EncDouble_0_8_0), // 18
-        new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0), 
+        new TypeInBenchmark("EncString (0.8.0)", WL_EncString_0_8_0),
         new TypeInBenchmark("EncInt (0.9.0)", WL_EncInt_0_9_0), // 20
-        new TypeInBenchmark("EncString (0.9.0)", WL_EncString_0_9_0), 
+        new TypeInBenchmark("EncString (0.9.0)", WL_EncString_0_9_0),
         new TypeInBenchmark("EncLong (0.3.0)", WL_EncLong_0_3_0), // 22
-        new TypeInBenchmark("EncLong (0.7.0)", WL_EncLong_0_7_0), 
+        new TypeInBenchmark("EncLong (0.7.0)", WL_EncLong_0_7_0),
         new TypeInBenchmark("EncLong (0.8.0)", WL_EncLong_0_8_0), // 24
-        new TypeInBenchmark("EncLong (0.9.0)", WL_EncLong_0_9_0), 
+        new TypeInBenchmark("EncLong (0.9.0)", WL_EncLong_0_9_0),
         new TypeInBenchmark("EncDecimal (0.5.0)", WL_EncDecimal_0_5_0), // 26
         new TypeInBenchmark("EncDecimal (0.8.0)", WL_EncDecimal_0_8_0),
         new TypeInBenchmark("EncDecimal (0.9.0)", WL_EncDecimal_0_9_0), // 28
@@ -45,6 +108,11 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncFloat (0.5.0)", WL_EncFloat_0_5_0), // 30
         new TypeInBenchmark("EncFloat (0.8.0)", WL_EncFloat_0_8_0),
         new TypeInBenchmark("EncFloat (0.9.0)", WL_EncFloat_0_9_0), // 32
+    };
+
+    static public int[] comparisonsChunks =
+    {
+        6, 4, 4, 3, 3, 4
     };
 
     static public BenchmarkData[] comparisons =
@@ -86,11 +154,20 @@ public static class BenchmarksManager
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[21]),
     };
 
-    static public int[] comparisonsChunks =
-    {
-        6, 4, 4, 3, 3, 4
-    };
+    #endregion
 
+    #region Benchmark Presets
+
+    static public BenchmarkPresetGroup[] benchmarkPresetGroups =
+    {
+        new BenchmarkPresetGroup("Fastest", benchmarkPresetsFastest),
+        new BenchmarkPresetGroup("Very Fast", benchmarkPresetsVeryFast),
+        new BenchmarkPresetGroup("Fast", benchmarkPresetsFast),
+        new BenchmarkPresetGroup("Normal", benchmarkPresetsNormal),
+        new BenchmarkPresetGroup("Medium", benchmarkPresetsMedium),
+        new BenchmarkPresetGroup("Long", benchmarkPresetsLong),
+        new BenchmarkPresetGroup("Very Long", benchmarkPresetsVeryLong),
+    };
 
     static BenchmarkPreset[] benchmarkPresetsFastest =
     {
@@ -148,56 +225,57 @@ public static class BenchmarksManager
         new BenchmarkPreset(10, 50000000),
     };
 
+    #endregion
 
-    static public BenchmarkPresetGroup[] benchmarkPresetGroups =
-    {
-        new BenchmarkPresetGroup("Fastest", benchmarkPresetsFastest),
-        new BenchmarkPresetGroup("Very Fast", benchmarkPresetsVeryFast),
-        new BenchmarkPresetGroup("Fast", benchmarkPresetsFast),
-        new BenchmarkPresetGroup("Normal", benchmarkPresetsNormal),
-        new BenchmarkPresetGroup("Medium", benchmarkPresetsMedium),
-        new BenchmarkPresetGroup("Long", benchmarkPresetsLong),
-        new BenchmarkPresetGroup("Very Long", benchmarkPresetsVeryLong),
-    };
+    #region Methods
 
     public static void RunBenchmark(BenchmarkData benchmarkData)
     {
+        // Prepare benchmark
         Console.Clear();
-
         currentBenchmarkResults = new BenchmarkResults();
         currentBenchmarkResults.SetData(benchmarkData);
 
+        // Run 2 benchmarks. One for each type
         SeparationLine();
         RunTests(benchmarkData.changesAmount, benchmarkData.testsAmount, benchmarkData.benchmark1);
         SeparationLine();
         RunTests(benchmarkData.changesAmount, benchmarkData.testsAmount, benchmarkData.benchmark2);
         SeparationLine();
 
-        AfterBenchmark();
+        // Finish benchmark
+        DisplayResults();
     }
 
     public static void RunTests(int changesAmount, int testsAmount, Action<int> whileLoop, string varName)
     {
-        WL_Invisible(2000);
+        // Title of type
+        WL_Int(2000);
         WriteLine(varName + ":");
         WriteLine(" ");
+
+        // Start measuring time
         List<TimeSpan> timeSpans = new List<TimeSpan>();
         testsStopWatch = new Stopwatch();
 
+        // Run tests
         for (int i = 0; i < testsAmount; i++)
         {
+            // Test's title
             WriteLine("Test {0}/{1}: It will make {2} changes in each test.", i + 1, testsAmount, changesAmount);
 
-            // benchmark
+            // Benchmark
             testsStopWatch.Restart();
-            testsStopWatch.Start();
             whileLoop(changesAmount);
             testsStopWatch.Stop();
-            AfterWhileLoop();
+
+            // After benchmark
+            CursorUp();
             PrintTestResults(i + 1, testsAmount, testsStopWatch.Elapsed);
             timeSpans.Add(testsStopWatch.Elapsed);
         }
-
+        
+        // Display average and add to the results
         WriteLine();
         TimeSpan average = GetAverage(timeSpans);
         DisplayAverage(average);
@@ -209,62 +287,27 @@ public static class BenchmarksManager
         RunTests(howMuchToIncrement, testsAmount, benchmark.benchmarkWhileLoop, benchmark.typeName);
     }
 
-    static void AfterWhileLoop()
+    static void CursorUp()
     {
         ClearCurrentConsoleLine();
         Console.SetCursorPosition(0, Console.CursorTop - 1);
         ClearCurrentConsoleLine();
     }
 
-    static void AfterBenchmark()
+    static void DisplayResults()
     {
-        string[] title =
-        {
-            "  _____  ______  _____ _    _ _   _______ _____",
-            " |  __ \\|  ____|/ ____| |  | | | |__   __/ ____|",
-            " | |__) | |__  | (___ | |  | | |    | | | (___  ",
-            " |  _  /|  __|  \\___ \\| |  | | |    | |  \\___ \\",
-            " | | \\ \\| |____ ____) | |__| | |____| |  ____) |",
-            " |_|  \\_\\______|_____/ \\____/|______|_| |_____/ ",
-            ""
-        };
-
-        WriteLines(title);
-
-        string[] description =
-        {
-            string.Format("A comparison between the types {0} and {1}", currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName),
-            string.Format("Benchmark #{0} of type [{1}]", currentBenchmarkResults.presetNumber, currentBenchmarkResults.presetGroupName)
-        };
-
-        int higherLength = GetTheHigherLength(currentBenchmarkResults.firstTypeName, currentBenchmarkResults.secondTypeName);
-        string firstTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.firstTypeName.Length);
-        string secondTypeSpaces = new string(' ', higherLength - currentBenchmarkResults.secondTypeName.Length);
-        decimal changesPerSec1 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.firstBenchmarkAverage.TotalSeconds);
-        decimal changesPerSec2 = (decimal)ChangesPerSecond(currentBenchmarkResults.changesAmount, currentBenchmarkResults.secondBenchmarkAverage.TotalSeconds);
-
-        string[] afterBenchmarkLines =
-        {
-            string.Format("{0}" + firstTypeSpaces + "average: {1}", currentBenchmarkResults.firstTypeName, currentBenchmarkResults.firstBenchmarkAverage),
-            string.Format("{0}" + secondTypeSpaces + "average: {1}", currentBenchmarkResults.secondTypeName, currentBenchmarkResults.secondBenchmarkAverage),
-            " ",
-            string.Format("{0}" + firstTypeSpaces + "changes per second: {1}", currentBenchmarkResults.firstTypeName, (long)changesPerSec1),
-            string.Format("{0}" + secondTypeSpaces + "changes per second: {1}", currentBenchmarkResults.secondTypeName, (long)changesPerSec2),
-            " ",
-            string.Format("The type {0} performed better by {1}%", currentBenchmarkResults.BetterTypeName, currentBenchmarkResults.GetHowMuchBetterPercentage()),
-        };
-
-        WriteLines(description);
+        WriteLines(resultsTitle);
+        WriteLines(ResultsDescription);
         SeparationLineSmall();
-        WriteLines(afterBenchmarkLines);
+        WriteLines(ResultsAnalysis);
         SeparationLineSmall();
-        WriteLine("Press Space to run again the same benchmark");
-        WriteLine("Press any key to return to the menu");
+        WriteLines(resultsBottomText);
         SeparationLine();
+
         currentBenchmarkResults = null;
 
         var k = Console.ReadKey();
-        if (k.Key == ConsoleKey.Spacebar)
+        if (k.Key == key_runSameBenchmarkAgain)
         {
             RunBenchmark(MenuSystem.currentBenchmarkData);
         }
@@ -275,4 +318,6 @@ public static class BenchmarksManager
     }
 
     static double ChangesPerSecond(int changes, double seconds) => (changes / seconds);
+
+    #endregion
 }
