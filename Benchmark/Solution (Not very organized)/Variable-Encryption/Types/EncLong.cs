@@ -2,13 +2,15 @@
 
 public struct EncLong
 {
-    /// A struct for storing a 64-bit integer while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an long.
+    /// A struct for storing a 64-bit integer while efficiently keeping it encrypted in the memory
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
+    /// Every time the value changes, the encryption keys change too. And it works exactly as a long (Int64)
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
-    #region Variables - Properties - Methods - Constructors
+    #region Variables And Properties
 
     private readonly byte[] encryptionKeys;
 
@@ -23,6 +25,10 @@ public struct EncLong
 
     public static long MaxValue { get => Int64.MaxValue; }
     public static long MinValue { get => Int64.MinValue; }
+
+    #endregion
+
+    #region Methods And Constructors
 
     private EncLong(long value)
     {
@@ -174,6 +180,7 @@ public struct EncLong
     public static bool operator >(EncLong elong1, EncLong elong2) => elong1.Value > elong2.Value;
 
     /// assign
+    public static explicit operator EncLong(ulong value) => new EncLong((long)value);
     public static implicit operator EncLong(long value) => new EncLong(value);
     public static implicit operator EncLong(int value) => new EncLong(value);
     public static implicit operator EncLong(uint value) => new EncLong(value);
@@ -181,6 +188,10 @@ public struct EncLong
     public static implicit operator EncLong(short value) => new EncLong(value);
     public static implicit operator EncLong(byte value) => new EncLong(value);
     public static implicit operator EncLong(sbyte value) => new EncLong(value);
+    public static explicit operator EncLong(decimal value) => new EncLong((long)value);
+    public static explicit operator EncLong(double value) => new EncLong((long)value);
+    public static explicit operator EncLong(float value) => new EncLong((long)value);
+
     public static explicit operator ulong(EncLong elong1) => (ulong)elong1.Value;
     public static implicit operator long(EncLong elong1) => elong1.Value;
     public static explicit operator uint(EncLong elong1) => (uint)elong1.Value;

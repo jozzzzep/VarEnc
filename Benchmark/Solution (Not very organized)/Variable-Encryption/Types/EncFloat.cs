@@ -2,9 +2,11 @@
 
 public struct EncFloat
 {
-    /// A struct for storing a Single while efficiently keeping it encrypted in the memory.
+    /// A struct for storing a Single (float) while efficiently keeping it encrypted in the memory.
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
     /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an flaot.
+    /// Every time the value changes, the encryption keys change too. And it works exactly as an float.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
@@ -32,8 +34,7 @@ public struct EncFloat
 
     #endregion
 
-    #region Methods & Constructors
-
+    #region Methods And Constructors
     private EncFloat(float value)
     {
         encryptionKey1 = random.NextDouble() * 0.001;
@@ -190,7 +191,18 @@ public struct EncFloat
     public static bool operator <(EncFloat eint1, float eint2) => eint1.Value < eint2;
 
     /// assign
+    public static implicit operator EncFloat(ulong value) => new EncFloat(value);
+    public static implicit operator EncFloat(long value) => new EncFloat(value);
+    public static implicit operator EncFloat(uint value) => new EncFloat(value);
+    public static implicit operator EncFloat(int value) => new EncFloat(value);
+    public static implicit operator EncFloat(ushort value) => new EncFloat(value);
+    public static implicit operator EncFloat(short value) => new EncFloat(value);
+    public static implicit operator EncFloat(byte value) => new EncFloat(value);
+    public static implicit operator EncFloat(sbyte value) => new EncFloat(value);
+    public static explicit operator EncFloat(decimal value) => new EncFloat((float)value);
+    public static explicit operator EncFloat(double value) => new EncFloat((float)value);
     public static implicit operator EncFloat(float value) => new EncFloat(value);
+
     public static explicit operator decimal(EncFloat eint1) => (decimal)eint1.Value;
     public static implicit operator double(EncFloat eint1) => eint1.Value;
     public static implicit operator float(EncFloat eint1) => eint1.Value;

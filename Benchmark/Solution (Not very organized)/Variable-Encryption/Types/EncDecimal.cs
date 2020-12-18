@@ -3,8 +3,10 @@
 public struct EncDecimal
 {
     /// A struct for storing a Decimal while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a different that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an deciaml.
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
+    /// Every time the value changes, the encryption keys change too. And it works exactly as a deciaml.
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
@@ -29,7 +31,7 @@ public struct EncDecimal
 
     #endregion
 
-    #region Methods & Constructors
+    #region Methods And Constructors
 
     private EncDecimal(decimal value)
     {
@@ -227,6 +229,17 @@ public struct EncDecimal
     /// assign
     
     public static implicit operator EncDecimal(decimal value) => new EncDecimal(value);
+    public static explicit operator EncDecimal(double value) => new EncDecimal((decimal)value);
+    public static explicit operator EncDecimal(float value) => new EncDecimal((decimal)value);
+    public static implicit operator EncDecimal(ulong value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(long value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(uint value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(int value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(ushort value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(short value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(byte value) => new EncDecimal(value);
+    public static implicit operator EncDecimal(sbyte value) => new EncDecimal(value);
+
     public static implicit operator decimal(EncDecimal eint1) => eint1.Value;
     public static explicit operator double(EncDecimal eint1) => (double)eint1.Value;
     public static explicit operator float(EncDecimal eint1) => (float)eint1.Value;

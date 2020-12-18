@@ -4,9 +4,11 @@ using System.Text;
 
 public class EncString
 {
-    /// A class for storing a string while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a wierd string that is affected by a very long random key. { encryptionKey }
-    /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
+    /// A class for storing a string while efficiently keeping it encrypted in the memory
+    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
+    /// The encryption will happen in the background without you worrying about it
+    /// In the memory it is saved as a wierd char array that is affected by random keys { encryptionKeys }
+    /// Every time the value of the string changes, the encryption keys change too. And it works exactly as a string
     ///
     /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
 
@@ -41,8 +43,7 @@ public class EncString
     #endregion
 
     #region Methods
-
-    public bool IsEqual(EncString encString) => encString.Value == this.Value;
+    public bool IsObjectEqual(EncString encString) => encString == this;
     public bool IsNull() => this.Value == null;
     public object Clone() => Value.Clone();
     public override bool Equals(object obj) => Value.Equals(obj);
@@ -208,9 +209,12 @@ public class EncString
     /// == != < >
     public static bool operator ==(EncString es1, string es2) => es1.Value == es2;
     public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
+    public static bool operator ==(EncString es1, EncString es2) => es1.Value == es2.Value;
+    public static bool operator !=(EncString es1, EncString es2) => es1.Value != es2.Value;
 
     /// assign
     public static implicit operator EncString(string value) => new EncString(value);
+    public static explicit operator EncString(char[] value) => new EncString(value);
     public static implicit operator string(EncString encString) => encString.Value;
 
     #endregion
