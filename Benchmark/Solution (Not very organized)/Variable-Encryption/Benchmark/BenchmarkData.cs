@@ -26,7 +26,7 @@
             if (benchmark1 == null || benchmark2 == null) return false;
             else
             {
-                return 
+                return
                     benchmark1.typeName.Contains("String") ||
                     benchmark2.typeName.Contains("String");
             }
@@ -58,7 +58,7 @@
     {
         if (ComparingStrings)
         {
-            changesAmount = benchmarkPreset.ChangesAmount / 50;
+            changesAmount = benchmarkPreset.ChangesAmount / 100;
         }
         else
         {

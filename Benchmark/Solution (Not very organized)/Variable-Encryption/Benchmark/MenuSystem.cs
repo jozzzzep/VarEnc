@@ -124,7 +124,7 @@ static class MenuSystem
             int number = i + 1;
             int changesAmount =
                 (currentBenchmarkData.ComparingStrings)
-                ? group.presets[i].ChangesAmount / 50
+                ? group.presets[i].ChangesAmount / 100
                 : group.presets[i].ChangesAmount;
 
             string[] lines =
@@ -160,18 +160,26 @@ static class MenuSystem
 
     public static void DisplayComparisonsList()
     {
-        for (int i = 0; i < BenchmarksManager.comparisons.Length; i++)
+        int number = 0;
+        for (int i1 = 0; i1 < BenchmarksManager.comparisonsChunks.Length; i1++)
         {
-            int number = i + 1;
-            int currentL = BenchmarksManager.comparisons[i].benchmark1.typeName.Length;
-            string spaces1 = new string(' ', 3 - HowManyDigits(number));
-            string spaces2 = new string(' ', GetTheSpacesLength() - currentL);
-            string line = string.Format(
-                    "{0}." + spaces1 + "{1}" + spaces2 + "vs {2}",
-                    number, BenchmarksManager.comparisons[i].benchmark1.typeName,
-                    BenchmarksManager.comparisons[i].benchmark2.typeName);
+            for (int i2 = 0; i2 < BenchmarksManager.comparisonsChunks[i1]; i2++)
+            {
+                int currentL = BenchmarksManager.comparisons[number].benchmark1.typeName.Length;
+                string spaces1 = new string(' ', 3 - HowManyDigits(number + 1));
+                string spaces2 = new string(' ', GetTheSpacesLength() - currentL);
+                string line = string.Format(
+                        "{0}." + spaces1 + "{1}" + spaces2 + "vs {2}",
+                        number + 1, BenchmarksManager.comparisons[number].benchmark1.typeName,
+                        BenchmarksManager.comparisons[number].benchmark2.typeName);
+                WriteLine(line);
+                number++;
+            }
 
-            WriteLine(line);
+            if (i1 < BenchmarksManager.comparisonsChunks.Length - 1)
+            {
+                WriteLine();
+            }
         }
     }
 
