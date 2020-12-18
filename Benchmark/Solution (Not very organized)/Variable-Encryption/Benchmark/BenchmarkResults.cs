@@ -4,6 +4,9 @@ using System.Text;
 
 public class BenchmarkResults
 {
+    /// A class for containing benchmark result
+    /// Used in the benchmark manager
+
     public string firstTypeName;
     public string secondTypeName;
 
