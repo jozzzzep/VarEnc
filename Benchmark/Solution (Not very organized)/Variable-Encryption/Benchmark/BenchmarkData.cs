@@ -1,5 +1,8 @@
 ﻿public class BenchmarkData
 {
+    // A class for storing the benchmark preferences
+    // Influenced by the choices of the user in the menu
+
     public int changesAmount;
     public int testsAmount;
 
@@ -54,6 +57,7 @@
     public BenchmarkData()
         : this(null, null, 0, 0) { }
 
+    // When the user choose a benchmark preset, it'll copy its values to the benchmark data
     public void InputPreset(BenchmarkPreset benchmarkPreset, string presetGroupName, int presetNum)
     {
         if (ComparingStrings)
@@ -67,16 +71,5 @@
         testsAmount = benchmarkPreset.TestsAmount;
         benchmarkPresetGroupName = presetGroupName;
         benchmarkPresetNumber = presetNum;
-    }
-
-    public string[] DataInText()
-    {
-        string[] dataString =
-        {
-                "Type #1: " + benchmark1.typeName,
-                "Type #2: " + benchmark2.typeName,
-                "Tests amount: " + changesAmount,
-            };
-        return dataString;
     }
 }
