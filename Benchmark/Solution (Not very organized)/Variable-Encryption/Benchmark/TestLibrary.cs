@@ -130,155 +130,136 @@ static public class TestLibrary
 
     public static void WL_Float(int amount)
     {
-        float number1 = (float)RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        float number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.77024436f;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncFloat(int amount)
     {
-        EncFloat number1 = (float)RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncFloat number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.77024436f;
-            timesIncremented++;
+            number1++;
+        }
+    }
+
+    public static void WL_EncFloat_0_5_0(int amount)
+    {
+        EncFloat_0_5_0 number1 = 0;
+        while (number1 < (float)amount)
+        {
+            number1++;
+        }
+    }
+
+    public static void WL_EncFloat_0_8_0(int amount)
+    {
+        EncFloat_0_8_0 number1 = 0;
+        while (number1 < amount)
+        {
+            number1++;
+        }
+    }
+
+    public static void WL_EncFloat_0_9_0(int amount)
+    {
+        EncFloat_0_9_0 number1 = 0;
+        while (number1 < amount)
+        {
+            number1++;
         }
     }
 
     public static void WL_Double(int amount)
     {
-        double number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        double number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
+            number1++;
         }
     }
     
     public static void WL_EncDouble(int amount)
     {
-        EncDouble number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDouble number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDouble_0_5_0(int amount)
     {
-        EncDouble_0_5_0 number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDouble_0_5_0 number1 = 0;
+        while (number1 < (double)amount)
         {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
-        }
-    }
-
-    public static void WL_EncDouble_0_7_0(int amount)
-    {
-        EncDouble_0_7_0 number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
-        {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDouble_0_8_0(int amount)
     {
-        EncDouble_0_8_0 number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDouble_0_8_0 number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDouble_0_9_0(int amount)
     {
-        EncDouble_0_9_0 number1 = RandomDouble();
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDouble_0_9_0 number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 0.46772781036222716d;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_Decimal(int amount)
     {
-        decimal number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        decimal number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDecimal(int amount)
     {
-        EncDecimal number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDecimal number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDecimal_0_5_0(int amount)
     {
-        EncDecimal_0_5_0 number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDecimal_0_5_0 number1 = 0;
+        while (number1 < (decimal)amount)
         {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
-        }
-    }
-
-    public static void WL_EncDecimal_0_7_0(int amount)
-    {
-        EncDecimal_0_7_0 number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
-        {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDecimal_0_8_0(int amount)
     {
-        EncDecimal_0_8_0 number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDecimal_0_8_0 number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
+            number1++;
         }
     }
 
     public static void WL_EncDecimal_0_9_0(int amount)
     {
-        EncDecimal_0_9_0 number1 = (decimal)RandomDouble() + 1.467727810362227164677278103622271646772781036222716m;
-        int timesIncremented = 0;
-        while (timesIncremented < amount)
+        EncDecimal_0_9_0 number1 = 0;
+        while (number1 < amount)
         {
-            number1 += 1.467727810362227164677278103622271646772781036222716m;
-            timesIncremented++;
+            number1++;
         }
     }
 
@@ -333,9 +314,9 @@ static public class TestLibrary
         }
     }
 
-    public static void WL_EncString_0_6_0(int amount)
+    public static void WL_EncString_0_7_0(int amount)
     {
-        EncString_0_6_0 stringVar = RandomString();
+        EncString_0_7_0 stringVar = RandomString();
         int currentPos = 0;
         int timesIncremented = 0;
         while (timesIncremented < amount)
