@@ -36,7 +36,6 @@ public struct EncDouble
     private EncDouble(double value)
     {
         encryptionKeys = new byte[8];
-        random.NextBytes(encryptionKeys);
         encryptedValue = Encrypt(value, encryptionKeys);
     }
 
@@ -46,6 +45,7 @@ public struct EncDouble
     // Takes a given value and returns it encrypted
     private static byte[] Encrypt(double value, byte[] keys)
     {
+        random.NextBytes(keys);
         var valueBytes = BitConverter.GetBytes(value);
         for (int i = 0; i < 8; i++)
         {
