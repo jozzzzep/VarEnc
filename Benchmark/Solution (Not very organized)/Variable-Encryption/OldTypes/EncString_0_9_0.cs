@@ -4,11 +4,7 @@ using System.Text;
 
 public class EncString_0_9_0
 {
-    /// A class for storing a string while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a wierd string that is affected by a very long random key. { encryptionKey }
-    /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
-    ///
-    /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
+    /// An old class, just used for comparing the older versions of the EncTypes
 
     #region Variables And Properties
 

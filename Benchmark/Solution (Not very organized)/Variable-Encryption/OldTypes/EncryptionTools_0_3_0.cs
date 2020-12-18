@@ -2,13 +2,7 @@
 
 static class EncryptionTools_0_3_0
 {
-    ///  Not a class you should use.
-    ///  But it is a requirement to have it if you want to use most of the classes and structs.
-    ///  Just copy it with all the other files and forget about it.
-    ///  This is just a static class the classes uses to get a random float.
-    /// 
-    /// Wiki page: https://github.com/JosepeDev/SimpleEncryptionTools/wiki
-    /// Examples and tutorial: https://github.com/JosepeDev/SimpleEncryptionTools/wiki/Examples-&-Tutorial
+    /// An old class, just used for comparing the older versions of the EncTypes
 
     #region Methods
 

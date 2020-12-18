@@ -2,11 +2,7 @@
 
 public struct EncLong_0_7_0
 {
-    /// A struct for storing a 64-bit integer while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a floating-point number that is affected by random values. { encryptionKey1 & encryptionKey2 }
-    /// Every time the value changes, the encryption keys change too. And it works exactly as an long.
-    ///
-    /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
+    /// An old structure, just used for comparing the older versions of the EncTypes
 
     #region Variables And Properties
 

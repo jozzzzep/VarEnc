@@ -2,11 +2,7 @@
 
 public class EncString_0_5_0
 {
-    /// A class for storing a string while efficiently keeping it encrypted in the memory.
-    /// In the memory it is saved as a wierd string that is affected by random very long an wierd key. { encryptionKey }
-    /// Every time the value of the string changes, the encryption key changes too. And it works exactly as an string.
-    ///
-    /// Wiki page: https://github.com/JosepeDev/Variable-Encryption/wiki
+    /// An old class, just used for comparing the older versions of the EncTypes
 
     #region Content
 
