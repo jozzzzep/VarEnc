@@ -12,8 +12,8 @@ public class EncString
 
     #region Variables And Properties
 
-    private readonly string _encryptionKey;
-    private readonly string _encryptedValue;
+    private readonly char[] _encryptionKeys;
+    private readonly char[] _encryptedValue;
 
     /// <summary>
     /// The decrypted value of the stored string.
@@ -125,8 +125,8 @@ public class EncString
 
     public EncString(string value)
     {
-        _encryptionKey = RandomString();
-        _encryptedValue = Encrypt(value, _encryptionKey);
+        _encryptionKeys = EncKeys();
+        _encryptedValue = Encrypt(value, _encryptionKeys);
     }
 
     public EncString(char[] value)
@@ -145,17 +145,17 @@ public class EncString
 
     static Random random = new Random();
 
-    static string RandomString()
+    static char[] EncKeys()
     {
         char[] chars = new char[random.Next(10, 100)]; // random length
         for (int i = 0; i < chars.Length; i++)
         {
             chars[i] = (char)(random.Next(char.MinValue, char.MinValue)); // random chars
         }
-        return new string(chars);
+        return chars;
     }
 
-    private static string Encrypt(string data, string key)
+    private static char[] Encrypt(string data, char[] key)
     {
         if (data == null)
         {
@@ -172,7 +172,7 @@ public class EncString
                 output[i] = (char)(data[i] ^ key[i % keyLen]);
             }
 
-            return new string(output);
+            return output;
         }
     }
 
@@ -185,12 +185,12 @@ public class EncString
         else
         {
             int dataLen = _encryptedValue.Length;
-            int keyLen = _encryptionKey.Length;
+            int keyLen = _encryptionKeys.Length;
             char[] output = new char[dataLen];
 
             for (int i = 0; i < dataLen; ++i)
             {
-                output[i] = (char)(_encryptedValue[i] ^ _encryptionKey[i % keyLen]);
+                output[i] = (char)(_encryptedValue[i] ^ _encryptionKeys[i % keyLen]);
             }
 
             return new string(output);
