@@ -6,10 +6,6 @@
         <img src="https://img.shields.io/github/v/release/JosepeDev/VarEnc">
 </p>
 <p align="center">
-        <img src="https://img.shields.io/github/search/JosepeDev/VarEnc/main">
-        <img src="https://img.shields.io/github/downloads/JosepeDev/VarEnc/total">
-</p>
-<p align="center">
         <img src="https://img.shields.io/github/followers/JosepeDev?style=social">
         <img src="https://img.shields.io/github/watchers/JosepeDev/VarEnc?style=social">
         <img src="https://img.shields.io/github/stars/JosepeDev/VarEnc?style=social">
