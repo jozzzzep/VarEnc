@@ -114,12 +114,14 @@ After the benchmark is finished, the results will be printed. From there you can
 ### Performance
 
 I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and these are the results:  
-| Comparison                                              | CPS (Changes per second) |
-|---------------------------------------------------------|:------------------------:|
-| **EncInt** - int                      |     16,508,079 - 600,146,109     |
-| **EncLong** - long                     |     3,835,249 - 430,079,779     |
-| **EncDouble** - double (Similar to **EncFloat** and **EncDecimal**) |     20,155,276 - 329,739,613     |
-| **EncString** - string                                      |       501,253 - 13,579,435       |  
+| Variable Type | CPS (Changes per second) |
+|---------------|--------------------------|
+|     EncInt    |         5,837,044        |
+|    EncLong    |         3,980,810        |
+|    EncFloat   |         5,625,961        |
+|   EncDouble   |         3,928,240        |
+|   EncDecimal  |         4,213,448        |
+|   EncString   |          584,270         |
 
 This is the size of each EncType compared to its normal type
 |         Types        | Size in bytes |
