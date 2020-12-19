@@ -62,7 +62,7 @@
     {
         if (ComparingStrings)
         {
-            changesAmount = benchmarkPreset.ChangesAmount / 100;
+            changesAmount = benchmarkPreset.ChangesAmount / 50;
         }
         else
         {

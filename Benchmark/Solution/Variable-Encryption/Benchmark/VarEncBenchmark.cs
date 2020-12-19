@@ -187,7 +187,7 @@ static class VarEncBenchmark
             int number = i + 1;
             int changesAmount =
                 (currentBenchmarkData.ComparingStrings)
-                ? group.presets[i].ChangesAmount / 100
+                ? group.presets[i].ChangesAmount / 50
                 : group.presets[i].ChangesAmount;
 
             string[] lines =
@@ -209,18 +209,16 @@ static class VarEncBenchmark
 
         SeparationLine();
         WriteLine("These are the sizes of each type, in bytes.");
-        WriteLine("EncInt & EncFloat use a different method for encryption. Large size in memory, but 150% more efficient.");
-        WriteLine("These are the only types this method can work on.");
         SeparationLineSmall();
 
         WriteLine("int        size: {0}", 4);
-        WriteLine("EncInt     size: {0}", 24);
+        WriteLine("EncInt     size: {0}", 8);
         WriteLine();
         WriteLine("long       size: {0}", 8);
         WriteLine("EncLong    size: {0}", 16);
         WriteLine();
         WriteLine("float      size: {0}", 4);
-        WriteLine("EncFloat   size: {0}", 24);
+        WriteLine("EncFloat   size: {0}", 8);
         WriteLine();
         WriteLine("double     size: {0}", 8);
         WriteLine("EncDouble  size: {0}", 16);
