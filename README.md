@@ -126,11 +126,11 @@ I ran a few benchmarks on my Laptop (Intel Core i7-8750h, GTX1060-MaxQ), and the
 This is the size of each EncType compared to its normal type
 |         Types        | Size in bytes |
 |:--------------------:|:-------------:|
-|     int - EncInt     |     4 - 24    |
-|    long - EncLong    |     8 - 48    |
-|   float - EncFloat   |     4 - 24    |
-|  double - EncDouble  |     8 - 48    |
-| decimal - EncDecimal |    16 - 48    |
+|     int - EncInt     |     4 - 8     |
+|    long - EncLong    |     8 - 16    |
+|   float - EncFloat   |     4 - 8     |
+|  double - EncDouble  |     8 - 16    |
+| decimal - EncDecimal |    16 - 32    |
 
 It may seem heavy but it's **very light** considering its **simple** and **efficient encryption**.  
 In a game where you want to have an encrypted "**score**" for the player, you can just **switch** the score's variable **type** from an **int** to an **EncInt**.  
