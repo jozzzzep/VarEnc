@@ -31,13 +31,6 @@ static class VarEncBenchmark
     static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static private string choiceText = "Type the number of your choice and press ENTER";
 
-    static private string[] sectionTitles =
-    {
-        "Step #1: TYPES TO COMPARE",
-        "Step #2: BENCHMARK DURATION",
-        "Step #3: BENCHMARK PRESET"
-    };
-
     static void PrintSectionTitle()
     {
         switch (currentSection)

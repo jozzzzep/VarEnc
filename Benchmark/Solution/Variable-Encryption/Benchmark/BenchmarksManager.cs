@@ -118,7 +118,7 @@ public static class BenchmarksManager
 
     static public int[] comparisonsChunks =
     {
-        6, 4, 4, 3, 3, 4
+        6, 4, 3, 3, 4
     };
 
     static public BenchmarkData[] comparisons =
@@ -131,32 +131,20 @@ public static class BenchmarksManager
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[9]),   // decimal
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[11]), // string
         
-        // EncInt
-        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[14]),
-        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[15]),
-        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[16]),
-        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[20]),
+        // Comparing an EncInt with its older versions means nothing
+        // Now the EncInt is heavier, because it uses a better, heavier encryption
+        // The same thing applies to the EncFloat and EncDouble
 
         // EncLong
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[22]),
-        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[23]),
-        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[24]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[25]),
-
-        // EncFloat
-        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[30]),
-        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[31]),
-        new BenchmarkData(benchmarkTypes[4], benchmarkTypes[32]),
 
         // EncDecimal
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[26]),
-        new BenchmarkData(benchmarkTypes[8], benchmarkTypes[27]),
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[28]),
 
         // EncString
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[12]),
-        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[13]),
-        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[19]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[21]),
     };
 
