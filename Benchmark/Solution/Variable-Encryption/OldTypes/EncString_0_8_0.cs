@@ -2,27 +2,22 @@
 using System.Globalization;
 using System.Text;
 
-public class EncString
+public class EncString_0_8_0
 {
-    /// A class for storing a string while efficiently keeping it encrypted in the memory
-    /// Instead of encrypting and decrypting yourself, you can just use the encrypted type (EncType) of the variable you want to be encrypted
-    /// The encryption will happen in the background without you worrying about it
-    /// In the memory it is saved as a wierd char array that is affected by random keys { encryptionKeys }
-    /// Every time the value of the string changes, the encryption keys change too. And it works exactly as a string
-    ///
-    /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
+    /// An old class, just used for comparing the older versions of the EncTypes
 
     #region Variables And Properties
 
-    private readonly char[] _encryptionKeys;
-    private readonly char[] _encryptedValue;
+    private string _encryptionKey;
+    private string _encryptedValue;
 
     /// <summary>
     /// The decrypted value of the stored string.
     /// </summary>
     private string Value
     {
-        get => Decrypt();
+        get => EncryptorDecryptor(_encryptedValue, _encryptionKey);
+        set => _encryptedValue = EncryptorDecryptor(value, _encryptionKey);
     }
 
     public int Length
@@ -43,7 +38,8 @@ public class EncString
     #endregion
 
     #region Methods
-    public bool IsObjectEqual(EncString encString) => encString == this;
+
+    public bool IsEqual(EncString_0_8_0 encString) => encString.Value == this.Value;
     public bool IsNull() => this.Value == null;
     public object Clone() => Value.Clone();
     public override bool Equals(object obj) => Value.Equals(obj);
@@ -124,21 +120,22 @@ public class EncString
 
     #region Constructors
 
-    public EncString(string value)
-    {
-        _encryptionKeys = EncKeys();
-        _encryptedValue = Encrypt(value, _encryptionKeys);
-    }
+    public EncString_0_8_0(string value) => New(value, this);
 
-    public EncString(char[] value)
+    public EncString_0_8_0(char[] value)
         : this(new string(value)) { }
 
-    public EncString(char c, int count)
+    public EncString_0_8_0(char c, int count)
         : this(new string(c, count)) { }
 
-    public EncString(char[] value, int startIndex, int length)
+    public EncString_0_8_0(char[] value, int startIndex, int length)
         : this(new string(value, startIndex, length)) { }
 
+    private static void New(string value, EncString_0_8_0 encString)
+    {
+        encString._encryptionKey = RandomString();
+        encString.Value = value;
+    }
 
     #endregion
 
@@ -146,19 +143,26 @@ public class EncString
 
     static Random random = new Random();
 
-    static char[] EncKeys()
+    static int RandomLength() => random.Next(10, 150);
+
+    static char RandomChar(int min = char.MinValue, int max = (char.MaxValue - 1))
     {
-        char[] chars = new char[random.Next(10, 100)]; // random length
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i] = (char)(random.Next(char.MinValue, char.MinValue)); // random chars
-        }
-        return chars;
+        return (char)(random.Next(min, max));
     }
 
-    private static char[] Encrypt(string data, char[] key)
+    static string RandomString()
     {
-        if (data == null)
+        char[] chars = new char[RandomLength()];
+        for (int i = 0; i < chars.Length; i++)
+        {
+            chars[i] = RandomChar();
+        }
+        return new string(chars);
+    }
+
+    private static string EncryptorDecryptor(string data, string key)
+    {
+        if (data == null || key == null)
         {
             return null;
         }
@@ -173,27 +177,6 @@ public class EncString
                 output[i] = (char)(data[i] ^ key[i % keyLen]);
             }
 
-            return output;
-        }
-    }
-
-    private string Decrypt()
-    {
-        if (_encryptedValue == null)
-        {
-            return null;
-        }
-        else
-        {
-            int dataLen = _encryptedValue.Length;
-            int keyLen = _encryptionKeys.Length;
-            char[] output = new char[dataLen];
-
-            for (int i = 0; i < dataLen; ++i)
-            {
-                output[i] = (char)(_encryptedValue[i] ^ _encryptionKeys[i % keyLen]);
-            }
-
             return new string(output);
         }
     }
@@ -203,19 +186,16 @@ public class EncString
     #region Operators Overloading
 
     /// + 
-    public static EncString operator +(EncString enc, string n) => new EncString(enc.Value + n);
-    public static string operator +(string n, EncString enc) => enc.Value + n;
+    public static EncString_0_8_0 operator +(EncString_0_8_0 enc, string n) => new EncString_0_8_0(enc.Value + n);
+    public static string operator +(string n, EncString_0_8_0 enc) => enc.Value + n;
 
     /// == != < >
-    public static bool operator ==(EncString es1, string es2) => es1.Value == es2;
-    public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
-    public static bool operator ==(EncString es1, EncString es2) => es1.Value == es2.Value;
-    public static bool operator !=(EncString es1, EncString es2) => es1.Value != es2.Value;
+    public static bool operator ==(EncString_0_8_0 es1, string es2) => es1.Value == es2;
+    public static bool operator !=(EncString_0_8_0 es1, string es2) => es1.Value != es2;
 
     /// assign
-    public static implicit operator EncString(string value) => new EncString(value);
-    public static explicit operator EncString(char[] value) => new EncString(value);
-    public static implicit operator string(EncString encString) => encString.Value;
+    public static implicit operator EncString_0_8_0(string value) => new EncString_0_8_0(value);
+    public static implicit operator string(EncString_0_8_0 encString) => encString.Value;
 
     #endregion
 }
