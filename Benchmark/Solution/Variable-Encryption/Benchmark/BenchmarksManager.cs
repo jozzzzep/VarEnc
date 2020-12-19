@@ -164,17 +164,6 @@ public static class BenchmarksManager
 
     #region Benchmark Presets
 
-    static public BenchmarkPresetGroup[] benchmarkPresetGroups =
-    {
-        new BenchmarkPresetGroup("Fastest", benchmarkPresetsFastest),
-        new BenchmarkPresetGroup("Very Fast", benchmarkPresetsVeryFast),
-        new BenchmarkPresetGroup("Fast", benchmarkPresetsFast),
-        new BenchmarkPresetGroup("Normal", benchmarkPresetsNormal),
-        new BenchmarkPresetGroup("Medium", benchmarkPresetsMedium),
-        new BenchmarkPresetGroup("Long", benchmarkPresetsLong),
-        new BenchmarkPresetGroup("Very Long", benchmarkPresetsVeryLong),
-    };
-
     static BenchmarkPreset[] benchmarkPresetsFastest =
     {
         new BenchmarkPreset(20, 50000),
@@ -229,6 +218,17 @@ public static class BenchmarksManager
         new BenchmarkPreset(100, 5000000),
         new BenchmarkPreset(4000, 100000),
         new BenchmarkPreset(10, 50000000),
+    };
+
+    static public BenchmarkPresetGroup[] benchmarkPresetGroups =
+    {
+        new BenchmarkPresetGroup("Fastest", benchmarkPresetsFastest),
+        new BenchmarkPresetGroup("Very Fast", benchmarkPresetsVeryFast),
+        new BenchmarkPresetGroup("Fast", benchmarkPresetsFast),
+        new BenchmarkPresetGroup("Normal", benchmarkPresetsNormal),
+        new BenchmarkPresetGroup("Medium", benchmarkPresetsMedium),
+        new BenchmarkPresetGroup("Long", benchmarkPresetsLong),
+        new BenchmarkPresetGroup("Very Long", benchmarkPresetsVeryLong),
     };
 
     #endregion

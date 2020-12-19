@@ -178,9 +178,9 @@ static class VarEncBenchmark
     }
 
     // Section #3
-    public static void PrintBenchmarkPresetGroup(BenchmarkPresetGroup _group)
+    public static void PrintBenchmarkPresetGroup()
     {
-        BenchmarkPresetGroup group = _group;
+        BenchmarkPresetGroup group = currentBenchmarkPresetGroup;
         WriteLine(string.Format("These are the {0} benchmark presets:", group.Name));
         for (int i = 0; i < group.presets.Length; i++)
         {
@@ -200,8 +200,6 @@ static class VarEncBenchmark
             WriteLines(lines);
         }
     }
-
-    public static void PrintBenchmarkPresetGroup() => PrintBenchmarkPresetGroup(currentBenchmarkPresetGroup);
 
 
     // Special Section -  input "s" in the menu

@@ -12,6 +12,7 @@ public class BenchmarkPresetGroup
     }
 
     public BenchmarkPreset[] presets;
+
     public BenchmarkPresetGroup(string name, BenchmarkPreset[] benchmarkPresets)
     {
         _name = name;
