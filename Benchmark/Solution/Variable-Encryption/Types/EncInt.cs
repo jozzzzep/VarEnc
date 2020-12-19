@@ -34,8 +34,8 @@ public struct EncInt
 
     private EncInt(int value)
     {
-        encryptionKey1 = random.NextDouble() * 0.001;
-        encryptionKey2 = random.NextDouble() * 100;
+        encryptionKey1 = random.NextDouble() * 0.01;
+        encryptionKey2 = random.NextDouble() * 10;
         encryptedValue = Encrypt(value, encryptionKey1, encryptionKey2);
     }
 
