@@ -118,7 +118,7 @@ public static class BenchmarksManager
 
     static public int[] comparisonsChunks =
     {
-        6, 4, 3, 3, 4
+        6, 2, 2, 2
     };
 
     static public BenchmarkData[] comparisons =
