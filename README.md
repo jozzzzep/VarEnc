@@ -11,6 +11,8 @@
         <img src="https://img.shields.io/github/stars/JosepeDev/VarEnc?style=social">
 </p>
 
+The idea is to make the **encryption** of values in C# **easier**. Let's say you have a video game with an "int" variable containing the **player's score**. With simple software like **CheatEngine** and many more, you can **search for this variable and change it**. The VarEnc project has an easy solution for that. All you got to do is to change the type of the variable from "int", to "EncInt". Done. Your game will work the same but the score of the player will be encrypted in the background.
+These called **EncTypes**, they are the alternative **encrypted** version of **their normal variables version** (**EncString** for string, **EncInt** for int, and so on). You can also combine and/or compare an EncType with its normal type and vice versa. They will work the same as their normal type, and every EncType has every method its normal version has. The performance cost is also minimal considering the encryption level, especially for videogames made with Unity (Just don't make every variable encrypted, only the ones you know you don't want a player to change with cheating software. At least not that easily, every "Client-Side" stuff can be hacked).
 
 **Content**
 - [**EncTypes**](#enctypes)
@@ -28,7 +30,7 @@
 
 **A group of classes and structures for storing values while efficiently keeping them encrypted in the memory.**  
 **In memory, they are saved as a "weird" array of bytes that is affected by random values (encryption keys).**  
-**You can find all the EncTypes in [this](https://github.com/JosepeDev/Variable-Encryption/tree/main/EncTypes) folder. You can also use the** 
+**You can find all the EncTypes in [this](https://github.com/JosepeDev/VarEnc/tree/main/EncTypes) folder. You can also use the** 
 **[benchmark](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark) executable file, to speed test each type.**  
 
 Let's say you want to create a variable for a score inside a video game.  
@@ -44,7 +46,7 @@ This is when you want to use an EncType. Each type does not depend on the other,
 - **EncDecimal** - The same thing as the struct above, but for a Decimal.
 - **EncString** - An EncType class for a string type.
 
-You can find the EncTypes folder [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/EncTypes)
+You can find the EncTypes folder [here](https://github.com/JosepeDev/VarEnc/tree/main/EncTypes)
 
 ## Examples
 
@@ -174,7 +176,7 @@ By typing **"size"** or **"s"** in the opening menu, you can see the sizes of ev
 
 
 ### Files
-You can lunch the benchmark executable from [here](https://github.com/JosepeDev/Variable-Encryption/tree/main/Benchmark)  
+You can lunch the benchmark executable from [here](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark)  
 You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution) folder  
 
 # Documentations
