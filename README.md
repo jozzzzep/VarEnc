@@ -128,8 +128,8 @@ After the benchmark is finished, the results will be printed. From there you can
 I ran a few benchmarks on my Laptop (Intel Core **i7-8750h**, **GTX1060-MaxQ**), and these are the results:  
 | Variable Type | CPS (Changes per second) |
 |---------------|--------------------------|
-|     EncInt    |         5,837,044        |
-|    EncLong    |         3,980,810        |
+|     EncInt    |         6,004,303        |
+|    EncLong    |         4,015,799        |
 |    EncFloat   |         5,625,961        |
 |   EncDouble   |         3,928,240        |
 |   EncDecimal  |         4,213,448        |
