@@ -18,12 +18,14 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
+  - [Documentations](#documentations)
 - [**Benchmark**](#benchmark)
   - [Performance](#performance)
   - [Example of usage](#example-of-usage)
   - [Files](#files)
-- [**Documentations**](#documentations)
-  - [CSharp](#csharp)
+- [**Cloning And Importing**](#cloning-and-importing)
+  - [Visual Studio](#visual-studio)
+  - [Unity](#unity)
 
 # EncTypes
 ![img](https://i.imgur.com/F2fxgOn.png)
@@ -93,6 +95,17 @@ encryptedString += "more text";
 **Without you worrying about encryption or decryption, you work with your variables just the same.**  
 **You can also combine and/or compare an EncType with its normal type and vice versa.**  
 **Every EncType has every method its normal version has.**
+
+## Documentations
+**Every EncType contains the same methods and fields as its normal type.**  
+**So it'll link you to the official .NET documentaions.**
+### CSharp
+- [EncInt](https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=net-5.0)
+- [EncLong](https://docs.microsoft.com/en-us/dotnet/api/system.int64?view=net-5.0)
+- [EncFloat](https://docs.microsoft.com/en-us/dotnet/api/system.single?view=net-5.0)
+- [EncDouble](https://docs.microsoft.com/en-us/dotnet/api/system.double?view=net-5.0)
+- [EncDecimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-5.0)
+- [EncString](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-5.0)
 
 # Benchmark
 ![img](https://i.imgur.com/C8YKbnd.png)
@@ -179,13 +192,72 @@ By typing **"size"** or **"s"** in the opening menu, you can see the sizes of ev
 You can lunch the benchmark executable from [here](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark)  
 You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution) folder  
 
-# Documentations
-**Every EncType contains the same methods and fields as its normal type.**  
-**So it'll link you to the official .NET documentaions.**
-## CSharp
-- [EncInt](https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=net-5.0)
-- [EncLong](https://docs.microsoft.com/en-us/dotnet/api/system.int64?view=net-5.0)
-- [EncFloat](https://docs.microsoft.com/en-us/dotnet/api/system.single?view=net-5.0)
-- [EncDouble](https://docs.microsoft.com/en-us/dotnet/api/system.double?view=net-5.0)
-- [EncDecimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-5.0)
-- [EncString](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-5.0)
+# Cloning And Importing
+![img](https://i.imgur.com/n7PAr9D.png)
+
+- .NET CLI: ```dotnet add package VarEnc --version x.x.x```
+
+- NuGet Package Manager: ```Install-Package VarEnc -Version x.x.x```
+
+- Nuget Package Link: https://www.nuget.org/packages/VarEnc
+
+## Visual Studio
+You can also get the package through VisualStudio's NuGet package manager.
+**IT DOESN'T WORK WITH UNITY PROJECTS** Click on **Tools**>**NuGet Package Manager**>**Manage NuGet Packages for Solution...**  
+
+![img](https://i.imgur.com/T6Mwuzx.png)  
+It'll open the **"NuGet - Solution"** Window. From there, click on the **"Browse"** tab, and search **"varenc" or "VarEnc"**  
+
+![img](https://i.imgur.com/zQDshL0.png)  
+When you see the **"VarEnc" package**, click on it, and click on the **Install** button in the right panel  
+
+![img](https://i.imgur.com/VmSArI0.png)  
+Click **OK** to proceed, accept the **licence** and you're done (:  
+
+## Unity
+I use this project on every Unity game I've created.
+Unity games are the reason I created this project.
+You can import the script to unity in many ways.
+
+### Way #1 - Importing scripts
+This way will require you to download or clone the repository.  
+You can **clone** from this page by **clicking** the green **"Code" button**:  
+
+![img](https://i.imgur.com/LhNSi5i.png)  
+
+You can also **download** the content of this repo through the recent **release page**: [Releases page](https://github.com/JosepeDev/VarEnc/releases)  
+From there, **scroll to the bottom** of the **current release** and click on the file "**Source code (zip)**".  
+It'll **download** the repository as a zip file to you computer. Just **Unzip** and you're reasy.  
+
+![img](https://i.imgur.com/hgB06A9.png)
+
+After that, when you have the repository on you computer, the next step is to enter the &&EncTypes directory&&.
+
+![img](https://i.imgur.com/tVOQBzG.png)
+
+From there **select all the scripts you want**, and **drag** them to your **Unity** project.
+
+![img](https://i.imgur.com/SnIYfLJ.png)
+
+**Done!**
+
+![img](https://i.imgur.com/mwAtfTx.png)
+
+### Way #2 - Copying to a Unity Projcet
+This way will take more time for all the scripts, but will be quick if you only need a few scripts.  
+Lets say you want only the **EncInt** script and the **EncString**.  
+Go to **your Unity project**, and **create 2 new scripts**, one foreach type you want.  
+(EncInt and EncString in this case)  
+
+![img](https://i.imgur.com/y00Pc6m.png)  
+From this repository, enter the **EncTypes folder**.  
+It contains **every** Encrypted Variable Type.  
+
+![img](https://i.imgur.com/CHxddy7.png)  
+Click on the ones you want, in my case I start with with EncInt.  
+
+![img](https://i.imgur.com/w8JCnIw.png)  
+**Copy** the content from the script you want, and **paste** it **inside the scripts you created in Unity**.  
+
+![img](https://i.imgur.com/BMrIwTf.png)  
+**Done!**
