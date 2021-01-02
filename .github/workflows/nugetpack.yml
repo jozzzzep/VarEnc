@@ -16,10 +16,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Push Nupkg to GitHub Packages
-        uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
+      - name: Publish Nuget package
+      # You may pin to the exact commit or the version.
+      # uses: myci-actions/publish-nuget@ab7bb3fee53c2b5a4191a9b5d77297fe48273a9d
+        uses: myci-actions/publish-nuget@2
         with:
-          nupkg-path:  'JosepeDev/VarEnc/*.nupkg'
-          repo-owner:  'JosepeDev'
-          gh-user:  'JosepeDev'
-          token:  ${{ secrets.TOKEN }}
+        # nuget package filename, wildcards allowed
+          filename: VarEnc
+          # API key to access the repository
+          api-key: ${{ secrets.NUGET_APIKEY }}
+          # Nuget repository URL
+          repo-url: https://api.nuget.org/v3/index.json
