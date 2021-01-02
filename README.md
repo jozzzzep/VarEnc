@@ -183,6 +183,8 @@ You can lunch the benchmark executable from [here](https://github.com/JosepeDev/
 You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution) folder  
 
 # Cloning And Importing
+![img](https://i.imgur.com/n7PAr9D.png)
+
 - .NET CLI: ```dotnet add package VarEnc --version x.x.x```
 
 - NuGet Package Manager: ```Install-Package VarEnc -Version x.x.x```
