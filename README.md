@@ -18,6 +18,7 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
+  - [**Documentations**](#documentations)
 - [**Benchmark**](#benchmark)
   - [Performance](#performance)
   - [Example of usage](#example-of-usage)
@@ -25,8 +26,6 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - [**Cloning And Importing**](#cloning-and-importing)
   - [Visual Studio](#visual-studio)
   - [Unity](#unity)
-- [**Documentations**](#documentations)
-  - [CSharp](#csharp)
 
 # EncTypes
 ![img](https://i.imgur.com/F2fxgOn.png)
@@ -96,6 +95,17 @@ encryptedString += "more text";
 **Without you worrying about encryption or decryption, you work with your variables just the same.**  
 **You can also combine and/or compare an EncType with its normal type and vice versa.**  
 **Every EncType has every method its normal version has.**
+
+## Documentations
+**Every EncType contains the same methods and fields as its normal type.**  
+**So it'll link you to the official .NET documentaions.**
+### CSharp
+- [EncInt](https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=net-5.0)
+- [EncLong](https://docs.microsoft.com/en-us/dotnet/api/system.int64?view=net-5.0)
+- [EncFloat](https://docs.microsoft.com/en-us/dotnet/api/system.single?view=net-5.0)
+- [EncDouble](https://docs.microsoft.com/en-us/dotnet/api/system.double?view=net-5.0)
+- [EncDecimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-5.0)
+- [EncString](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-5.0)
 
 # Benchmark
 ![img](https://i.imgur.com/C8YKbnd.png)
@@ -251,14 +261,3 @@ Click on the ones you want, in my case I start with with EncInt.
 
 ![img](https://i.imgur.com/BMrIwTf.png)  
 **Done!**
-
-# Documentations
-**Every EncType contains the same methods and fields as its normal type.**  
-**So it'll link you to the official .NET documentaions.**
-## CSharp
-- [EncInt](https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=net-5.0)
-- [EncLong](https://docs.microsoft.com/en-us/dotnet/api/system.int64?view=net-5.0)
-- [EncFloat](https://docs.microsoft.com/en-us/dotnet/api/system.single?view=net-5.0)
-- [EncDouble](https://docs.microsoft.com/en-us/dotnet/api/system.double?view=net-5.0)
-- [EncDecimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-5.0)
-- [EncString](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-5.0)
