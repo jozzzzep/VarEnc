@@ -29,7 +29,7 @@ namespace EncTypes
                 {
                     valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
                 }
-                return BitConverter.ToInt64(valueBytes);
+                return BitConverter.ToInt64(valueBytes, 0);
             }
         }
 
