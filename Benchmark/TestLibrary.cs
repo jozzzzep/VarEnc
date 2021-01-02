@@ -1,5 +1,6 @@
 ﻿using System;
 using EncTypes;
+using Benchmark.OldTypes;
 
 static public class TestLibrary
 {
