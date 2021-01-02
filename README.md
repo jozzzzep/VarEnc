@@ -18,7 +18,7 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - [**EncTypes**](#enctypes)
   - [Which type to use?](#which-type-to-use)
   - [Examples](#examples)
-  - [**Documentations**](#documentations)
+  - [Documentations](#documentations)
 - [**Benchmark**](#benchmark)
   - [Performance](#performance)
   - [Example of usage](#example-of-usage)
