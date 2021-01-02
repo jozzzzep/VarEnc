@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using static Utilities;
 
 static class VarEncBenchmark
@@ -27,7 +29,7 @@ static class VarEncBenchmark
 
     #region Sections Content
 
-    static string currentVersion = "- Current version - 1.0.0";
+    static string currentVersion = "1.1.0";
     static string titleOfApplication = "VarEnc's Benchmarking Console Application";
     static private string choiceText = "Type the number of your choice and press ENTER";
 
@@ -55,6 +57,9 @@ static class VarEncBenchmark
     static void PrintSectionText()
     {
         string[] textToReturn;
+
+        // Only if there's an existing benchmark preset that can be use,
+        // display the option to run the previous benchmark.
         string previousBenchmarkText =
             (currentBenchmarkData == null || !currentBenchmarkData.IsValid)
             ? ""
@@ -65,7 +70,7 @@ static class VarEncBenchmark
             case ChoosingState.ChoosingComparisons:
                 string[] text1 =
                 {
-                        currentVersion,
+                        "- Current version - " + currentVersion,
                         "- Welcome to the console app for speedtesting the VarEnc features.",
                         "- If you already know the numbers of your choices, you can input them all together. (separated with spaces)",
                         "- Type the letter \"s\" or the word \"size\" to see the size of each type in bytes." + previousBenchmarkText,
