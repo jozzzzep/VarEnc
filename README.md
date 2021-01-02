@@ -134,8 +134,8 @@ This is the size of each EncType compared to its normal type
 It may seem heavy but it's **very light** considering its **simple** and **efficient encryption**.  
 In a game where you want to have an encrypted "**score**" for the player, you can just **switch** the score's variable **type** from an **int** to an **EncInt**.  
 They **work** the same, **behave** the same, and have the same **methods** and **functionality**.  
-How many time you change the score variable? How many variables you want to be encrypted?  
-Even if you'll have **1,000,000 encrypted variables** that you want to change **at once** (it is probably unnecessary to have all of them enc), you can do it and you'll have exactly the same **framerate**. It is a **very light** encryption solution.  
+How many times did you change the score variable? How many variables do you want to be encrypted?  
+Even if you'll have **1,000,000 encrypted variables** that you want to change **at once** (it is probably unnecessary to have all of them enc), you can do it and you'll have exactly the same **framerate**. It is a **very light** encryption solution.
 
 ### Example of usage:  
 I **opened** the application from the "**Benchmark**" folder.  
