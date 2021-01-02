@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -19,6 +19,7 @@ They will work the same as their normal type, and every EncType has every method
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>encryption, encrypt, decrypt, string, easy, unity, easy-to-use, variable-encryption, varenc, encryption-tool, encryption-tools, tool, tools</PackageTags>
     <Version>1.1.0</Version>
+    <Copyright>2020</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
