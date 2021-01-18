@@ -4,6 +4,8 @@
         <img src="https://img.shields.io/github/languages/code-size/JosepeDev/VarEnc">
         <img src="https://img.shields.io/github/license/JosepeDev/VarEnc">
         <img src="https://img.shields.io/github/v/release/JosepeDev/VarEnc">
+        <img src="https://img.shields.io/nuget/dt/VarEnc">
+        
 </p>
 <p align="center">
         <img src="https://img.shields.io/github/followers/JosepeDev?style=social">
