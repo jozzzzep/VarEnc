@@ -15,6 +15,10 @@ static class VarEncBenchmark
     public static BenchmarkData currentBenchmarkData;
     static BenchmarkPresetGroup currentBenchmarkPresetGroup;
 
+    static string currentVersion = "1.2.0";
+    static string titleOfApplication = "VarEnc's Benchmarking Console Application";
+    static private string choiceText = "Type the number of your choice and press ENTER";
+
     public static void StartProgram()
     {
         // Setup console application
@@ -28,10 +32,6 @@ static class VarEncBenchmark
     }
 
     #region Sections Content
-
-    static string currentVersion = "1.1.0";
-    static string titleOfApplication = "VarEnc's Benchmarking Console Application";
-    static private string choiceText = "Type the number of your choice and press ENTER";
 
     static void PrintSectionTitle()
     {
