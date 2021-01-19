@@ -172,7 +172,7 @@ namespace EncTypes
         // Returns an array of encryption keys
         static ushort[] EncKeys()
         {
-            int len = random.Next(10, 20);
+            int len = random.Next(3, 10);
             ushort[] keys = new ushort[len]; // random length
             for (int i = 0; i < len; i++)
             {
