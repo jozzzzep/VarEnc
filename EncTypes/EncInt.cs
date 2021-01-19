@@ -10,7 +10,7 @@ namespace EncTypes
         /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
         /// Every time the value changes, the encryption keys change too. And it works exactly as an int (Int32)
         ///
-        /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
 
         #region Variables And Properties
 

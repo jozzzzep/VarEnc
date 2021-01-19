@@ -12,7 +12,7 @@ namespace EncTypes
         /// In the memory it is saved as a wierd char array that is affected by random keys { encryptionKeys }
         /// Every time the value of the string changes, the encryption keys change too. And it works exactly as a string
         ///
-        /// WIKI & INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
 
         #region Variables And Properties
 
