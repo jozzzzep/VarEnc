@@ -363,6 +363,23 @@ static public class TestLibrary
         }
     }
 
+    public static void WL_EncString_1_1_0(int amount)
+    {
+        EncString_1_1_0 stringVar = RandomString();
+        int currentPos = 0;
+        int timesIncremented = 0;
+        while (timesIncremented < amount)
+        {
+            timesIncremented++;
+            stringVar = StringReplaceAt(stringVar, currentPos, RandomCharNormal());
+            currentPos++;
+            if (currentPos >= stringVar.Length)
+            {
+                currentPos = 0;
+            }
+        }
+    }
+
     #endregion
 
     #region Utils For Class

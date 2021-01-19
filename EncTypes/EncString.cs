@@ -16,20 +16,36 @@ namespace EncTypes
 
         #region Variables And Properties
 
-        private readonly char[] _encryptionKeys;
-        private readonly char[] _encryptedValue;
+        private readonly ushort[] encryptionKeys;
+        private readonly ushort[] encryptedValue;
 
-        /// <summary>
-        /// The decrypted value of the stored string.
-        /// </summary>
-        private string Value
+        private string Decrypt
         {
-            get => Decrypt();
+            get
+            {
+                if (encryptedValue == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    int dataLen = encryptedValue.Length;
+                    int keyLen = encryptionKeys.Length;
+                    char[] output = new char[dataLen];
+
+                    for (int i = 0; i < dataLen; ++i)
+                    {
+                        output[i] = (char)(encryptedValue[i] ^ encryptionKeys[i % keyLen]);
+                    }
+
+                    return new string(output);
+                }
+            }
         }
 
         public int Length
         {
-            get => Value.Length;
+            get => Decrypt.Length;
         }
 
         public static string Empty
@@ -39,101 +55,106 @@ namespace EncTypes
 
         public char this[int index]
         {
-            get => Value[index];
+            get => Decrypt[index];
         }
 
         #endregion
 
         #region Methods
-        public bool IsObjectEqual(EncString encString) => encString == this;
-        public bool IsNull() => this.Value == null;
-        public object Clone() => Value.Clone();
-        public override bool Equals(object obj) => Value.Equals(obj);
-        public override int GetHashCode() => Value.GetHashCode();
-        public bool Contains(string value) => Value.Contains(value);
-        public int CompareTo(object value) => Value.CompareTo(value);
-        public int CompareTo(string strB) => Value.CompareTo(strB);
-        public void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) => Value.CopyTo(sourceIndex, destination, destinationIndex, count);
-        public bool EndsWith(string value) => Value.EndsWith(value);
-        public bool EndsWith(string value, StringComparison comparisonType) => Value.EndsWith(value, comparisonType);
-        public bool EndsWith(string value, bool ignoreCase, CultureInfo culture) => Value.EndsWith(value, ignoreCase, culture);
-        public CharEnumerator GetEnumerator() => Value.GetEnumerator();
-        public TypeCode GetTypeCode() => Value.GetTypeCode();
-        public int IndexOf(string value, int startIndex, StringComparison comparisonType) => Value.IndexOf(value, startIndex, comparisonType);
-        public int IndexOf(string value, StringComparison comparisonType) => Value.IndexOf(value, comparisonType);
-        public int IndexOf(string value, int startIndex, int count) => Value.IndexOf(value, startIndex, count);
-        public int IndexOf(string value) => Value.IndexOf(value);
-        public int IndexOf(char value, int startIndex, int count) => Value.IndexOf(value, startIndex, count);
-        public int IndexOf(char value, int startIndex) => Value.IndexOf(value, startIndex);
-        public int IndexOf(char value) => Value.IndexOf(value);
-        public int IndexOf(string value, int startIndex, int count, StringComparison comparisonType) => Value.IndexOf(value, startIndex, count, comparisonType);
-        public int IndexOf(string value, int startIndex) => Value.IndexOf(value, startIndex);
-        public int IndexOfAny(char[] anyOf) => Value.IndexOfAny(anyOf);
-        public int IndexOfAny(char[] anyOf, int startIndex, int count) => Value.IndexOfAny(anyOf, startIndex, count);
-        public int IndexOfAny(char[] anyOf, int startIndex) => Value.IndexOfAny(anyOf, startIndex);
-        public string Insert(int startIndex, string value) => Value.Insert(startIndex, value);
-        public bool IsNormalized() => Value.IsNormalized();
-        public bool IsNormalized(NormalizationForm normalizationForm) => Value.IsNormalized(normalizationForm);
-        public int LastIndexOf(string value, int startIndex, StringComparison comparisonType) => Value.LastIndexOf(value, startIndex, comparisonType);
-        public int LastIndexOf(string value, int startIndex, int count, StringComparison comparisonType) => Value.LastIndexOf(value, startIndex, count, comparisonType);
-        public int LastIndexOf(string value, int startIndex, int count) => Value.LastIndexOf(value, startIndex, count);
-        public int LastIndexOf(string value, StringComparison comparisonType) => Value.LastIndexOf(value, comparisonType);
-        public int LastIndexOf(string value) => Value.LastIndexOf(value);
-        public int LastIndexOf(char value, int startIndex, int count) => Value.LastIndexOf(value, startIndex, count);
-        public int LastIndexOf(char value, int startIndex) => Value.LastIndexOf(value, startIndex);
-        public int LastIndexOf(string value, int startIndex) => Value.LastIndexOf(value, startIndex);
-        public int LastIndexOf(char value) => Value.LastIndexOf(value);
-        public int LastIndexOfAny(char[] anyOf) => Value.LastIndexOfAny(anyOf);
-        public int LastIndexOfAny(char[] anyOf, int startIndex) => Value.LastIndexOfAny(anyOf, startIndex);
-        public int LastIndexOfAny(char[] anyOf, int startIndex, int count) => Value.LastIndexOfAny(anyOf, startIndex, count);
-        public string Normalize() => Value.Normalize();
-        public string Normalize(NormalizationForm normalizationForm) => Value.Normalize(normalizationForm);
-        public string PadLeft(int totalWidth) => Value.PadLeft(totalWidth);
-        public string PadLeft(int totalWidth, char paddingChar) => Value.PadLeft(totalWidth, paddingChar);
-        public string PadRight(int totalWidth) => Value.PadRight(totalWidth);
-        public string PadRight(int totalWidth, char paddingChar) => Value.PadRight(totalWidth, paddingChar);
-        public string Remove(int startIndex) => Value.Remove(startIndex);
-        public string Remove(int startIndex, int count) => Value.Remove(startIndex, count);
-        public string Replace(string oldValue, string newValue) => Value.Replace(oldValue, newValue);
-        public string Replace(char oldChar, char newChar) => Value.Replace(oldChar, newChar);
-        public string[] Split(string[] separator, int count, StringSplitOptions options) => Value.Split(separator, count, options);
-        public string[] Split(params char[] separator) => Value.Split(separator);
-        public string[] Split(char[] separator, int count) => Value.Split(separator, count);
-        public string[] Split(char[] separator, int count, StringSplitOptions options) => Value.Split(separator, count, options);
-        public string[] Split(char[] separator, StringSplitOptions options) => Value.Split(separator, options);
-        public string[] Split(string[] separator, StringSplitOptions options) => Value.Split(separator, options);
-        public bool StartsWith(string value) => Value.StartsWith(value);
-        public bool StartsWith(string value, bool ignoreCase, CultureInfo culture) => Value.StartsWith(value, ignoreCase, culture);
-        public bool StartsWith(string value, StringComparison comparisonType) => Value.StartsWith(value, comparisonType);
-        public string Substring(int startIndex) => Value.Substring(startIndex);
-        public string Substring(int startIndex, int length) => Value.Substring(startIndex, length);
-        public char[] ToCharArray(int startIndex, int length) => Value.ToCharArray(startIndex, length);
-        public char[] ToCharArray() => Value.ToCharArray();
-        public string ToLower() => Value.ToLower();
-        public string ToLower(CultureInfo culture) => Value.ToLower(culture);
-        public string ToLowerInvariant() => Value.ToLowerInvariant();
-        public override string ToString() => Value.ToString();
-        public string ToString(IFormatProvider provider) => Value.ToString(provider);
-        public string ToUpper() => Value.ToUpper();
-        public string ToUpper(CultureInfo culture) => Value.ToUpper(culture);
-        public string ToUpperInvariant() => Value.ToUpperInvariant();
-        public string Trim() => Value.Trim();
-        public string Trim(params char[] trimChars) => Value.Trim(trimChars);
-        public string TrimEnd(params char[] trimChars) => Value.TrimEnd(trimChars);
-        public string TrimStart(params char[] trimChars) => Value.TrimStart(trimChars);
+        public bool IsNull() => this.Decrypt == null;
+        public object Clone() => Decrypt.Clone();
+        public override bool Equals(object obj) => Decrypt.Equals(obj);
+        public override int GetHashCode() => Decrypt.GetHashCode();
+        public bool Contains(string value) => Decrypt.Contains(value);
+        public int CompareTo(object value) => Decrypt.CompareTo(value);
+        public int CompareTo(string strB) => Decrypt.CompareTo(strB);
+        public void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) => Decrypt.CopyTo(sourceIndex, destination, destinationIndex, count);
+        public bool EndsWith(string value) => Decrypt.EndsWith(value);
+        public bool EndsWith(string value, StringComparison comparisonType) => Decrypt.EndsWith(value, comparisonType);
+        public bool EndsWith(string value, bool ignoreCase, CultureInfo culture) => Decrypt.EndsWith(value, ignoreCase, culture);
+        public CharEnumerator GetEnumerator() => Decrypt.GetEnumerator();
+        public TypeCode GetTypeCode() => Decrypt.GetTypeCode();
+        public int IndexOf(string value, int startIndex, StringComparison comparisonType) => Decrypt.IndexOf(value, startIndex, comparisonType);
+        public int IndexOf(string value, StringComparison comparisonType) => Decrypt.IndexOf(value, comparisonType);
+        public int IndexOf(string value, int startIndex, int count) => Decrypt.IndexOf(value, startIndex, count);
+        public int IndexOf(string value) => Decrypt.IndexOf(value);
+        public int IndexOf(char value, int startIndex, int count) => Decrypt.IndexOf(value, startIndex, count);
+        public int IndexOf(char value, int startIndex) => Decrypt.IndexOf(value, startIndex);
+        public int IndexOf(char value) => Decrypt.IndexOf(value);
+        public int IndexOf(string value, int startIndex, int count, StringComparison comparisonType) => Decrypt.IndexOf(value, startIndex, count, comparisonType);
+        public int IndexOf(string value, int startIndex) => Decrypt.IndexOf(value, startIndex);
+        public int IndexOfAny(char[] anyOf) => Decrypt.IndexOfAny(anyOf);
+        public int IndexOfAny(char[] anyOf, int startIndex, int count) => Decrypt.IndexOfAny(anyOf, startIndex, count);
+        public int IndexOfAny(char[] anyOf, int startIndex) => Decrypt.IndexOfAny(anyOf, startIndex);
+        public string Insert(int startIndex, string value) => Decrypt.Insert(startIndex, value);
+        public bool IsNormalized() => Decrypt.IsNormalized();
+        public bool IsNormalized(NormalizationForm normalizationForm) => Decrypt.IsNormalized(normalizationForm);
+        public int LastIndexOf(string value, int startIndex, StringComparison comparisonType) => Decrypt.LastIndexOf(value, startIndex, comparisonType);
+        public int LastIndexOf(string value, int startIndex, int count, StringComparison comparisonType) => Decrypt.LastIndexOf(value, startIndex, count, comparisonType);
+        public int LastIndexOf(string value, int startIndex, int count) => Decrypt.LastIndexOf(value, startIndex, count);
+        public int LastIndexOf(string value, StringComparison comparisonType) => Decrypt.LastIndexOf(value, comparisonType);
+        public int LastIndexOf(string value) => Decrypt.LastIndexOf(value);
+        public int LastIndexOf(char value, int startIndex, int count) => Decrypt.LastIndexOf(value, startIndex, count);
+        public int LastIndexOf(char value, int startIndex) => Decrypt.LastIndexOf(value, startIndex);
+        public int LastIndexOf(string value, int startIndex) => Decrypt.LastIndexOf(value, startIndex);
+        public int LastIndexOf(char value) => Decrypt.LastIndexOf(value);
+        public int LastIndexOfAny(char[] anyOf) => Decrypt.LastIndexOfAny(anyOf);
+        public int LastIndexOfAny(char[] anyOf, int startIndex) => Decrypt.LastIndexOfAny(anyOf, startIndex);
+        public int LastIndexOfAny(char[] anyOf, int startIndex, int count) => Decrypt.LastIndexOfAny(anyOf, startIndex, count);
+        public string Normalize() => Decrypt.Normalize();
+        public string Normalize(NormalizationForm normalizationForm) => Decrypt.Normalize(normalizationForm);
+        public string PadLeft(int totalWidth) => Decrypt.PadLeft(totalWidth);
+        public string PadLeft(int totalWidth, char paddingChar) => Decrypt.PadLeft(totalWidth, paddingChar);
+        public string PadRight(int totalWidth) => Decrypt.PadRight(totalWidth);
+        public string PadRight(int totalWidth, char paddingChar) => Decrypt.PadRight(totalWidth, paddingChar);
+        public string Remove(int startIndex) => Decrypt.Remove(startIndex);
+        public string Remove(int startIndex, int count) => Decrypt.Remove(startIndex, count);
+        public string Replace(string oldValue, string newValue) => Decrypt.Replace(oldValue, newValue);
+        public string Replace(char oldChar, char newChar) => Decrypt.Replace(oldChar, newChar);
+        public string[] Split(string[] separator, int count, StringSplitOptions options) => Decrypt.Split(separator, count, options);
+        public string[] Split(params char[] separator) => Decrypt.Split(separator);
+        public string[] Split(char[] separator, int count) => Decrypt.Split(separator, count);
+        public string[] Split(char[] separator, int count, StringSplitOptions options) => Decrypt.Split(separator, count, options);
+        public string[] Split(char[] separator, StringSplitOptions options) => Decrypt.Split(separator, options);
+        public string[] Split(string[] separator, StringSplitOptions options) => Decrypt.Split(separator, options);
+        public bool StartsWith(string value) => Decrypt.StartsWith(value);
+        public bool StartsWith(string value, bool ignoreCase, CultureInfo culture) => Decrypt.StartsWith(value, ignoreCase, culture);
+        public bool StartsWith(string value, StringComparison comparisonType) => Decrypt.StartsWith(value, comparisonType);
+        public string Substring(int startIndex) => Decrypt.Substring(startIndex);
+        public string Substring(int startIndex, int length) => Decrypt.Substring(startIndex, length);
+        public char[] ToCharArray(int startIndex, int length) => Decrypt.ToCharArray(startIndex, length);
+        public char[] ToCharArray() => Decrypt.ToCharArray();
+        public string ToLower() => Decrypt.ToLower();
+        public string ToLower(CultureInfo culture) => Decrypt.ToLower(culture);
+        public string ToLowerInvariant() => Decrypt.ToLowerInvariant();
+        public override string ToString() => Decrypt.ToString();
+        public string ToString(IFormatProvider provider) => Decrypt.ToString(provider);
+        public string ToUpper() => Decrypt.ToUpper();
+        public string ToUpper(CultureInfo culture) => Decrypt.ToUpper(culture);
+        public string ToUpperInvariant() => Decrypt.ToUpperInvariant();
+        public string Trim() => Decrypt.Trim();
+        public string Trim(params char[] trimChars) => Decrypt.Trim(trimChars);
+        public string TrimEnd(params char[] trimChars) => Decrypt.TrimEnd(trimChars);
+        public string TrimStart(params char[] trimChars) => Decrypt.TrimStart(trimChars);
 
         #endregion
 
         #region Constructors
 
-        public EncString(string value)
+        public EncString()
         {
-            _encryptionKeys = EncKeys();
-            _encryptedValue = Encrypt(value, _encryptionKeys);
+            encryptionKeys = EncKeys();
         }
 
-        public EncString(char[] value)
-            : this(new string(value)) { }
+        public EncString(string value) : this()
+        {
+            encryptedValue = Encrypt(value, encryptionKeys);
+        }
+
+        public EncString(char[] value) : this()
+        {
+            encryptedValue = Encrypt(value, encryptionKeys);
+        }
 
         public EncString(char c, int count)
             : this(new string(c, count)) { }
@@ -148,17 +169,19 @@ namespace EncTypes
 
         static Random random = new Random();
 
-        static char[] EncKeys()
+        // Returns an array of encryption keys
+        static ushort[] EncKeys()
         {
-            char[] chars = new char[random.Next(10, 100)]; // random length
-            for (int i = 0; i < chars.Length; i++)
+            int len = random.Next(10, 20);
+            ushort[] keys = new ushort[len]; // random length
+            for (int i = 0; i < len; i++)
             {
-                chars[i] = (char)(random.Next(char.MinValue, char.MinValue)); // random chars
+                keys[i] = (ushort)random.Next(0, 65535); // random chars
             }
-            return chars;
+            return keys;
         }
 
-        private static char[] Encrypt(string data, char[] key)
+        private static ushort[] Encrypt(char[] data, ushort[] keys)
         {
             if (data == null)
             {
@@ -167,36 +190,36 @@ namespace EncTypes
             else
             {
                 int dataLen = data.Length;
-                int keyLen = key.Length;
-                char[] output = new char[dataLen];
+                int keyLen = keys.Length;
+                ushort[] output = new ushort[dataLen];
 
                 for (int i = 0; i < dataLen; ++i)
                 {
-                    output[i] = (char)(data[i] ^ key[i % keyLen]);
+                    output[i] = (ushort)(data[i] ^ keys[i % keyLen]);
                 }
 
                 return output;
             }
         }
 
-        private string Decrypt()
+        private static ushort[] Encrypt(string data, ushort[] keys)
         {
-            if (_encryptedValue == null)
+            if (data == null)
             {
                 return null;
             }
             else
             {
-                int dataLen = _encryptedValue.Length;
-                int keyLen = _encryptionKeys.Length;
-                char[] output = new char[dataLen];
+                int dataLen = data.Length;
+                int keyLen = keys.Length;
+                ushort[] output = new ushort[dataLen];
 
                 for (int i = 0; i < dataLen; ++i)
                 {
-                    output[i] = (char)(_encryptedValue[i] ^ _encryptionKeys[i % keyLen]);
+                    output[i] = (ushort)(data[i] ^ keys[i % keyLen]);
                 }
 
-                return new string(output);
+                return output;
             }
         }
 
@@ -205,19 +228,19 @@ namespace EncTypes
         #region Operators Overloading
 
         /// + 
-        public static EncString operator +(EncString enc, string n) => new EncString(enc.Value + n);
-        public static string operator +(string n, EncString enc) => enc.Value + n;
+        public static EncString operator +(EncString enc, string n) => new EncString(enc.Decrypt + n);
+        public static string operator +(string n, EncString enc) => enc.Decrypt + n;
 
         /// == != < >
-        public static bool operator ==(EncString es1, string es2) => es1.Value == es2;
-        public static bool operator !=(EncString es1, string es2) => es1.Value != es2;
-        public static bool operator ==(EncString es1, EncString es2) => es1.Value == es2.Value;
-        public static bool operator !=(EncString es1, EncString es2) => es1.Value != es2.Value;
+        public static bool operator ==(EncString es1, string es2) => es1.Decrypt == es2;
+        public static bool operator !=(EncString es1, string es2) => es1.Decrypt != es2;
+        public static bool operator ==(EncString es1, EncString es2) => es1.Decrypt == es2.Decrypt;
+        public static bool operator !=(EncString es1, EncString es2) => es1.Decrypt != es2.Decrypt;
 
         /// assign
         public static implicit operator EncString(string value) => new EncString(value);
         public static explicit operator EncString(char[] value) => new EncString(value);
-        public static implicit operator string(EncString encString) => encString.Value;
+        public static implicit operator string(EncString encString) => encString.Decrypt;
 
         #endregion
     }

@@ -114,11 +114,12 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncFloat (0.5.0)", WL_EncFloat_0_5_0), // 30
         new TypeInBenchmark("EncFloat (0.8.0)", WL_EncFloat_0_8_0),
         new TypeInBenchmark("EncFloat (0.9.0)", WL_EncFloat_0_9_0), // 32
+        new TypeInBenchmark("EncString (1.1.0)", WL_EncString_1_1_0), 
     };
 
     static public int[] comparisonsChunks =
     {
-        6, 2, 2, 2
+        6, 2, 2, 3
     };
 
     static public BenchmarkData[] comparisons =
@@ -146,6 +147,7 @@ public static class BenchmarksManager
         // EncString
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[12]),
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[21]),
+        new BenchmarkData(benchmarkTypes[10], benchmarkTypes[33]),
     };
 
     #endregion
