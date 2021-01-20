@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static Utilities;
@@ -115,11 +114,13 @@ public static class BenchmarksManager
         new TypeInBenchmark("EncFloat (0.8.0)", WL_EncFloat_0_8_0),
         new TypeInBenchmark("EncFloat (0.9.0)", WL_EncFloat_0_9_0), // 32
         new TypeInBenchmark("EncString (1.1.0)", WL_EncString_1_1_0), 
+        new TypeInBenchmark("EncInt (1.1.0)", WL_EncInt_1_1_0), // 34
+        new TypeInBenchmark("EncLong (1.1.0)", WL_EncLong_1_1_0),
     };
 
     static public int[] comparisonsChunks =
     {
-        6, 2, 2, 3
+        6, 1, 3, 2, 3
     };
 
     static public BenchmarkData[] comparisons =
@@ -136,9 +137,13 @@ public static class BenchmarksManager
         // Now the EncInt is heavier, because it uses a better, heavier encryption
         // The same thing applies to the EncFloat and EncDouble
 
+        // EncInt
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[34]),
+
         // EncLong
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[22]),
         new BenchmarkData(benchmarkTypes[2], benchmarkTypes[25]),
+        new BenchmarkData(benchmarkTypes[2], benchmarkTypes[35]),
 
         // EncDecimal
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[26]),

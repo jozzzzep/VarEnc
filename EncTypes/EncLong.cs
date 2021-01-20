@@ -14,20 +14,12 @@ namespace EncTypes
 
         #region Variables And Properties
 
-        private readonly byte[] encryptionKeys;
-        private readonly byte[] encryptedValue;
+        private readonly long encryptionKey;
+        private readonly long encryptedValue;
 
         private long Decrypt
         {
-            get
-            {
-                var valueBytes = new byte[8];
-                for (int i = 0; i < 8; i++)
-                {
-                    valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
-                }
-                return BitConverter.ToInt64(valueBytes, 0);
-            }
+            get => encryptedValue ^ encryptionKey;
         }
 
         public static long MaxValue { get => Int64.MaxValue; }
@@ -39,22 +31,18 @@ namespace EncTypes
 
         private EncLong(long value)
         {
-            encryptionKeys = new byte[8];
-            encryptedValue = Encrypt(value, encryptionKeys);
+            encryptionKey = GenerateEncryptionKey();
+            encryptedValue = value ^ encryptionKey;
+        }
+
+        static long GenerateEncryptionKey()
+        {
+            byte[] arr = new byte[8];
+            random.NextBytes(arr);
+            return BitConverter.ToInt64(arr, 0);
         }
 
         static private Random random = new Random();
-
-        private static byte[] Encrypt(long value, byte[] keys)
-        {
-            random.NextBytes(keys);
-            var valueBytes = BitConverter.GetBytes(value);
-            for (int i = 0; i < 8; i++)
-            {
-                valueBytes[i] ^= keys[i];
-            }
-            return valueBytes;
-        }
 
         public int CompareTo(object value) => Decrypt.CompareTo(value);
         public int CompareTo(long value) => Decrypt.CompareTo(value);

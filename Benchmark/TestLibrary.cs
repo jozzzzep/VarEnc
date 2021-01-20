@@ -64,6 +64,15 @@ static public class TestLibrary
         }
     }
 
+    public static void WL_EncInt_1_1_0(int amount)
+    {
+        EncInt_1_1_0 number1 = 0;
+        while (number1 < amount)
+        {
+            number1++;
+        }
+    }
+
     public static void WL_Long(int amount)
     {
         long number1 = 0;
@@ -112,6 +121,15 @@ static public class TestLibrary
     public static void WL_EncLong_0_9_0(int amount)
     {
         EncLong_0_9_0 number1 = 0;
+        while (number1 < amount)
+        {
+            number1++;
+        }
+    }
+
+    public static void WL_EncLong_1_1_0(int amount)
+    {
+        EncLong_1_1_0 number1 = 0;
         while (number1 < amount)
         {
             number1++;

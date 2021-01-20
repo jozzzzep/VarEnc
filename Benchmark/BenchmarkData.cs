@@ -1,4 +1,5 @@
-﻿public class BenchmarkData
+﻿using System;
+public class BenchmarkData
 {
     // A class for storing the benchmark preferences
     // Influenced by the choices of the user in the menu
