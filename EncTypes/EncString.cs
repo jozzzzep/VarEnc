@@ -144,7 +144,6 @@ namespace EncTypes
         public EncString()
         {
             encryptionKeys = new byte[8];
-            random.NextBytes(encryptionKeys);
         }
 
         public EncString(string value) : this()
@@ -178,6 +177,8 @@ namespace EncTypes
             }
             else
             {
+                random.NextBytes(keys);
+
                 int dataLen = data.Length;
                 int keyLen = keys.Length;
                 ushort[] output = new ushort[dataLen];
@@ -199,6 +200,8 @@ namespace EncTypes
             }
             else
             {
+                random.NextBytes(keys);
+
                 int dataLen = data.Length;
                 int keyLen = keys.Length;
                 ushort[] output = new ushort[dataLen];
