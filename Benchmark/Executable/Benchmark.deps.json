@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Benchmark/1.0.0": {
+      "Benchmark/1.2.0": {
         "dependencies": {
-          "VarEnc": "1.1.0"
+          "VarEnc": "1.2.0"
         },
         "runtime": {
           "Benchmark.dll": {}
         }
       },
-      "VarEnc/1.1.0": {
+      "VarEnc/1.2.0": {
         "runtime": {
           "EncTypes.dll": {}
         }
@@ -22,12 +22,12 @@
     }
   },
   "libraries": {
-    "Benchmark/1.0.0": {
+    "Benchmark/1.2.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "VarEnc/1.1.0": {
+    "VarEnc/1.2.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
