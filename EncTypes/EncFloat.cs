@@ -15,11 +15,8 @@ namespace EncTypes
         #region Variables And Properties
 
         private readonly byte[] encryptionKeys;
-
-        // The encrypted value stored in memory
         private readonly byte[] encryptedValue;
 
-        // Takes an encrypted value and returns it decrypted
         private float Decrypt
         {
             get
@@ -50,10 +47,8 @@ namespace EncTypes
             encryptedValue = Encrypt(value, encryptionKeys);
         }
 
-        // encryption key generator
         static private Random random = new Random();
 
-        // Takes a given value and returns it encrypted
         private static byte[] Encrypt(float value, byte[] keys)
         {
             random.NextBytes(keys);
@@ -65,7 +60,6 @@ namespace EncTypes
             return valueBytes;
         }
 
-        // Single methods
         public int CompareTo(Single value) => Decrypt.CompareTo(value);
         public int CompareTo(object value) => Decrypt.CompareTo(value);
         public override bool Equals(object obj) => Decrypt.Equals(obj);
@@ -143,7 +137,6 @@ namespace EncTypes
         public static float operator %(EncFloat efloat1, float efloat2) => efloat1.Decrypt % efloat2;
 
         /// == != < >
-
         public static bool operator ==(EncFloat eint1, EncFloat eint2) => eint1.Decrypt == eint2.Decrypt;
         public static bool operator !=(EncFloat eint1, EncFloat eint2) => eint1.Decrypt != eint2.Decrypt;
         public static bool operator <(EncFloat eint1, EncFloat eint2) => eint1.Decrypt < eint2.Decrypt;

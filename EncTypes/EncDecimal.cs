@@ -15,11 +15,8 @@ namespace EncTypes
         #region Variables And Properties
 
         private readonly int[] encryptionKeys;
-
-        // The encrypted value stored in memory
         private readonly int[] encryptedValue;
 
-        // Takes an encrypted value and returns it decrypted
         private decimal Decrypt
         {
             get
@@ -49,7 +46,6 @@ namespace EncTypes
             encryptedValue = Encrypt(value, encryptionKeys);
         }
 
-        // Encryption key generator
         static private Random random = new Random();
 
         private static int[] EncKeys()
@@ -62,7 +58,6 @@ namespace EncTypes
             return arr;
         }
 
-        // Takes a given value and returns it encrypted
         private static int[] Encrypt(decimal value, int[] keys)
         {
             var valueInBits = decimal.GetBits(value);
@@ -73,7 +68,6 @@ namespace EncTypes
             return valueInBits;
         }
 
-        // Overrides
         public int CompareTo(Decimal value) => Decrypt.CompareTo(value);
         public int CompareTo(object value) => Decrypt.CompareTo(value);
         public bool Equals(Decimal value) => Decrypt.Equals(value);
@@ -90,7 +84,6 @@ namespace EncTypes
         #region Operators Overloading
 
         /// + - * / %
-
         public static EncDecimal operator +(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Decrypt + eint2.Decrypt);
         public static EncDecimal operator -(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Decrypt - eint2.Decrypt);
         public static EncDecimal operator *(EncDecimal eint1, EncDecimal eint2) => new EncDecimal(eint1.Decrypt * eint2.Decrypt);
@@ -164,7 +157,6 @@ namespace EncTypes
         public static decimal operator %(EncDecimal edecimal1, float edecimal2) => edecimal1.Decrypt % (decimal)edecimal2;
 
         /// == != < >
-
         public static bool operator ==(EncDecimal eint1, EncDecimal eint2) => eint1.Decrypt == eint2.Decrypt;
         public static bool operator !=(EncDecimal eint1, EncDecimal eint2) => eint1.Decrypt != eint2.Decrypt;
         public static bool operator <(EncDecimal eint1, EncDecimal eint2) => eint1.Decrypt < eint2.Decrypt;
@@ -226,7 +218,6 @@ namespace EncTypes
         public static bool operator <(EncDecimal eint1, float eint2) => eint1.Decrypt < (decimal)eint2;
 
         /// assign
-
         public static implicit operator EncDecimal(decimal value) => new EncDecimal(value);
         public static explicit operator EncDecimal(double value) => new EncDecimal((decimal)value);
         public static explicit operator EncDecimal(float value) => new EncDecimal((decimal)value);

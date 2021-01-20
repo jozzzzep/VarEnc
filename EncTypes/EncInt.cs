@@ -15,11 +15,8 @@ namespace EncTypes
         #region Variables And Properties
 
         private readonly byte[] encryptionKeys;
-
-        // The encrypted value stored in memory
         private readonly byte[] encryptedValue;
 
-        // Takes an encrypted value and returns it decrypted
         private int Decrypt
         {
             get
@@ -46,10 +43,8 @@ namespace EncTypes
             encryptedValue = Encrypt(value, encryptionKeys);
         }
 
-        // Encryption Key Generator
         static private Random random = new Random();
 
-        // Takes a given value and returns it encrypted
         private static byte[] Encrypt(int value, byte[] keys)
         {
             random.NextBytes(keys);
@@ -61,7 +56,6 @@ namespace EncTypes
             return valueBytes;
         }
 
-        // Int32 methods
         public Int32 CompareTo(object value) => Decrypt.CompareTo(value);
         public Int32 CompareTo(Int32 value) => Decrypt.CompareTo(value);
         public bool Equals(Int32 obj) => Decrypt.Equals(obj);

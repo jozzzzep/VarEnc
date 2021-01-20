@@ -61,6 +61,7 @@ namespace EncTypes
         #endregion
 
         #region Methods
+
         public bool IsNull() => this.Decrypt == null;
         public object Clone() => Decrypt.Clone();
         public override bool Equals(object obj) => Decrypt.Equals(obj);
