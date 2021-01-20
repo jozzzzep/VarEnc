@@ -16,7 +16,7 @@ namespace EncTypes
 
         #region Variables And Properties
 
-        private readonly ushort[] encryptionKeys;
+        private readonly byte[] encryptionKeys;
         private readonly ushort[] encryptedValue;
 
         private string Decrypt
@@ -143,7 +143,8 @@ namespace EncTypes
 
         public EncString()
         {
-            encryptionKeys = EncKeys();
+            encryptionKeys = new byte[8];
+            random.NextBytes(encryptionKeys);
         }
 
         public EncString(string value) : this()
@@ -169,19 +170,7 @@ namespace EncTypes
 
         static Random random = new Random();
 
-        // Returns an array of encryption keys
-        static ushort[] EncKeys()
-        {
-            int len = random.Next(4, 16);
-            ushort[] keys = new ushort[len]; // random length
-            for (int i = 0; i < len; i++)
-            {
-                keys[i] = (ushort)random.Next(0, 65535); // random chars
-            }
-            return keys;
-        }
-
-        private static ushort[] Encrypt(char[] data, ushort[] keys)
+        private static ushort[] Encrypt(char[] data, byte[] keys)
         {
             if (data == null)
             {
@@ -202,7 +191,7 @@ namespace EncTypes
             }
         }
 
-        private static ushort[] Encrypt(string data, ushort[] keys)
+        private static ushort[] Encrypt(string data, byte[] keys)
         {
             if (data == null)
             {
