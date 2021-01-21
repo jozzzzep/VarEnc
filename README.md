@@ -99,6 +99,7 @@ encryptedString += "more text";
 **Every EncType has every method its normal version has.**
 
 ## Documentations
+
 **Every EncType contains the same methods and fields as its normal type.**  
 **So it'll link you to the official .NET documentaions.**
 ### CSharp
