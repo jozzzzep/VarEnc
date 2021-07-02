@@ -148,6 +148,60 @@ static public class Utilities
         }
     }
 
+    public static int HowManyDigitsBinarySearch1(int n)
+    {
+        if (n >= 0)
+        {
+            if (n < 100000)
+            {
+                if (n < 1000)
+                {
+                    if (n < 10) return 1;
+                    if (n < 100) return 2;
+                    return 3;
+                }
+                if (n < 10000) return 4;
+                return 5;
+            }
+            if (n < 10000000)
+            {
+                if (n < 1000000) return 6;
+                return 7;              
+            }
+            if (n < 1000000000)
+            {
+                if (n < 100000000) return 8;
+                return 9;
+            }
+            return 10;
+        }
+        else
+        {
+            if (n > -100000)
+            {
+                if (n > -1000)
+                {
+                    if (n > -10) return 2;
+                    if (n > -100) return 3;
+                    return 4;
+                }
+                if (n > -10000) return 5;
+                return 6;
+            }
+            if (n > -10000000)
+            {
+                if (n > -1000000) return 7;
+                return 8;
+            }
+            if (n > -1000000000)
+            {
+                if (n > -100000000) return 9;
+                return 10;
+            }
+            return 11;
+        }
+    }
+
     public static int GetTheHigherLength(string s1, string s2) => (s1.Length >= s2.Length) ? s1.Length + 1 : s2.Length + 1;
 
     public static bool ContainingOnlyDigits(string s)
