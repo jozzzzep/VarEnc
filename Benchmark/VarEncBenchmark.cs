@@ -56,7 +56,7 @@ static class VarEncBenchmark
     {
         string[] textToReturn;
 
-        // Only if there's an existing benchmark preset that can be use,
+        // Only if there's an existing benchmark preset that can be used,
         // display the option to run the previous benchmark.
         string previousBenchmarkText =
             (currentBenchmarkData == null || !currentBenchmarkData.IsValid)
@@ -169,7 +169,7 @@ static class VarEncBenchmark
         {
             int number = i + 1;
             string spaces = new string(' ', 5 - HowManyDigits(number));
-            WriteLine(string.Format("{0}." + spaces + "{1}", number, BenchmarksManager.benchmarkPresetGroups[i].Name));
+            WriteLine("{0}." + spaces + "{1}", number, BenchmarksManager.benchmarkPresetGroups[i].Name);
         }
     }
 
@@ -177,7 +177,7 @@ static class VarEncBenchmark
     public static void PrintBenchmarkPresetGroup()
     {
         BenchmarkPresetGroup group = currentBenchmarkPresetGroup;
-        WriteLine(string.Format("These are the {0} benchmark presets:", group.Name));
+        WriteLine("These are the {0} benchmark presets:", group.Name);
         for (int i = 0; i < group.presets.Length; i++)
         {
             int number = i + 1;
