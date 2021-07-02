@@ -253,7 +253,7 @@ public static class BenchmarksManager
         // Title of type
         WL_Int(2000);
         WriteLine(varName + ":");
-        WriteLine(" ");
+        WriteLine();
 
         // Start measuring time
         List<TimeSpan> timeSpans = new List<TimeSpan>();
