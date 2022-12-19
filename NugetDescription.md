@@ -11,7 +11,7 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - **EncString** - An EncType class for a string type.
 
 # Benchmark And Performance
-The VarEnc repo contains a [benchmark](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark) console application to test the efficiency of its types.  
+The VarEnc repo contains a [benchmark](https://github.com/jozzzzep/VarEnc/tree/main/Benchmark) console application to test the efficiency of its types.  
 When it's running, the application will perform a certain amount of tests on the types you chose.  
 In each test, the application will change the value of a certain variable-type a certain amount of time.  
 
@@ -21,15 +21,15 @@ After the benchmark is finished, the results will be printed. From there you can
 
 ### Performance
 
-I ran a few benchmarks on my Laptop (Intel Core **i7-8750h**, **GTX1060-MaxQ**), and these are the results:  
+I ran a few benchmarks on my Laptop, and these are the results:  
 
 Variable Type - CPS (Changes per second):
-**EncInt** - 5,837,044
-**EncLong** - 3,980,810
-**EncFloat** - 5,625,961
-**EncDouble** - 3,928,240
-**EncDecimal** - 4,213,448
-**EncString** - 584,270
+**EncInt** - 48,137,557
+**EncLong** - 10,216,779
+**EncFloat** - 6,462,340
+**EncDouble** - 4,367,976
+**EncDecimal** - 5,111,549
+**EncString** - 1,809,394
 
 This is the size of each EncType:
 **EncInt** - 8 bytes
