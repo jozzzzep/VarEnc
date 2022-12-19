@@ -306,26 +306,19 @@ static class VarEncBenchmark
 
         // input for seeing the sizes of the types
         else if (currentSection == ChoosingState.ChoosingComparisons && line.Contains("s"))
-        {
             PrintSizesOfTypes();
-        }
 
         // input for running the previous benchmark
         else if (currentSection == ChoosingState.ChoosingComparisons && line.Contains("p") && currentBenchmarkData != null && currentBenchmarkData.IsValid)
-        {
             BenchmarksManager.RunBenchmark(currentBenchmarkData);
-        }
+
         else // normal choosing input
         {
             // if there are spaces, it means the user inputed many choices separated with spaces
             if (line.Contains(" ") && ContainingDigits(line))
-            {
                 ApplyMultipleInputs(line);
-            }
             else
-            {
                 ApplySingleInput(line);
-            }
         }
     }
 

@@ -62,13 +62,10 @@ public class BenchmarkData
     public void InputPreset(BenchmarkPreset benchmarkPreset, string presetGroupName, int presetNum)
     {
         if (ComparingStrings)
-        {
             changesAmount = benchmarkPreset.ChangesAmount / 50;
-        }
         else
-        {
             changesAmount = benchmarkPreset.ChangesAmount;
-        }
+
         testsAmount = benchmarkPreset.TestsAmount;
         benchmarkPresetGroupName = presetGroupName;
         benchmarkPresetNumber = presetNum;

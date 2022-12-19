@@ -10,17 +10,14 @@ namespace EncTypes
         /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
         /// Every time the value changes, the encryption keys change too. And it works exactly as a long (Int64)
         ///
-        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/jozzzzep/VarEnc
 
         #region Variables And Properties
 
         private readonly long encryptionKey;
         private readonly long encryptedValue;
 
-        private long Decrypt
-        {
-            get => encryptedValue ^ encryptionKey;
-        }
+        private long Decrypt => encryptedValue ^ encryptionKey;
 
         public static long MaxValue { get => Int64.MaxValue; }
         public static long MinValue { get => Int64.MinValue; }

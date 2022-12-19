@@ -10,7 +10,7 @@ namespace EncTypes
         /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
         /// Every time the value changes, the encryption keys change too. And it works exactly as a double.
         ///
-        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/jozzzzep/VarEnc
 
         #region Variables And Properties
 
@@ -23,9 +23,7 @@ namespace EncTypes
             {
                 var valueBytes = new byte[8];
                 for (int i = 0; i < 8; i++)
-                {
                     valueBytes[i] = (byte)(encryptedValue[i] ^ encryptionKeys[i]);
-                }
                 return BitConverter.ToDouble(valueBytes, 0);
             }
         }
@@ -54,9 +52,7 @@ namespace EncTypes
             random.NextBytes(keys);
             var valueBytes = BitConverter.GetBytes(value);
             for (int i = 0; i < 8; i++)
-            {
                 valueBytes[i] ^= keys[i];
-            }
             return valueBytes;
         }
 

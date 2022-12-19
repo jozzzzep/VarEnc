@@ -12,7 +12,7 @@ namespace EncTypes
         /// In the memory it is saved as a wierd char array that is affected by random keys { encryptionKeys }
         /// Every time the value of the string changes, the encryption keys change too. And it works exactly as a string
         ///
-        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/jozzzzep/VarEnc
 
         #region Variables And Properties
 
@@ -24,9 +24,7 @@ namespace EncTypes
             get
             {
                 if (encryptedValue == null)
-                {
                     return null;
-                }
                 else
                 {
                     int dataLen = encryptedValue.Length;
@@ -34,9 +32,7 @@ namespace EncTypes
                     char[] output = new char[dataLen];
 
                     for (int i = 0; i < dataLen; ++i)
-                    {
                         output[i] = (char)(encryptedValue[i] ^ encryptionKeys[i % keyLen]);
-                    }
 
                     return new string(output);
                 }
@@ -142,10 +138,8 @@ namespace EncTypes
 
         #region Constructors
 
-        public EncString()
-        {
+        public EncString() =>
             encryptionKeys = new byte[8];
-        }
 
         public EncString(string value) : this()
         {
@@ -173,9 +167,7 @@ namespace EncTypes
         private static ushort[] Encrypt(char[] data, byte[] keys)
         {
             if (data == null)
-            {
                 return null;
-            }
             else
             {
                 random.NextBytes(keys);
@@ -185,9 +177,7 @@ namespace EncTypes
                 ushort[] output = new ushort[dataLen];
 
                 for (int i = 0; i < dataLen; ++i)
-                {
                     output[i] = (ushort)(data[i] ^ keys[i % keyLen]);
-                }
 
                 return output;
             }
@@ -196,9 +186,7 @@ namespace EncTypes
         private static ushort[] Encrypt(string data, byte[] keys)
         {
             if (data == null)
-            {
                 return null;
-            }
             else
             {
                 random.NextBytes(keys);
@@ -208,9 +196,7 @@ namespace EncTypes
                 ushort[] output = new ushort[dataLen];
 
                 for (int i = 0; i < dataLen; ++i)
-                {
                     output[i] = (ushort)(data[i] ^ keys[i % keyLen]);
-                }
 
                 return output;
             }

@@ -10,7 +10,7 @@ namespace EncTypes
         /// In the memory it is saved as a an array of weird bytes that are affected by random values { encryptionKeys array }
         /// Every time the value changes, the encryption keys change too. And it works exactly as a deciaml
         ///
-        /// WIKI AND INFO: https://github.com/JosepeDev/VarEnc
+        /// WIKI AND INFO: https://github.com/jozzzzep/VarEnc
 
         #region Variables And Properties
 
@@ -23,9 +23,7 @@ namespace EncTypes
             {
                 var decrypted = new int[4];
                 for (int i = 0; i < 4; i++)
-                {
                     decrypted[i] = encryptedValue[i] ^ encryptionKeys[i];
-                }
                 return new decimal(decrypted);
             }
         }
