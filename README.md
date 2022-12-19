@@ -1,16 +1,16 @@
 ![Imgur](https://i.imgur.com/jnXHECv.png)
 <p align="center">
-        <img src="https://img.shields.io/codefactor/grade/github/JosepeDev/VarEnc/main">
-        <img src="https://img.shields.io/github/languages/code-size/JosepeDev/VarEnc">
-        <img src="https://img.shields.io/github/license/JosepeDev/VarEnc">
-        <img src="https://img.shields.io/github/v/release/JosepeDev/VarEnc">
+        <img src="https://img.shields.io/codefactor/grade/github/jozzzzep/VarEnc/main">
+        <img src="https://img.shields.io/github/languages/code-size/jozzzzep/VarEnc">
+        <img src="https://img.shields.io/github/license/jozzzzep/VarEnc">
+        <img src="https://img.shields.io/github/v/release/jozzzzep/VarEnc">
         <img src="https://img.shields.io/nuget/dt/VarEnc">
         
 </p>
 <p align="center">
-        <img src="https://img.shields.io/github/followers/JosepeDev?style=social">
-        <img src="https://img.shields.io/github/watchers/JosepeDev/VarEnc?style=social">
-        <img src="https://img.shields.io/github/stars/JosepeDev/VarEnc?style=social">
+        <img src="https://img.shields.io/github/followers/jozzzzep?style=social">
+        <img src="https://img.shields.io/github/watchers/jozzzzep/VarEnc?style=social">
+        <img src="https://img.shields.io/github/stars/jozzzzep/VarEnc?style=social">
 </p>
 
 The idea is to make the **encryption** of values in C# **easier**. Let's say you have a video game with an "int" variable containing the **player's score**. With simple software like **CheatEngine** and many more, you can **search for this variable and change it**. The VarEnc project has an easy solution for that. All you got to do is to change the type of the variable from "int", to "EncInt". Done. Your game will work the same but the score of the player will be encrypted in the background.
