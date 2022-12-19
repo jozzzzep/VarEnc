@@ -34,7 +34,7 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 
 **A group of classes and structures for storing values while efficiently keeping them encrypted in the memory.**  
 **In memory, they are saved as a "weird" array of bytes that is affected by random values (encryption keys).**  
-**You can find all the EncTypes in [this](https://github.com/JosepeDev/VarEnc/tree/main/EncTypes) folder. You can also use the** 
+**You can find all the EncTypes in [this](https://github.com/jozzzzep/VarEnc/tree/main/src/EncTypes) folder. You can also use the** 
 **[benchmark](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark) executable file, to speed test each type.**  
 
 Let's say you want to create a variable for a score inside a video game.  
@@ -50,7 +50,7 @@ This is when you want to use an EncType. Each type does not depend on the other,
 - **EncDecimal** - The same thing as the struct above, but for a Decimal.
 - **EncString** - An EncType class for a string type.
 
-You can find the EncTypes folder [here](https://github.com/JosepeDev/VarEnc/tree/main/EncTypes)
+You can find the EncTypes folder [here](https://github.com/jozzzzep/VarEnc/tree/main/src/EncTypes)
 
 ## Examples
 
@@ -192,8 +192,8 @@ By typing **"size"** or **"s"** in the opening menu, you can see the sizes of ev
 
 
 ### Files
-You can lunch the benchmark executable from [here](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark)  
-You can also see the Benchmark Application's Solution in [this](https://github.com/JosepeDev/VarEnc/tree/main/Benchmark/Solution) folder  
+You can lunch the benchmark executable from [here](https://github.com/jozzzzep/VarEnc/tree/main/build/Benchmark)  
+You can also see the Benchmark Application's Project in [this](https://github.com/jozzzzep/VarEnc/tree/main/src/Benchmark) folder  
 
 # Cloning And Importing
 ![img](https://i.imgur.com/n7PAr9D.png)
@@ -228,7 +228,7 @@ You can **clone** from this page by **clicking** the green **"Code" button**:
 
 ![img](https://i.imgur.com/LhNSi5i.png)  
 
-You can also **download** the content of this repo through the recent **release page**: [Releases page](https://github.com/JosepeDev/VarEnc/releases)  
+You can also **download** the content of this repo through the recent **release page**: [Releases page](https://github.com/jozzzzep/VarEnc/releases)  
 From there, **scroll to the bottom** of the **current release** and click on the file "**Source code (zip)**".  
 It'll **download** the repository as a zip file to you computer. Just **Unzip** and you're reasy.  
 
