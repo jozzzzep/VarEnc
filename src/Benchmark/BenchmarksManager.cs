@@ -120,7 +120,7 @@ public static class BenchmarksManager
 
     static public int[] comparisonsChunks =
     {
-        6, 1, 3, 2, 3
+        6, 4, 3, 2, 3
     };
 
     static public BenchmarkData[] comparisons =
@@ -133,11 +133,10 @@ public static class BenchmarksManager
         new BenchmarkData(benchmarkTypes[8], benchmarkTypes[9]),   // decimal
         new BenchmarkData(benchmarkTypes[10], benchmarkTypes[11]), // string
         
-        // Comparing an EncInt with its older versions means nothing
-        // Now the EncInt is heavier, because it uses a better, heavier encryption
-        // The same thing applies to the EncFloat and EncDouble
-
         // EncInt
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[14]),
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[15]),
+        new BenchmarkData(benchmarkTypes[0], benchmarkTypes[20]),
         new BenchmarkData(benchmarkTypes[0], benchmarkTypes[34]),
 
         // EncLong
