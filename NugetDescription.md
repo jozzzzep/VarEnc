@@ -11,7 +11,7 @@ These called **EncTypes**, they are the alternative **encrypted** version of **t
 - **EncString** - An EncType class for a string type.
 
 # Benchmark And Performance
-The VarEnc repo contains a [benchmark](https://github.com/jozzzzep/VarEnc/tree/main/Benchmark) console application to test the efficiency of its types.  
+The VarEnc [repo](https://github.com/jozzzzep/VarEnc) contains a benchmark console application to test the efficiency of its types.  
 When it's running, the application will perform a certain amount of tests on the types you chose.  
 In each test, the application will change the value of a certain variable-type a certain amount of time.  
 
