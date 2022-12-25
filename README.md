@@ -218,35 +218,17 @@ When you see the **"VarEnc" package**, click on it, and click on the **Install**
 Click **OK** to proceed, accept the **licence** and you're done (:  
 
 ## Unity
-I use this project on every Unity game I've created.
-Unity games are the reason I created this project.
-You can import the script to unity in many ways.
+I use this project on every Unity game I've created.  
+Unity games are the reason I created this project.  
+You can import the script to unity in many ways.  
 
-### Way #1 - Importing scripts
-This way will require you to download or clone the repository.  
-You can **clone** from this page by **clicking** the green **"Code" button**:  
-
-![img](https://i.imgur.com/LhNSi5i.png)  
-
-You can also **download** the content of this repo through the recent **release page**: [Releases page](https://github.com/jozzzzep/VarEnc/releases)  
-From there, **scroll to the bottom** of the **current release** and click on the file "**Source code (zip)**".  
-It'll **download** the repository as a zip file to you computer. Just **Unzip** and you're reasy.  
-
-![img](https://i.imgur.com/hgB06A9.png)
-
-After that, when you have the repository on you computer, the next step is to enter the &&EncTypes directory&&.
-
-![img](https://i.imgur.com/tVOQBzG.png)
-
-From there **select all the scripts you want**, and **drag** them to your **Unity** project.
-
-![img](https://i.imgur.com/SnIYfLJ.png)
-
+### Best Way - Download the official Unity Package
+[**Click here to download**](https://github.com/jozzzzep/VarEnc/raw/main/packages/VarEnc.unitypackage), or go to the packages folder of the reposetory and download the "VarEnc.unitypackage" package file.  
+Then import the package directly to your project like any other Unity package. 
+This is he fastest and easiest way.  
 **Done!**
 
-![img](https://i.imgur.com/mwAtfTx.png)
-
-### Way #2 - Copying to a Unity Projcet
+### Alternative Way - Copying to a Unity Projcet
 This way will take more time for all the scripts, but will be quick if you only need a few scripts.  
 Lets say you want only the **EncInt** script and the **EncString**.  
 Go to **your Unity project**, and **create 2 new scripts**, one foreach type you want.  
